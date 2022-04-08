@@ -14,15 +14,25 @@ import { Link, Route, Switch } from "react-router-dom";
 import HomeContent1 from "./components/HomeContent1";
 import HomeWrap from "./components/HomeWrap";
 import Footer from "./components/Footer.js";
+import My from "./components/My";
 
 function App(props) {
   return (
     <div className="App">
       <Route path="/:id">{props.expand ? <ExpandNav /> : <BootNav />}</Route>
-      <Switch>
-        <Route path="/home">
+      <Route path="/home">
           <HomeWrap/>
         </Route>
+      <Route path="/homemy">
+        <My/>
+      </Route>
+
+      
+      <Switch>
+
+
+        
+
 
         <Route path="/personal">
           <ImageView/>

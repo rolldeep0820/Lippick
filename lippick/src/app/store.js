@@ -98,10 +98,47 @@ function reducer7(state = selectImg, action) {
   return selectImg;
 }
 
+let myTG = false;
 
+function reducer8(state = myTG, action) {
+  if (action.type === "my-on") {
+    myTG = true;
+  } else if (action.type === "my-off") {
+    myTG = false;
+  }
+
+  return myTG;
+}
+
+let tap = [true, false, false, false];
+// let tap1 = true;
+// let tap2 = false;
+// let tap3 = false;
+// let tap4 = false;
+
+function reducer9(state = tap, action) {
+  switch (action.type) {
+    case "on-1":
+      tap = [true, false, false, false];
+      break;
+    case "on-2":
+      tap = [false, true, false, false];
+      break;
+    case "on-3":
+      tap = [false, false, true, false];
+      break;
+    case "on-4":
+      tap = [false, false, false, true];
+      break;
+
+    default:
+      return tap;
+  }
+
+  return tap;
+}
 
 export {
-  navTG,
   reducer1,
   reducer2,
   reducer3,
@@ -109,4 +146,6 @@ export {
   reducer5,
   reducer6,
   reducer7,
+  reducer8,
+  reducer9,
 };

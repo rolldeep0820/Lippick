@@ -1,0 +1,201 @@
+.content2-wrap {
+  max-width: 1640px;
+  width: 92vw;
+  top: 100%;
+  position: relative;
+
+  max-height: 639px;
+  margin-bottom: 5vh;
+
+  .content2-box {
+    width: 100%;
+    background-color: white;
+    height: 70vh;
+    max-height: 639px;
+    transition: 0.5s;
+    font-family: "Noto Sans KR", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .content2-title {
+      flex: 0.1;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+
+      h2 {
+        margin: 0 !important;
+        display: flex;
+        width: 20%;
+        font-weight: 200;
+        align-items: center;
+        justify-content: center;
+      }
+
+      svg {
+        font-size: 1rem;
+        max-width: 100px;
+      }
+    }
+
+    .content2-tap-wrap {
+      width: 100%;
+      border-bottom: 1px solid #eaeaea;
+      display: flex;
+      justify-content: center;
+      .content2-tap {
+        display: flex;
+        width: 25%;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 0;
+        margin-top: 1%;
+
+        li {
+          cursor: pointer;
+          margin-bottom: 10px;
+          margin:0;
+        }
+
+        .li-wrap {
+          height: 10px;
+        }
+        .false {
+          color: gray;
+        }
+
+        .tap-on {
+          font-weight: 500 !important;
+          color: black;
+          display: inline;
+          border-bottom: 2px solid black;
+          margin-bottom: -2px;
+        }
+
+        .tap-on::after {
+            display: block;
+            content: '';
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid #000;
+            width: 0;
+            height: 0;
+            bottom: -9px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            position: relative;
+        }
+      }
+    }
+  }
+  .content2-contents {
+    flex: 0.8;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 3vh;
+
+    .content2-contents-left-wrap{
+
+        width:100%;
+        height: 100%;
+        background-color: red;
+        flex:0.3;
+        display: flex;
+        flex-direction: column;
+
+        .content2-contents-left-top{
+
+            width:100%;
+            height: 100%;
+            background-color: yellow;
+            flex:0.6;
+        }
+
+        .content2-contents-left-bottom{
+
+            width:100%;
+            height: 100%;
+            background-color: orange;
+            flex:0.4;
+
+
+        }
+    }
+
+    .content2-contents-right-wrap{
+
+        width:100%;
+        height: 100%;
+        background-color: blue;
+        flex:0.7;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content:space-between;
+        
+
+        .content2-contents-right-1{
+            flex:0.3;
+            background-color: skyblue;
+            width:100%;
+            height: 100%;
+            margin-left:3%;
+
+        }
+        .content2-contents-right-2{
+
+            flex:0.3;
+            background-color: aqua;
+            width:100%;
+            height: 100%;
+        }
+        .content2-contents-right-3{
+
+            flex:0.3;
+            background-color: royalblue;
+            width:100%;
+            height: 100%;   
+        }
+    }
+  }
+}
+
+@media all and (min-width: 1401px) and (max-width: 1919px) {
+}
+
+@media all and (min-width: 1023px) and (max-width: 1400px) {
+}
+
+/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .content2-wrap {
+    margin-top: 4vh;
+    .content2-box {
+      height: 50vh !important;
+    }
+  }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+
+@media all and (min-width: 480px) and (max-width: 767px) {
+  .content2-wrap {
+    margin-top: 4vh;
+    .content2-box {
+      height: 35vh !important;
+    }
+  }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
+
+@media all and (max-width: 479px) {
+}

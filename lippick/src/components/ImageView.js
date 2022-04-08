@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { compose } from "@reduxjs/toolkit";
 import * as tmImage from "@teachablemachine/image";
 import { promise } from "bcrypt/promises";
-import * as faceapi from "face-api.js";
 
 function ImageView(props) {
     useEffect(() => {
@@ -71,34 +70,7 @@ function ImageView(props) {
     //teachablemachine end
 
     //face-api start
-    const picRef = useRef();
-    const pic = document.getElementById("pic");
-    function makeup() {
-        console.log(faceapi.nets);
 
-        const handleImage = async () => {
-            const detections = await faceapi
-                .detectAllFaces(pic)
-                .withFaceLandmarks();
-            console.log(detections);
-        };
-        async function loadModels() {
-            const MODEL_URL = process.env.PUBLIC_URL + "/models";
-            Promise.all([
-                faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
-                faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-                faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-            ])
-                .then((val) => {
-                    console.log("model load complete");
-                })
-                .catch((err) => {
-                    console.log("model load fail");
-                    console.log(err);
-                });
-        }
-        loadModels();
-    }
     //face-api end
 
     //파일 미리볼 url을 저장해줄 state
@@ -133,8 +105,6 @@ function ImageView(props) {
                                         src={fileImage}
                                         style={{
                                             margin: "auto",
-                                            width: "224px",
-                                            borderRadius: "10px",
                                         }}
                                     />
                                 )}
@@ -172,12 +142,8 @@ function ImageView(props) {
                                             height: "40px",
                                             cursor: "pointer",
                                         }}
-                                        onClick={
-                                            () =>
-                                                //init()
-                                                //  .then(() => predict())
-                                                // .then(
-                                                makeup() //)
+                                        onClick={() =>
+                                            init().then(() => predict())
                                         }
                                     >
                                         톤 판별

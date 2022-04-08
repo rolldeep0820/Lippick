@@ -100,7 +100,6 @@ function ImageView(props) {
                                 {fileImage && (
                                     <img
                                         id="pic"
-                                        ref={picRef}
                                         alt="sample"
                                         src={fileImage}
                                         style={{

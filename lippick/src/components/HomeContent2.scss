@@ -6,6 +6,7 @@
 
   max-height: 639px;
   margin-bottom: 5vh;
+  transition: 0.5s;
 
   .content2-box {
     width: 100%;
@@ -53,11 +54,12 @@
         justify-content: space-evenly;
         margin: 0;
         margin-top: 1%;
+        padding: 0;
 
         li {
           cursor: pointer;
           margin-bottom: 10px;
-          margin:0;
+          margin: 0;
         }
 
         .li-wrap {
@@ -76,18 +78,18 @@
         }
 
         .tap-on::after {
-            display: block;
-            content: '';
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid #000;
-            width: 0;
-            height: 0;
-            bottom: -9px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            position: relative;
+          display: block;
+          content: "";
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-top: 8px solid #000;
+          width: 0;
+          height: 0;
+          bottom: -9px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          position: relative;
         }
       }
     }
@@ -101,85 +103,126 @@
     align-items: center;
     margin-top: 3vh;
 
-    .content2-contents-left-wrap{
+    .content2-contents-left-wrap {
+      width: 100%;
+      height: 100%;
+      background-color: red;
+      flex: 0.3;
+      display: flex;
+      flex-direction: column;
 
-        width:100%;
+      .content2-contents-left-top {
+        width: 100%;
         height: 100%;
-        background-color: red;
-        flex:0.3;
-        display: flex;
-        flex-direction: column;
+        background-color: yellow;
+        flex: 0.6;
+      }
 
-        .content2-contents-left-top{
-
-            width:100%;
-            height: 100%;
-            background-color: yellow;
-            flex:0.6;
-        }
-
-        .content2-contents-left-bottom{
-
-            width:100%;
-            height: 100%;
-            background-color: orange;
-            flex:0.4;
-
-
-        }
+      .content2-contents-left-bottom {
+        width: 100%;
+        height: 100%;
+        background-color: orange;
+        flex: 0.4;
+      }
     }
 
-    .content2-contents-right-wrap{
+    .content2-contents-right-wrap {
+      width: 100%;
+      height: 100%;
+      flex: 0.7;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
 
-        width:100%;
+      .content2-contents-right-1 {
+        flex: 0.3;
+        background-color: skyblue;
+        width: 100%;
         height: 100%;
-        background-color: blue;
-        flex:0.7;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content:space-between;
-        
-
-        .content2-contents-right-1{
-            flex:0.3;
-            background-color: skyblue;
-            width:100%;
-            height: 100%;
-            margin-left:3%;
-
-        }
-        .content2-contents-right-2{
-
-            flex:0.3;
-            background-color: aqua;
-            width:100%;
-            height: 100%;
-        }
-        .content2-contents-right-3{
-
-            flex:0.3;
-            background-color: royalblue;
-            width:100%;
-            height: 100%;   
-        }
+        margin-left: 5%;
+      }
+      .content2-contents-right-2 {
+        flex: 0.3;
+        background-color: aqua;
+        width: 100%;
+        height: 100%;
+      }
+      .content2-contents-right-3 {
+        flex: 0.3;
+        background-color: royalblue;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
 
 @media all and (min-width: 1401px) and (max-width: 1919px) {
+  .content2-tap-wrap {
+    li {
+      font-size: 0.9rem;
+    }
+  }
 }
 
 @media all and (min-width: 1023px) and (max-width: 1400px) {
+  .content2-tap-wrap {
+    li {
+      font-size: 0.9rem;
+    }
+  }
+
+  .content2-tap {
+    width: 40% !important;
+  }
+
+  .content2-contents-right-1 {
+    flex: 0.33 !important;
+    margin-left: 1% !important;
+  }
+  .content2-contents-right-2 {
+    flex: 0.33 !important;
+  }
+  .content2-contents-right-3 {
+    flex: 0.33 !important;
+  }
 }
 
 /* 테블릿 세로 (해상도 768px ~ 1023px)*/
 
 @media all and (min-width: 768px) and (max-width: 1023px) {
+  .content2-contents-right-1 {
+    flex: 0.33 !important;
+    margin-left: 1% !important;
+  }
+  .content2-contents-right-2 {
+    flex: 0.33 !important;
+  }
+  .content2-contents-right-3 {
+    flex: 0.33 !important;
+  }
+
+  .content2-tap {
+    width: 40% !important;
+  }
+
+  .content2-tap-wrap {
+    li {
+      font-size: 0.8rem;
+    }
+  }
+
   .content2-wrap {
     margin-top: 4vh;
     .content2-box {
       height: 50vh !important;
+
+      .content2-title {
+        h2 {
+          font-size: 1.3rem;
+        }
+      }
     }
   }
 }
@@ -187,12 +230,94 @@
 /* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
 
 @media all and (min-width: 480px) and (max-width: 767px) {
-  .content2-wrap {
-    margin-top: 4vh;
-    .content2-box {
-      height: 35vh !important;
+
+    .content2-wrap{
+
+        height:1500px !important;
+        margin-top: 5vh;
+
+        .content2-box{
+
+            height:100% !important;
+        }
+    }
+  .content2-title {
+    h2 {
+      width: 25% !important;
+      font-size: 1.2rem;
     }
   }
+
+  .content2-tap {
+    width: 100% !important;
+  }
+
+
+
+  /*sssssssssssss*/
+
+  .content2-contents {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    margin-top: 4vh;
+    flex: none !important;
+
+    .content2-contents-left-wrap {
+
+      flex: none !important;
+
+      max-height:500px !important;
+
+      .content2-contents-left-top {
+
+        flex: none !important;
+        max-height:350px !important;
+      }
+
+      .content2-contents-left-bottom {
+        max-height:150px !important;
+        flex: none !important;
+      }
+    }
+
+    .content2-contents-right-wrap {
+
+      flex: none !important;
+
+      flex-direction: column !important;
+      align-items: center;
+      justify-content: space-between;
+      height: auto !important;
+
+      .content2-contents-right-1 {
+        flex: none !important;
+
+        width: 80% !important;
+        height: 500px !important;
+        margin-left: 0 !important;
+        margin-top:5vh;
+      }
+      .content2-contents-right-2 {
+        flex: none !important;
+        width: 80% !important;
+        height: 500px !important;
+
+        margin-top:5vh;
+
+      }
+      .content2-contents-right-3 {
+        flex: none !important;
+        width: 80% !important;
+        height: 500px !important;
+
+        margin-top:5vh;
+      }
+    }
+  }
+  
 }
 
 /* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/

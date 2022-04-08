@@ -16,7 +16,9 @@ function BG(props) {
 
         props.dispatch({ type: "nav-off" });
 
-        setTimeout(props.dispatch({type:"expand-off"}),3000)
+        props.dispatch({type:"expand-off"});
+
+        props.dispatch({type:"my-off"})
       }}
     ></div>
   );
@@ -26,6 +28,7 @@ function stateprops(state) {
   return {
     bg: state.reducer6,
     expand: state.reducer5,
+    myTG:state.reducer8,
   };
 }
 

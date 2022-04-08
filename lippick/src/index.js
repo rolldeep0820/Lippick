@@ -15,6 +15,7 @@ import {
   reducer5,   
   reducer6,
   reducer7,
+  reducer8,
 } from "./app/store.js";
 import { BrowserRouter } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const store = createStore(
     reducer5,
     reducer6,
     reducer7,
+    reducer8,
   })
 );
 

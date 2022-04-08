@@ -99,6 +99,19 @@ function reducer7(state = selectImg, action) {
 }
 
 
+let myTG = false;
+
+function reducer8(state=myTG, action){
+
+  if(action.type === "my-on"){
+    myTG = true;
+  }else if(action.type === "my-off"){
+
+    myTG = false;
+  }
+
+  return myTG
+}
 
 export {
   navTG,
@@ -109,4 +122,5 @@ export {
   reducer5,
   reducer6,
   reducer7,
+  reducer8,
 };

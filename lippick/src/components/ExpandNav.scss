@@ -1,0 +1,54 @@
+.expand-nav-wrap {
+  height: 60vh;
+  position: absolute;
+  z-index: 998;
+  background-color: white;
+  width: 100%;
+  transition: 1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .expand-top {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid #eae8e4;
+
+    .expand-form {
+      width: 40vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      svg {
+        font-size: 1.3rem;
+        margin-right:2%;
+      }
+      input[type="text"] {
+        outline: none;
+        border: none;
+        border-bottom: 2px solid black;
+        padding: 1%;
+      }
+    }
+  }
+
+  .expand-bottom {
+    width: 100%;
+    height: 70%;
+  }
+}
+
+.expand-entering {
+  transform: translateY(-100%);
+}
+
+.expand-exiting {
+  transform: translateY(0);
+}
+

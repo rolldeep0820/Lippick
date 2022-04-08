@@ -1,0 +1,36 @@
+/* style.css */
+
+/* label 스타일 조정 */
+.button {
+    display: flex;
+    justify-content: center;
+}
+label {
+    cursor: pointer;
+    font-size: 1em;
+}
+
+/* 못생긴 기존 input 숨기기 */
+#chooseFile {
+    visibility: hidden;
+}
+
+.image-top-wrap{
+    
+
+    width:100%;
+
+    height: 80vh;
+.image-wrap {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 40vh;
+
+}
+
+
+}

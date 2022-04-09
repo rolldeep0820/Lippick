@@ -1,5 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
+import Axios from 'axios';
 
 // export const store = configureStore({
 //   reducer: {
@@ -57,7 +56,7 @@ function reducer5(state = expand, action) {
   }
 
   return expand;
-}
+} 
 
 let bg = false;
 
@@ -99,7 +98,6 @@ function reducer7(state = selectImg, action) {
 }
 
 
-
 export {
   navTG,
   reducer1,
@@ -108,5 +106,5 @@ export {
   reducer4,
   reducer5,
   reducer6,
-  reducer7,
+  reducer7
 };

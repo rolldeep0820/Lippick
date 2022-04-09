@@ -71,7 +71,7 @@ function BootNav(props) {
               </Link>
             </Nav.Link>
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
-              <Link to="/my" style={linkStyle}>
+              <Link to="/my" style={linkStyle} onClick={()=>{props.dispatch({type:"bg-on"}); props.dispatch({type:"my-on"})}}>
                 <AiOutlineUser />
               </Link>
             </Nav.Link>
@@ -91,6 +91,7 @@ function stateprops(state) {
   return {
     navTG: state.reducer1,
     expand: state.reducer5,
+    myTG:state.reducer8,
   };
 }
 

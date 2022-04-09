@@ -16,6 +16,8 @@ import {
   reducer5,   
   reducer6,
   reducer7,
+  reducer8,
+  reducer9,
 } from "./app/store.js";
 import { BrowserRouter } from "react-router-dom";
 import promiseMiddleware from "redux-promise";
@@ -31,7 +33,10 @@ const store = createStore(
     reducer4,
     reducer5,
     reducer6,
-    reducer7
+    reducer7,
+    reducer8,
+    reducer9,
+
   })
 );
 

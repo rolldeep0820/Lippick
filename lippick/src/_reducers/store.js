@@ -91,17 +91,20 @@ function reducer7(state = selectImg, action) {
 
 
 
-let myTG = false;
+let login = false;
 
 
-function reducer8(state = myTG, action) {
-  if (action.type === "my-on") {
-    myTG = true;
-  } else if (action.type === "my-off") {
-    myTG = false;
+function reducer8(state = login, action) {
+
+
+  if (action.type === "login-on") {
+    login = true;
+  } else if (action.type === "login-off") {
+    login = false;
   }
 
-  return myTG;
+
+  return login;
 }
 
 let tap = [true, false, false, false];
@@ -132,6 +135,19 @@ function reducer9(state = tap, action) {
   return tap;
 }
 
+let ani = false;
+
+function reducer10(state=ani,action){
+
+  if(action.type === "ani-on"){
+    ani= true
+  }else if(action.type ==="ani-off"){
+    ani= false;
+  }
+
+  return ani
+}
+
 export {
   reducer1,
   reducer2,
@@ -142,5 +158,6 @@ export {
   reducer7,
   reducer8,
   reducer9,
+  reducer10,
 
 };

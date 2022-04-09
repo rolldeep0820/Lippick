@@ -54,13 +54,19 @@ function BootNav(props) {
               </Navbar.Brand>
             </Link>
 
-            <div  className={`logo-menu ${props.navTG ? "cb" : "cw"}`} >
-
-              <Link to="/lipstick" style={linkStyle}><span>립스틱</span></Link>
-              <Link to="/liquid" style={linkStyle}><span>리퀴드</span></Link>
-              <Link to="/gloss" style={linkStyle}><span>립 글로스</span></Link>
-              <Link to="/care" style={linkStyle}><span>립 케어</span></Link>
-
+            <div className={`logo-menu ${props.navTG ? "cb" : "cw"}`}>
+              <Link to="/lipstick" style={linkStyle}>
+                <span>립스틱</span>
+              </Link>
+              <Link to="/liquid" style={linkStyle}>
+                <span>리퀴드</span>
+              </Link>
+              <Link to="/gloss" style={linkStyle}>
+                <span>립 글로스</span>
+              </Link>
+              <Link to="/care" style={linkStyle}>
+                <span>립 케어</span>
+              </Link>
             </div>
           </div>
 
@@ -71,7 +77,16 @@ function BootNav(props) {
               </Link>
             </Nav.Link>
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
-              <Link to="/my" style={linkStyle} onClick={()=>{props.dispatch({type:"bg-on"}); props.dispatch({type:"my-on"})}}>
+              <Link
+                to="#"
+                style={linkStyle}
+                onClick={() => {
+                  props.dispatch({ type: "bg-on" });
+                  props.dispatch({ type: "login-on" });
+                  props.dispatch({ type: "nav-off"});
+                  props.dispatch({ type: "pause" });
+                }}
+              >
                 <AiOutlineUser />
               </Link>
             </Nav.Link>
@@ -90,8 +105,11 @@ function BootNav(props) {
 function stateprops(state) {
   return {
     navTG: state.reducer1,
+    playing:state.reducer3,
     expand: state.reducer5,
-    myTG:state.reducer8,
+    bg: state.reducer6,
+    login: state.reducer8,
+    
   };
 }
 

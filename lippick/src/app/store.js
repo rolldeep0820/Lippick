@@ -97,24 +97,27 @@ function reducer7(state = selectImg, action) {
   return selectImg;
 }
 
-let myTG = false;
+let login = false;
 
 
-function reducer8(state = myTG, action) {
-  if (action.type === "my-on") {
-    myTG = true;
-  } else if (action.type === "my-off") {
-    myTG = false;
+function reducer8(state = login, action) {
+
+
+  if (action.type === "login-on") {
+    login = true;
+    console.log(1);
+  } else if (action.type === "login-off") {
+    login = false;
+    console.log(2);
   }
 
-  return myTG;
+  console.log(3);
+
+  return login;
 }
 
 let tap = [true, false, false, false];
-// let tap1 = true;
-// let tap2 = false;
-// let tap3 = false;
-// let tap4 = false;
+
 
 function reducer9(state = tap, action) {
   switch (action.type) {

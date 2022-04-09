@@ -7,38 +7,15 @@ import "antd/dist/antd.min.css";
 
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { combineReducers, createStore } from "@reduxjs/toolkit";
-import {
-  reducer1,
-  reducer2,
-  reducer3,
-  reducer4,
-  reducer5,   
-  reducer6,
-  reducer7,
-  reducer8,
-  reducer9,
-} from "./_reducers/store.js";
+import {  createStore } from "@reduxjs/toolkit";
+
 import { BrowserRouter } from "react-router-dom";
 import promiseMiddleware from "redux-promise";
 import ReduxThunk from "redux-thunk";
 import { applyMiddleware} from "redux";
 import Reducer from "./_reducers";
 
-const store = createStore(
-  combineReducers({
-    reducer1,
-    reducer2,
-    reducer3,
-    reducer4,
-    reducer5,
-    reducer6,
-    reducer7,
-    reducer8,
-    reducer9,
 
-  })
-);
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
 

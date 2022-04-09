@@ -9,7 +9,7 @@ function BG(props) {
         width: "100%",
         height: "100%",
         backgroundColor: "rgba(0,0,0,0.7)",
-        zIndex: "500",
+        zIndex: "920",
       }}
       onClick={() => {
         props.dispatch({ type: "bg-off" });
@@ -18,7 +18,8 @@ function BG(props) {
 
         props.dispatch({type:"expand-off"});
 
-        props.dispatch({type:"my-off"})
+        props.dispatch({type:"login-off"})
+        props.dispatch({type:"play"});
       }}
     ></div>
   );

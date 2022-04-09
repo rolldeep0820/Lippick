@@ -1,7 +1,11 @@
-import { Axios } from "axios";
+import { withRouter } from 'react-router-dom';
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../_actions/user_actions";
 
-function LoginPage() {
+
+function LoginPage(props) {
+    const dispatch = useDispatch();
 
     const [Email, setEmail] = useState("")
     const [Password, setPassword] = useState("")
@@ -17,6 +21,25 @@ function LoginPage() {
 
         console.log('Email:', Email)
         console.log('Password', Password)
+
+        let body = {
+            email: Email,
+            password: Password  
+        }
+ 
+        dispatch(loginUser(body))
+            .then(response => {
+                console.log("res는 받았을까?")
+                if(response.payload.loginSuccess){
+                    console.log("res 성공했을까?")
+                    props.history.push('/home')
+                } else {
+                    alert('Error') 
+                }
+            })
+
+            
+
     }
 
     return (
@@ -42,4 +65,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+export default withRouter(LoginPage)

@@ -42,7 +42,7 @@ mongoose.connect('mongodb+srv://itwillteam3:teamteam333@boilerplate.ddtin.mongod
 
     
 app.post('/api/users/login', (req, res) => {
-     
+    console.log("로그인 되고 있나?")
     // 요청된 이메일을 데이터베이스에서 있는지 찾는다.
     User.findOne({ email: req.body.email }, (err, user) => {
         if(!user){
@@ -60,11 +60,12 @@ app.post('/api/users/login', (req, res) => {
             // 비밀번호까지 맞다면 토큰을 생성하기.
             user.generateToken((err, user) => {
                 if(err) return res.status(400).send(err);
-
+                console.log("아디비번 맞음")
                 // 토근을 저장한다.  
                 res.cookie("x_auth", user.token)
                 .status(200)
                 .json({ loginSuccess: true, userId: user._id })
+                
             })
             
         })

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./MainBottom.scss";
 import { BsFillVolumeUpFill, BsFillVolumeMuteFill } from "react-icons/bs";
 import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
 import { Container } from "react-bootstrap";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function MainBottom(props) {
+
+
   return (
     <div className="high-wrap">
       <Container className="main-bottom-wrap">

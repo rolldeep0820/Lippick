@@ -14,6 +14,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import HomeContent1 from "./components/HomeContent1";
 import HomeWrap from "./components/HomeWrap";
 import Footer from "./components/Footer.js";
+import Auth from "./hoc/auth"
 
 function App(props) {
   return (

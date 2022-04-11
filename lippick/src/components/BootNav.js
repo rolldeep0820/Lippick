@@ -8,6 +8,7 @@ import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 function BootNav(props) {
   const linkStyle = {
@@ -15,6 +16,16 @@ function BootNav(props) {
     textDecoration: "none",
     maxHeight: "75px",
   };
+
+  const onClickHandler = () => {
+    axios.get('/api/users/logout')
+    .then(response => {
+      if(response.data.seccess) {
+        props.history.push("/home")
+      }
+    })
+  }
+
   return (
     <>
       <Navbar
@@ -69,7 +80,10 @@ function BootNav(props) {
               </Link>
             </div>
           </div>
-
+          
+          <button onClick={onClickHandler}>
+            로그아웃
+          </button>
           <Nav className="nav-menu">
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
               <Link to="/wishlist" style={linkStyle}>

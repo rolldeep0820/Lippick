@@ -1,36 +1,114 @@
-/* style.css */
-
 /* label 스타일 조정 */
 .button {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 label {
-    cursor: pointer;
-    font-size: 1em;
+  cursor: pointer;
+  font-size: 1em;
 }
 
 /* 못생긴 기존 input 숨기기 */
 #chooseFile {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-.image-top-wrap{
-    
+.colortest-wrap {
+  width: 100%;
+  position: relative;
+  margin-top: 10%;
+  display: flex;
+  max-width: 1640px;
+  margin-bottom: 5%;
+  justify-content: center;
+  transition: 0.5s;
+  height: 725px !important;
 
-    width:100%;
+  .colortest-left-wrap {
+    flex: 0.4 1;
+    border: 1px solid #eaeaea;
+    padding: 5%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 100%;
+      max-width: 700px;
+      max-height: 700px;
+    }
+  }
 
-    height: 80vh;
-.image-wrap {
-
+  .colortest-right-wrap {
+    flex: 0.5;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    top: 40vh;
+    padding-left: 5%;
+    padding-top: 4%;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    border-right: 1px solid #eaeaea;
 
+    .colortest-right-wrap-title {
+      flex: 0.1;
+
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+
+    .colortest-right-wrap-span {
+      flex: 0.1;
+    }
+  }
 }
 
+.input-image-wrap {
+  margin-right: 3%;
+  width: 20%;
+  .input-image-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 12px;
+    border: 1px solid #eaeaea;
+    width: 100%;
+    height: 7vh;
 
+    .icon-wrap {
+      border-radius: 30px;
+      background-color: pink;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      svg {
+        font-size: 1.5rem;
+        color: black;
+      }
+    }
+  }
+
+  span {
+    width: 50%;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+
+.btn-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  width: 50%;
+  bottom: 10%;
+}
+
+.loading-wrap {
+  position: fixed;
+  z-index: 930;
+  top: 40%;
+  left: 43.2%;
 }

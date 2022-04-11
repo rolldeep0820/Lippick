@@ -13,7 +13,7 @@ function Footer(){
                 <div className="footer-top-item">
                     <ul className="footer-top-ul">
                         <li className="footer-top-li-1">Lippick</li>
-                        <li>저널</li>
+                        <li>퍼스널 컬러 테스트</li>
                         <li>익스클루시브 서비스</li>
                         <li>채용</li>
                         <li>브랜드 소개</li>

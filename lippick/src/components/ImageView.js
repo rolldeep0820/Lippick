@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import "./ImageView.scss";
+//import "./ImageView.scss";
 import { connect } from "react-redux";
 import { compose } from "@reduxjs/toolkit";
 import * as tmImage from "@teachablemachine/image";
 import { promise } from "bcrypt/promises";
+import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import MakeUp from "./MakeUp";
 
 function ImageView(props) {
@@ -17,6 +18,9 @@ function ImageView(props) {
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
+    const picRef = useRef(null);
+    const canvasRef = useRef(null);
+
     const URL2 = "https://teachablemachine.withgoogle.com/models/UoYzLe7MY/";
 
     let model, webcam, labelContainer, maxPredictions;
@@ -84,6 +88,61 @@ function ImageView(props) {
         setFileImage("");
     };
 
+    //얼굴 감지, make-up
+    const runFacemesh = async () => {
+        const net = await facemesh.load(
+            facemesh.SupportedPackages.mediapipeFacemesh
+        );
+
+        detect(net);
+    };
+
+    const detect = async (net) => {
+        if (typeof picRef.current !== "undefined" && picRef.current !== null) {
+            canvasRef.current.width = picRef.current.width;
+            canvasRef.current.height = picRef.current.height;
+            const pic = document.getElementById("pic");
+            const face = await net.estimateFaces({ input: pic });
+
+            const ctx = canvasRef.current.getContext("2d");
+
+            requestAnimationFrame(() => {
+                drawMesh(face, ctx);
+            });
+        }
+    };
+    const drawMesh = (predictions, ctx) => {
+        if (predictions.length > 0) {
+            predictions.forEach((prediction) => {
+                const keypoints1 = prediction.annotations.lipsLowerOuter;
+                const keypoints2 = prediction.annotations.lipsLowerInner;
+                const keypoints3 = prediction.annotations.lipsUpperOuter;
+                const keypoints4 = prediction.annotations.lipsUpperInner;
+                let i;
+                ctx.beginPath();
+                ctx.moveTo(keypoints1[0][0], keypoints1[0][1]);
+                for (i = 1; i < keypoints1.length - 1; i++) {
+                    ctx.lineTo(keypoints1[i][0], keypoints1[i][1]);
+                }
+
+                for (i = keypoints2.length - 1; i >= 0; i--) {
+                    ctx.lineTo(keypoints2[i][0], keypoints2[i][1]);
+                }
+                ctx.lineTo(keypoints1[0][0], keypoints1[0][1]);
+                ctx.moveTo(keypoints3[0][0], keypoints3[0][1]);
+
+                for (i = 1; i < keypoints3.length - 1; i++) {
+                    ctx.lineTo(keypoints3[i][0], keypoints3[i][1]);
+                }
+                for (i = keypoints4.length - 1; i >= 0; i--) {
+                    ctx.lineTo(keypoints4[i][0], keypoints4[i][1]);
+                }
+                ctx.fillStyle = "red";
+                ctx.globalAlpha = 0.7;
+                ctx.fill();
+            });
+        }
+    };
     return (
         <div className="image-wrap">
             <h1>이미지 미리보기</h1>
@@ -96,9 +155,25 @@ function ImageView(props) {
                                 {fileImage && (
                                     <img
                                         id="pic"
+                                        ref={picRef}
                                         alt="sample"
                                         src={fileImage}
                                         style={{
+                                            position: "absolute",
+                                            width: "400px",
+                                            left: 0,
+                                            right: 0,
+                                            margin: "auto",
+                                        }}
+                                    />
+                                )}
+                                {fileImage && (
+                                    <canvas
+                                        ref={canvasRef}
+                                        style={{
+                                            position: "absolute",
+                                            left: 0,
+                                            right: 0,
                                             margin: "auto",
                                         }}
                                     />
@@ -138,7 +213,9 @@ function ImageView(props) {
                                             cursor: "pointer",
                                         }}
                                         onClick={() =>
-                                            init().then(() => predict())
+                                            init()
+                                                .then(() => predict())
+                                                .then(runFacemesh())
                                         }
                                     >
                                         톤 판별
@@ -149,7 +226,6 @@ function ImageView(props) {
                     </tr>
                 </tbody>
             </table>
-            <MakeUp></MakeUp>
         </div>
     );
 }

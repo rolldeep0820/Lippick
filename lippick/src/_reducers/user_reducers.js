@@ -6,6 +6,8 @@ export default function user(state = {}, action){
           return { ...state, loginSuccess: action.payload }
         case "register_user":
           return { ...state, register: action.payload }
+        case "auth_user":
+          return { ...state, userData: action.payload }
 
         default:
         return state;

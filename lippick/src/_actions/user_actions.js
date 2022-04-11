@@ -18,3 +18,11 @@ export function registerUser(dataToSubmit){
     }
 }
 
+export function auth(){
+    const request = Axios.get('/api/users/auth')
+        .then(response => response.data)
+    return {
+        type: "auth_user",
+        payload: request
+    }
+}

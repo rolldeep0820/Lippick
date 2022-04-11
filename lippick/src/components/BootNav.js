@@ -9,8 +9,23 @@ import { BsHandbag } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import { getCookie } from "../cookies";
+import { useState } from "react";
 
 function BootNav(props) {
+  let [loginCheck, setLoginCheck] = useState(false);
+  let [dropTG, setDropTG] = useState(false);
+
+  const token = getCookie("x_auth");
+
+  useEffect(() => {
+    if (token === undefined) {
+      setLoginCheck(false);
+    } else {
+      setLoginCheck(true);
+    }
+  }, [loginCheck]);
+
   const linkStyle = {
     color: "inherit",
     textDecoration: "none",
@@ -18,13 +33,12 @@ function BootNav(props) {
   };
 
   const onClickHandler = () => {
-    axios.get('/api/users/logout')
-    .then(response => {
-      if(response.data.seccess) {
-        props.history.push("/home")
+    axios.get("/api/users/logout").then((response) => {
+      if (response.data.seccess) {
+        props.history.push("/home");
       }
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -80,29 +94,56 @@ function BootNav(props) {
               </Link>
             </div>
           </div>
-          
-          <button onClick={onClickHandler}>
-            로그아웃
-          </button>
+
           <Nav className="nav-menu">
+            {dropTG && (
+              <div className="balloon">
+                <ul>
+                  <li>
+                    <span className="balloon-item">위시리스트</span>
+                  </li>
+                  <li>
+                    <span className="balloon-item">장바구니</span>
+                  </li>
+                  <li>
+                    <span className="balloon-item" onClick={onClickHandler}>
+                      로그아웃
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            )}
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
               <Link to="/wishlist" style={linkStyle}>
                 <AiOutlineHeart />
               </Link>
             </Nav.Link>
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
-              <Link
-                to="#"
-                style={linkStyle}
-                onClick={() => {
-                  props.dispatch({ type: "bg-on" });
-                  props.dispatch({ type: "login-on" });
-                  props.dispatch({ type: "nav-off"});
-                  props.dispatch({ type: "pause" });
-                }}
-              >
-                <AiOutlineUser />
-              </Link>
+              {loginCheck ? (
+                <Link
+                  to="#"
+                  style={linkStyle}
+                  onClick={() => {
+                    setDropTG(!dropTG);
+                    console.log(dropTG);
+                  }}
+                >
+                  <AiOutlineUser />
+                </Link>
+              ) : (
+                <Link
+                  to="#"
+                  style={linkStyle}
+                  onClick={() => {
+                    props.dispatch({ type: "bg-on" });
+                    props.dispatch({ type: "login-on" });
+                    props.dispatch({ type: "nav-off" });
+                    props.dispatch({ type: "pause" });
+                  }}
+                >
+                  <AiOutlineUser />
+                </Link>
+              )}
             </Nav.Link>
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
               <Link to="/bag" style={linkStyle}>
@@ -119,11 +160,10 @@ function BootNav(props) {
 function stateprops(state) {
   return {
     navTG: state.reducer1,
-    playing:state.reducer3,
+    playing: state.reducer3,
     expand: state.reducer5,
     bg: state.reducer6,
     login: state.reducer8,
-    
   };
 }
 

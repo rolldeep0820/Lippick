@@ -50,9 +50,9 @@
     justify-content: center;
     width: 25vw;
 
-    a{
+    a {
       transition: 0.5s;
-      flex:0.15;
+      flex: 0.15;
       text-align: center;
     }
 
@@ -74,8 +74,7 @@
       span {
         cursor: pointer;
         margin-left: 3%;
-        width:100%;
-        
+        width: 100%;
       }
     }
   }
@@ -130,11 +129,47 @@
   }
 }
 
-@media all and (min-width: 1401px) and (max-width: 1919px) {
+.balloon {
+  position: absolute;
+  margin-left: 16px;
+  top: 100%;
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 3px 5px 10px 1px #333;
 
-  .logo-wrap{
-    a{
-      max-height: 65px!important;
+  ul {
+    margin:0;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    li {
+      margin-top:6%;
+      .balloon-item {
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.balloon:after {
+  border-top: 0px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 40px;
+}
+
+@media all and (min-width: 1401px) and (max-width: 1919px) {
+  .logo-wrap {
+    a {
+      max-height: 65px !important;
     }
   }
   .nav-menu {
@@ -142,9 +177,9 @@
   }
 }
 @media all and (min-width: 1023px) and (max-width: 1400px) {
-  .logo-wrap{
-    a{
-      max-height: 50px!important;
+  .logo-wrap {
+    a {
+      max-height: 50px !important;
       flex: 0.2 !important;
     }
   }
@@ -155,13 +190,13 @@
 /* 테블릿 세로 (해상도 768px ~ 1023px)*/
 
 @media all and (min-width: 768px) and (max-width: 1023px) {
-  .logo-wrap{
-    a{
-      max-height: 45px!important;
+  .logo-wrap {
+    a {
+      max-height: 45px !important;
       flex: 0.25 !important;
     }
-    span{
-      font-size:0.7rem !important
+    span {
+      font-size: 0.7rem !important;
     }
   }
 

@@ -35,7 +35,7 @@ function LoginPage(props) {
       console.log("res는 받았을까?");
       if (response.payload.loginSuccess) {
         console.log("res 성공했을까?");
-        props.history.push("/home");
+        window.location.replace("/home")
       } else {
         alert("Error");
       }
@@ -93,7 +93,19 @@ function LoginPage(props) {
                   서비스를 이용하실 수 있습니다.
                 </span>
                 <div>
-                  <Link to="./register">
+                  <Link
+                    to="./register"
+                    onClick={() => {
+                      props.dispatch({ type: "bg-off" });
+
+                      props.dispatch({ type: "nav-on" });
+
+                      props.dispatch({ type: "expand-off" });
+
+                      props.dispatch({ type: "login-off" });
+                      props.dispatch({ type: "play" });
+                    }}
+                  >
                     <button className="login-box-btn ">회원가입</button>
                   </Link>
                 </div>

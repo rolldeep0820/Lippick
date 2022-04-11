@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { compose } from "@reduxjs/toolkit";
 import * as tmImage from "@teachablemachine/image";
 import { promise } from "bcrypt/promises";
+import MakeUp from "./MakeUp";
 
 function ImageView(props) {
     useEffect(() => {
@@ -69,10 +70,6 @@ function ImageView(props) {
     }
     //teachablemachine end
 
-    //face-api start
-
-    //face-api end
-
     //파일 미리볼 url을 저장해줄 state
     const [fileImage, setFileImage] = useState("");
 
@@ -90,7 +87,6 @@ function ImageView(props) {
     return (
         <div className="image-wrap">
             <h1>이미지 미리보기</h1>
-            <canvas id="myCanvas" />
             <table>
                 <tbody>
                     <tr>
@@ -153,6 +149,7 @@ function ImageView(props) {
                     </tr>
                 </tbody>
             </table>
+            <MakeUp></MakeUp>
         </div>
     );
 }

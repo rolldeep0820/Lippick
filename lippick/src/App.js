@@ -2,16 +2,12 @@ import React from "react";
 import "./App.css";
 import ImageView from "./components/ImageView";
 import BootNav from "./components/BootNav";
-import HomeMain from "./components/HomeMain";
 import { connect } from "react-redux";
 import ExpandNav from "./components/ExpandNav";
-import { Transition } from "react-transition-group";
-import Test from "./components/Test.js";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 
-import { Link, Route, Switch } from "react-router-dom";
-import HomeContent1 from "./components/HomeContent1";
+import {  Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
 import Footer from "./components/Footer.js";
 import Auth from "./hoc/auth"

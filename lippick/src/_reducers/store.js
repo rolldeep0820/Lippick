@@ -1,3 +1,6 @@
+import { Cookies } from "react-cookie";
+import { getCookie } from "../cookies";
+
 let navTG = false;
 
 function reducer1(state = navTG, action) {
@@ -73,10 +76,10 @@ let selectImg = "content1-img-1";
 
 function reducer7(state = selectImg, action) {
   if (action.type === "minus" && num === 0) {
-    num = 0;
+    num = 3;
     selectImg = content1img[num];
   } else if (action.type === "plus" && num === 3) {
-    num = 3;
+    num = 0;
     selectImg = content1img[num];
   } else if (action.type === "plus" && 0 <= num <= 3) {
     num += 1;
@@ -147,6 +150,19 @@ function reducer10(state=ani,action){
 
   return ani
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export {
   reducer1,

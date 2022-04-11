@@ -1,4 +1,4 @@
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../_actions/user_actions";
@@ -35,7 +35,7 @@ function LoginPage(props) {
       console.log("res는 받았을까?");
       if (response.payload.loginSuccess) {
         console.log("res 성공했을까?");
-        props.history.push("/home");
+        window.location.replace("/home")
       } else {
         alert("Error");
       }
@@ -51,16 +51,18 @@ function LoginPage(props) {
           <div className={`login-box login-${status}`}>
             <div className="login-box-top">
               <h2>로그인</h2>
-              <button onClick={() => {
-        props.dispatch({ type: "bg-off" });
+              <button
+                onClick={() => {
+                  props.dispatch({ type: "bg-off" });
 
-        props.dispatch({ type: "nav-off" });
+                  props.dispatch({ type: "nav-off" });
 
-        props.dispatch({type:"expand-off"});
+                  props.dispatch({ type: "expand-off" });
 
-        props.dispatch({type:"login-off"})
-        props.dispatch({type:"play"});
-      }}>
+                  props.dispatch({ type: "login-off" });
+                  props.dispatch({ type: "play" });
+                }}
+              >
                 <MdOutlineClose />
               </button>
             </div>
@@ -86,8 +88,27 @@ function LoginPage(props) {
             <div className="login-box-bottom">
               <div className="login-box-bottom-margin">
                 <span className="login-box-bottom-title mb-3">Non-Members</span>
-                <span className="login-box-bottom-content mt-5">새로 오신 고객님,&nbsp;&nbsp;회원 가입을 하시면 더 많은 서비스를 이용하실 수 있습니다.</span>
-                <button className="login-box-btn ">회원가입</button>
+                <span className="login-box-bottom-content mt-5">
+                  새로 오신 고객님,&nbsp;&nbsp;회원 가입을 하시면 더 많은
+                  서비스를 이용하실 수 있습니다.
+                </span>
+                <div>
+                  <Link
+                    to="./register"
+                    onClick={() => {
+                      props.dispatch({ type: "bg-off" });
+
+                      props.dispatch({ type: "nav-on" });
+
+                      props.dispatch({ type: "expand-off" });
+
+                      props.dispatch({ type: "login-off" });
+                      props.dispatch({ type: "play" });
+                    }}
+                  >
+                    <button className="login-box-btn ">회원가입</button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

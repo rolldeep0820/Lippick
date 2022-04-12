@@ -7,7 +7,7 @@ import { Transition } from "react-transition-group";
 
 function ExpandNav(props) {
   return (
-    <div>
+    <div className="expand-wrap">
       {props.bg ? <BG /> : ""}
 
       <Transition in={props.expand} appear={props.expand} timeout={50}>

@@ -11,6 +11,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { getCookie } from "../cookies";
 import { withRouter } from "react-router-dom";
+import UploadProduct from "./UploadProduct";
 
 function BootNav(props) {
     let [loginCheck, setLoginCheck] = useState(false);
@@ -120,6 +121,14 @@ function BootNav(props) {
                                             onClick={onClickHandler}
                                         >
                                             로그아웃
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span
+                                            className="balloon-item">
+                                          <Link to="/product/upload" style={linkStyle} >
+                                            업로드
+                                          </Link>
                                         </span>
                                     </li>
                                 </ul>

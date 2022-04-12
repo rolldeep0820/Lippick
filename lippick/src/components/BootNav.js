@@ -15,11 +15,16 @@ import { useState } from "react";
 function BootNav(props) {
   let [loginCheck, setLoginCheck] = useState(false);
   let [dropTG, setDropTG] = useState(false);
+ let [isAuth,setIsAuth]=useState(false);
 
-  const token = getCookie("x_auth");
+ const token = getCookie("x_auth");
+
+ axios.get('api/users/auth').then((response)=> setIsAuth(response.isAuth))
+  
+
 
   useEffect(() => {
-    if (token === undefined) {
+    if (isAuth) { // undefin
       setLoginCheck(false);
     } else {
       setLoginCheck(true);

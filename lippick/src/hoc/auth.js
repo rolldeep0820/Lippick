@@ -23,6 +23,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
                 if(!response.payload.isAuth) {
                      if(option) {
                          props.history.push('/home')
+                         alert("로그인 후 이용가능합니다.")
                      }
                 } else {
                     // 로그인 한 상태 

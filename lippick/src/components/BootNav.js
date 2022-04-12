@@ -11,6 +11,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { getCookie } from "../cookies";
 import { withRouter } from "react-router-dom";
+import UploadProduct from "./UploadProduct";
 
 function BootNav(props) {
   let [loginCheck, setLoginCheck] = useState(false);

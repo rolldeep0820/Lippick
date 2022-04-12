@@ -11,6 +11,7 @@ import {  Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
 import Footer from "./components/Footer.js";
 import Auth from "./hoc/auth"
+import UploadProduct from "./components/UploadProduct";
 
 function App(props) {
   return (
@@ -24,14 +25,13 @@ function App(props) {
       
 
       <Switch>
-        <Route path="/personal">
-          <ImageView />
+        <Route path="/personal" component={Auth(ImageView, true)}>
+          {/* <ImageView /> */}
         </Route>
-
-      
-
         <Route path="/register">
           <RegisterPage />
+        </Route>
+        <Route path="/product/upload" component={Auth(UploadProduct, true)}>
         </Route>
       </Switch>
       <Route path="/:id">

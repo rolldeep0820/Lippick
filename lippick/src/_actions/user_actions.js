@@ -3,6 +3,7 @@ import Axios from "axios";
 export function loginUser(dataToSubmit){
     const request = Axios.post('/api/users/login', dataToSubmit)
         .then(response => response.data)
+        console.log("loginUser 액션 ")
     return {
         type: "login_user",
         payload: request

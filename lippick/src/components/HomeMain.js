@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import MainBottom from "./MainBottom";
 
 function HomeMain(props) {
+
+  
   return (
     <div className="video-wrap">
       <ReactPlayer

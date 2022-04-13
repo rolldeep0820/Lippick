@@ -1,30 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import Dropzone from "react-dropzone";
 import axios from "axios";
 
-function FileUpload() {
+function FileUpload(props) {
 
-    const dropHandler = (files) => {
+  const [Images, setImages] = useState([])
 
-        let formData = new FormData();
+  
+  const dropHandler = (files) => {
+      const formData = new FormData();
+      const config = {
+        header: { 'content-type': 'multipart/form-data'}
+      }
+      formData.append("file", files[0])
 
-        const config = {
-            header: { 'content-type': 'multipart/form-data' }
+      axios.post("/api/product/image", formData , config)
+      .then(response => {
+        if(response.data.success) {
+
+          setImages([...Images, response.data.filePath])
+          props.refreshFunction([...Images, response.data.filePath])
+
+        } else {
+          alert('파일 저장 실패')
         }
-        formData.append("file", files[0])
+      })
+  }
 
-        axios.post('/api/product/image', formData, config)
-            .then(response => {
-                if(response.data.success){
-                    console.log(response.data)
-                } else {
-                    alert("파일 저장 실패")
-                }
-            })
-
-
-    }
-
+  const deleteHandler = (image) => {
+    const currentIndex = Image.indexOf(image)
+    let newImages = [...Images]
+    newImages.splice(currentIndex, 1)
+    setImages(newImages)
+    props.refreshFunction(newImages)
+  }
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -39,6 +48,18 @@ function FileUpload() {
             </div>
         )}
       </Dropzone>
+
+      <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
+
+        { Images.map((image, index) => (
+          <div onClick={() => deleteHandler(image)} key={index}>
+            <img style={{ width:'300px', height:'300px' }} 
+              src={`http://localhost:3000/${image}`}/>
+          </div>
+        ))}
+      </div>
+
+
     </div>
   );
 }

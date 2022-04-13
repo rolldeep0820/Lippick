@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import {Button, Form, Input} from "antd";
 import FileUpload from "./FileUpload";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 const { TextArea } = Input;
 
-function UploadProduct(){
+function UploadProduct(props){
 
     const [Title, setTitle] = useState("")
     const [Description, setDescription] = useState([])
@@ -40,15 +41,31 @@ function UploadProduct(){
 
     const submitHandler = (event) => {
         event.preventDefault();
-
+        console.log("submitHandler 작동!")
         if(!Title || !Description || !Price || !Category || !Tone || !Images || !Color ) {
             return alert("모든 값을 넣어주세요.")
         }
 
         // 서버에 채운 값들을 request로 보낸다.
-
+        const body = {
+            title: Title,
+            description: Description,
+            price: Price,
+            category: Category,
+            tone: Tone,
+            images: Images,
+            color: Color
+        }
         
-        axios.post("/api/product", )
+        axios.post("/api/product", body)
+        .then(response => {
+            if(response.data.success){
+                alert("상품을 업로드 했습니다.")
+                props.history.push('/product/upload')
+            } else {
+                alert("상품 업로드 실패했습니다.")
+            }
+        })
     }
 
     return (
@@ -57,7 +74,7 @@ function UploadProduct(){
                 <h2> Upload Product </h2>
             </div>
 
-            <Form onSubmit={submitHandler}> 
+            <Form onSubmitCapture={submitHandler}> 
                 <br />
                 <br /><br />
                 <br /><br />
@@ -102,7 +119,7 @@ function UploadProduct(){
                 </select>
                 <br />
                 <br />
-                <Button type="submit">확인</Button>
+                <Button htmlType="submit">확인</Button>
 
             
 
@@ -112,4 +129,4 @@ function UploadProduct(){
     )
 }
 
-export default UploadProduct 
+export default withRouter(UploadProduct)

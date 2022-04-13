@@ -34,13 +34,10 @@ function App(props) {
                 <Route path="/register">
                     <RegisterPage />
                 </Route>
-                <Route path="/product/upload1">
+                <Route path="/product/upload">
                     <UploadProduct />
                 </Route>
-                <Route
-                    path="/product/upload"
-                    component={Auth("/product/upload1", true)}
-                ></Route>
+                
             </Switch>
             <Route path="/:id">
                 <Footer />

@@ -28,7 +28,7 @@ function FileUpload(props) {
   }
 
   const deleteHandler = (image) => {
-    const currentIndex = Image.indexOf(image)
+    const currentIndex = Images.indexOf(image)
     let newImages = [...Images]
     newImages.splice(currentIndex, 1)
     setImages(newImages)

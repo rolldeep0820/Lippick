@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 const multer = require("multer");
+const { Product } = require("./models/Product");
 
 // application/x-www-from-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -124,6 +125,17 @@ app.post("/api/product/image", (req, res) => {
         }
         console.log("이미지를 가져오나")
         return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename})
+    })
+})
+
+
+app.post("/api/product", (req, res) => {
+
+    // 받아온 정보들을 디비에 넣어준다.
+    const product = new Product(req.body)
+    product.save((err) => {
+        if(err) return res.status(400).json({ success: false, err})
+        return res.status(200).json({ success: true })
     })
 })
 

@@ -5,12 +5,16 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
+const multer = require("multer");
 
 // application/x-www-from-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 // application/json
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use('server/uploads', express.static('uploads'));
+
+
 
 const mongoose = require("mongoose");
 mongoose
@@ -97,6 +101,34 @@ app.get("/api/users/logout", auth, (req, res) => {
     });
 });
 
+
+app.post("/api/product/image", (req, res) => {
+
+    const path = require('path');
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, 'server/uploads')
+        },
+        filename: function (req, file, cb) {
+            cb(null, `${Date.now()}_${file.originalname}`)
+        }
+    })
+    
+    const upload = multer({storage: storage}).single("file")
+
+    // 가져오 이미지를 저장.
+    upload(req, res, (err) => {
+        if(err) {
+            console.log(err)
+            return res.json({ success: false, err})
+        }
+        console.log("이미지를 가져오나")
+        return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename})
+    })
+})
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
+

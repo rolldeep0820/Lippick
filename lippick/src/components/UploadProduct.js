@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Button, Form, Input} from "antd";
 import FileUpload from "./FileUpload";
+import axios from "axios";
 
 const { TextArea } = Input;
 
@@ -12,6 +13,7 @@ function UploadProduct(){
     const [Category, setCategory] = useState(1)
     const [Tone, setTone] = useState(1)
     const [Images, setImages] = useState([])
+    const [Color, setColor] = useState("")
 
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
@@ -28,6 +30,26 @@ function UploadProduct(){
     const toneChangeHandler = (event) => {
         setTone(event.currentTarget.value)
     }
+    const colorChangeHandler = (event) => {
+        setColor(event.currentTarget.value)
+    }
+
+    const updateImages = (newImages) => {
+        setImages(newImages)
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        if(!Title || !Description || !Price || !Category || !Tone || !Images || !Color ) {
+            return alert("모든 값을 넣어주세요.")
+        }
+
+        // 서버에 채운 값들을 request로 보낸다.
+
+        
+        axios.post("/api/product", )
+    }
 
     return (
         <div style={{ width: '700px', margin: '2rem auto' }}>
@@ -35,12 +57,12 @@ function UploadProduct(){
                 <h2> Upload Product </h2>
             </div>
 
-            <Form> 
+            <Form onSubmit={submitHandler}> 
                 <br />
                 <br /><br />
                 <br /><br />
                 <br />
-                <FileUpload />
+                <FileUpload refreshFunction={updateImages}/>
 
                 <br />
                 <br />
@@ -56,6 +78,10 @@ function UploadProduct(){
                 <Input onChange={priceChangeHandler} value={Price}/>
                 <br />
                 <br />
+                <label>색정보</label>
+                <Input onChange={colorChangeHandler} value={Color}/>
+                <br />
+                <br />
                 <label>카테고리</label>
                 <br />
                 <select onChange={categoryChangeHandler} value={Category}>
@@ -66,7 +92,7 @@ function UploadProduct(){
                 </select>
                 <br />
                 <br />
-                {/* <label>톤</label>
+                <label>톤</label>
                 <br />
                 <select onChange={toneChangeHandler} value={Tone}>
                     <option key="1" value="1">봄웜</option>
@@ -75,8 +101,8 @@ function UploadProduct(){
                     <option key="4" value="4">겨울쿨</option>
                 </select>
                 <br />
-                <br /> */}
-                <Button>확인</Button>
+                <br />
+                <Button type="submit">확인</Button>
 
             
 

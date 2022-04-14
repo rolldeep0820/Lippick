@@ -11,8 +11,8 @@ function UploadProduct(props){
     const [Title, setTitle] = useState("")
     const [Description, setDescription] = useState([])
     const [Price, setPrice] = useState(0)
-    const [Category, setCategory] = useState(1)
-    const [Tone, setTone] = useState(1)
+    const [Category, setCategory] = useState("립스틱")
+    const [Tone, setTone] = useState("봄웜")
     const [Images, setImages] = useState([])
     const [Color, setColor] = useState("")
 
@@ -65,8 +65,8 @@ function UploadProduct(props){
         axios.post("/api/product", body)
         .then(response => {
             if(response.data.success){
-                alert("상품을 업로드 했습니다.")
                 props.history.push('/product/upload')
+                alert("상품을 업로드 했습니다.")
             } else {
                 alert("상품 업로드 실패했습니다.")
             }

@@ -24,7 +24,7 @@ function LandingPage() {
         
         console.log('product', product)
         return <Card
-            cover={<img src={'http://localhost:5000/${product.images[0]}'} />}>
+            cover={<img src={`http://localhost:5000/${product.images[0]}`} />}>
             <Meta 
                 title= {product.title}
             />

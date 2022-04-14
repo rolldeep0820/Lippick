@@ -19,9 +19,9 @@ function UploadProduct(props){
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
     }
-    const descriptionChangeHandler = (event) => {
-        setDescription(event.currentTarget.value)
-    }
+    // const descriptionChangeHandler = (event) => {
+    //     setDescription(event.currentTarget.value)
+    // }
     const priceChangeHandler = (event) => {
         setPrice(event.currentTarget.value)
     }
@@ -39,12 +39,17 @@ function UploadProduct(props){
         setImages(newImages)
     }
 
+    const detailImages = (newImages) => {
+        setDescription(newImages)
+    }
+
     const submitHandler = (event) => {
         event.preventDefault();
         console.log("submitHandler 작동!")
         if(!Title || !Description || !Price || !Category || !Tone || !Images || !Color ) {
             return alert("모든 값을 넣어주세요.")
         }
+    
 
         // 서버에 채운 값들을 request로 보낸다.
         const body = {
@@ -88,7 +93,8 @@ function UploadProduct(props){
                 <br />
                 <br />
                 <label>설명</label>
-                <TextArea onChange={descriptionChangeHandler} value={Description}/>
+                <FileUpload refreshFunction={detailImages}/>
+                {/* <TextArea onChange={descriptionChangeHandler} value={Description}/> */}
                 <br />
                 <br />
                 <label>가격</label>
@@ -102,20 +108,20 @@ function UploadProduct(props){
                 <label>카테고리</label>
                 <br />
                 <select onChange={categoryChangeHandler} value={Category}>
-                    <option key="1" value="1">립스틱</option>
-                    <option key="2" value="2">리퀴드</option>
-                    <option key="3" value="3">립글로스</option>
-                    <option key="4" value="4">립케어</option>
+                    <option key="1" value="립스틱">립스틱</option>
+                    <option key="2" value="리퀴드">리퀴드</option>
+                    <option key="3" value="립글로스">립글로스</option>
+                    <option key="4" value="립케어">립케어</option>
                 </select>
                 <br />
                 <br />
                 <label>톤</label>
                 <br />
                 <select onChange={toneChangeHandler} value={Tone}>
-                    <option key="1" value="1">봄웜</option>
-                    <option key="2" value="2">여름쿨</option>
-                    <option key="3" value="3">가을웜</option>
-                    <option key="4" value="4">겨울쿨</option>
+                    <option key="1" value="봄웜">봄웜</option>
+                    <option key="2" value="여름쿨">여름쿨</option>
+                    <option key="3" value="가을웜">가을웜</option>
+                    <option key="4" value="겨울쿨">겨울쿨</option>
                 </select>
                 <br />
                 <br />

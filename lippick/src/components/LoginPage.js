@@ -24,7 +24,6 @@ function LoginPage(props) {
     event.preventDefault();
 
     console.log("Email:", Email);
-    console.log("Password", Password);
 
     let body = {
       email: Email,
@@ -34,6 +33,9 @@ function LoginPage(props) {
     dispatch(loginUser(body)).then((response) => {
       console.log("res는 받았을까?");
       if (response.payload.loginSuccess) {
+        let userId = response.payload.userId
+        console.log(userId)
+        sessionStorage.setItem("userId", userId);
         console.log("res 성공했을까?");
         window.location.replace("/home")
       } else {
@@ -41,6 +43,10 @@ function LoginPage(props) {
       }
     });
   };
+
+
+
+
 
   return (
     <div className="login-wrap">

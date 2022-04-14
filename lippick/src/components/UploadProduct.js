@@ -19,9 +19,9 @@ function UploadProduct(props){
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
     }
-    // const descriptionChangeHandler = (event) => {
-    //     setDescription(event.currentTarget.value)
-    // }
+    const descriptionChangeHandler = (event) => {
+        setDescription(event.currentTarget.value)
+    }
     const priceChangeHandler = (event) => {
         setPrice(event.currentTarget.value)
     }
@@ -39,8 +39,8 @@ function UploadProduct(props){
         setImages(newImages)
     }
 
-    const detailImages = (newImages) => {
-        setDescription(newImages)
+    const detailImages = (description) => {
+        setDescription(description)
     }
 
     const submitHandler = (event) => {

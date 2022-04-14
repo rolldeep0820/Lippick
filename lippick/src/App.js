@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import ExpandNav from "./components/ExpandNav";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import LandingPage from "./components/LandingPage";
 
 import { Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
@@ -36,6 +37,9 @@ function App(props) {
                 </Route>
                 <Route path="/product/upload">
                     <UploadProduct />
+                </Route>
+                <Route path="/lipstick">
+                    <LandingPage />
                 </Route>
                 
             </Switch>

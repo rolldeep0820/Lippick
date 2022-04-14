@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // application/json
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use('server/uploads', express.static('uploads'));
+app.use(express.static('server/uploads'));
 
 
 
@@ -138,6 +138,18 @@ app.post("/api/product", (req, res) => {
         return res.status(200).json({ success: true })
     })
 })
+
+app.post("/api/product/products", (req, res) => {
+
+    // product collection에 들어있는 모든 상품 정보를 불러오기 
+
+    Product.find()
+        .exec((err, productInfo) => {
+            if (err) return res.status(400).json({ success: false, err})
+            return res.status(200).json({ success: true, productInfo})
+        })
+})
+
 
 
 app.listen(port, () => {

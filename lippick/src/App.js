@@ -26,7 +26,7 @@ function App(props) {
             </Route>
 
             <Switch>
-                <Route path="/personal" component={Auth("/personal1", true)}>
+                <Route path="/personal" component={Auth(ImageView, true)}>
                     {/* <ImageView /> */}
                 </Route>
                 <Route path="/personal1">
@@ -41,7 +41,6 @@ function App(props) {
                 <Route path="/lipstick">
                     <LandingPage />
                 </Route>
-                
             </Switch>
             <Route path="/:id">
                 <Footer />

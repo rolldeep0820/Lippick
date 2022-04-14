@@ -3,7 +3,7 @@ import axios from "axios";
 import { Col, Card, Row, Button } from "antd";
 import Meta from "antd/lib/card/Meta";
 
-function LandingPage() {
+function LandingLipstick() {
 
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
@@ -23,7 +23,7 @@ function LandingPage() {
     }, [])
 
     const getProducts = (body) => {
-        axios.post('/api/product/products', body)
+        axios.post('/api/product/lipstick', body)
             .then(response => {
                 if (response.data.success) {
                     if(body.loadMore){
@@ -93,4 +93,4 @@ function LandingPage() {
     )
 }
 
-export default LandingPage
+export default LandingLipstick

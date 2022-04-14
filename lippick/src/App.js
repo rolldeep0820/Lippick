@@ -7,6 +7,10 @@ import ExpandNav from "./components/ExpandNav";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import LandingPage from "./components/LandingPage";
+import LandingLipstick from "./components/LandingLipstick";
+import LandingLiquid from "./components/LandingLiquid";
+import LandingGloss from "./components/LandingGloss";
+import LandingCare from "./components/LandingCare";
 
 import { Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
@@ -38,8 +42,20 @@ function App(props) {
                 <Route path="/product/upload">
                     <UploadProduct />
                 </Route>
-                <Route path="/lipstick">
+                <Route path="/all">
                     <LandingPage />
+                </Route>
+                <Route path="/lipstick">
+                    <LandingLipstick />
+                </Route>
+                <Route path="/liquid">
+                    <LandingLiquid />
+                </Route>
+                <Route path="/gloss">
+                    <LandingGloss />
+                </Route>
+                <Route path="/care">
+                    <LandingCare />
                 </Route>
             </Switch>
             <Route path="/:id">

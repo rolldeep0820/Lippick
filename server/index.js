@@ -143,12 +143,93 @@ app.post("/api/product/products", (req, res) => {
 
     // product collection에 들어있는 모든 상품 정보를 불러오기 
 
+    let limit = req.body.limit ? parseInt(req.body.limit): 20;
+    let skip = req.body.skip ? parseInt(req.body.skip): 0;
+
     Product.find()
+        .skip(skip)
+        .limit(limit)
         .exec((err, productInfo) => {
             if (err) return res.status(400).json({ success: false, err})
-            return res.status(200).json({ success: true, productInfo})
+            return res.status(200).json({ 
+                success: true, productInfo,
+                postSize: productInfo.length
+            })
         })
 })
+
+app.post('/api/product/lipstick', (req, res) => {
+
+    let limit = req.body.limit ? parseInt(req.body.limit): 20;
+    let skip = req.body.skip ? parseInt(req.body.skip): 0;
+
+    Product.find()
+        .find({ "category" : "립스틱" })
+        .skip(skip)
+        .limit(limit)
+        .exec((err, productInfo) => {
+            if (err) return res.status(400).json({ success: false, err})
+            return res.status(200).json({ 
+                success: true, productInfo,
+                postSize: productInfo.length
+            })
+        })
+})
+
+app.post('/api/product/liquid', (req, res) => {
+
+    let limit = req.body.limit ? parseInt(req.body.limit): 20;
+    let skip = req.body.skip ? parseInt(req.body.skip): 0;
+
+    Product.find()
+        .find({ "category" : "리퀴드" })
+        .skip(skip)
+        .limit(limit)
+        .exec((err, productInfo) => {
+            if (err) return res.status(400).json({ success: false, err})
+            return res.status(200).json({ 
+                success: true, productInfo,
+                postSize: productInfo.length
+            })
+        })
+})
+
+app.post('/api/product/gloss', (req, res) => {
+
+    let limit = req.body.limit ? parseInt(req.body.limit): 20;
+    let skip = req.body.skip ? parseInt(req.body.skip): 0;
+
+    Product.find()
+        .find({ "category" : "립글로스" })
+        .skip(skip)
+        .limit(limit)
+        .exec((err, productInfo) => {
+            if (err) return res.status(400).json({ success: false, err})
+            return res.status(200).json({ 
+                success: true, productInfo,
+                postSize: productInfo.length
+            })
+        })
+})
+
+app.post('/api/product/care', (req, res) => {
+
+    let limit = req.body.limit ? parseInt(req.body.limit): 20;
+    let skip = req.body.skip ? parseInt(req.body.skip): 0;
+
+    Product.find()
+        .find({ "category" : "립케어" })
+        .skip(skip)
+        .limit(limit)
+        .exec((err, productInfo) => {
+            if (err) return res.status(400).json({ success: false, err})
+            return res.status(200).json({ 
+                success: true, productInfo,
+                postSize: productInfo.length
+            })
+        })
+})
+
 
 
 

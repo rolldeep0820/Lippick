@@ -37,6 +37,7 @@ function BootNav(props) {
   const onClickHandler = () => {
     axios.get("/api/users/logout").then((response) => {
       alert("로그아웃 되었습니다.");
+      sessionStorage.clear();
       props.history.push("/home");
     });
   };

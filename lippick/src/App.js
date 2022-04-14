@@ -17,13 +17,67 @@ import HomeWrap from "./components/HomeWrap";
 import Footer from "./components/Footer.js";
 import Auth from "./hoc/auth";
 import UploadProduct from "./components/UploadProduct";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios"
 
 function App(props) {
+    const [Products, setProducts] = useState([]);
+    const [Skip, setSkip] = useState(0);
+    const [Limit, setLimit] = useState(8);
+    const [PostSize, setPostSize] = useState(0);
+  
+    const [searchTerm, setSearchTerm] = useState("");
+  
+    useEffect(() => {
+      let body = {
+        skip: Skip,
+        limit: Limit,
+      };
+  
+      getProducts(body);
+    }, []);
+  
+  
+  
+    const getProducts = (body) => {
+      axios.post("/api/search", body).then((response) => {
+        if (response.data.success) {
+          if (body) {
+            setProducts([...response.data.productInfo])
+            console.log(Products);
+          } 
+          setPostSize(response.data.postSize);
+        }else {
+          alert(" 상품 가져오기 실패 ");
+        }
+      });
+  
+  
+      
+    };
+  
+    const updateSearchTerm = (newSearchTerm) => {
+      
+  
+      let body ={
+          skip:0,
+          limit:Limit,
+          searchTerm:newSearchTerm
+      }
+  
+      setSkip(0)
+      setSearchTerm(newSearchTerm);
+      getProducts(body);
+  };
+
+  
+
     return (
         <div className="App">
             {props.login && <LoginPage />}
             <Route path="/:id">
-                {props.expand ? <ExpandNav /> : <BootNav />}
+                {props.expand ? <ExpandNav Products={Products} refreshFunction={updateSearchTerm}  /> : <BootNav />}
             </Route>
             <Route path="/home">
                 <HomeWrap />

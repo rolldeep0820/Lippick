@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // application/json
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static('server/uploads'));
+app.use('/uploads', express.static('uploads'));
 
 
 
@@ -108,7 +108,7 @@ app.post("/api/product/image", (req, res) => {
     const path = require('path');
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, 'server/uploads')
+            cb(null, 'uploads')
         },
         filename: function (req, file, cb) {
             cb(null, `${Date.now()}_${file.originalname}`)

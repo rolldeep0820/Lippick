@@ -285,6 +285,28 @@ app.post("/api/search", (req, res) => {
   }
 });
 
+// axios.get(`/api/product/products_by_id?id=${productId}`)
+
+app.get("/api/product/products_by_id", (req, res) => {
+
+  let productId = req.query.id
+  console.log(productId)
+
+  // productId를 이용해서 DB에서 productId와 같은 상품의 정보를 가져온다.
+
+  Product.find({_id:productId})
+    .exec((err, product) => {
+      console.log(product)
+    if (err) return res.status(400).send(err)
+    return res.status(200).send({ success: true, product})
+  }) 
+  
+
+})
+
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

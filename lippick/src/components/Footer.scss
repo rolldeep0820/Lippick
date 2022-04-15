@@ -69,7 +69,7 @@
     .footer-wrap{
 
       font-size:0.8rem;
-      transform: translateY(425%);
+      
 
       .footer-top{
         flex: 1 !important;
@@ -80,6 +80,11 @@
         }
       }
 
+    }
+
+    .footer-true{
+
+      transform: translateY(425%);
     }
 }
 

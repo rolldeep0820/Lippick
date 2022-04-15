@@ -1,14 +1,15 @@
+import { connect } from "react-redux";
 import React from "react";
 import "./Footer.scss"
 
 
-function Footer(){
+function Footer(props){
 
 
     return(
 
 
-        <div className="footer-wrap">
+        <div className={`footer-wrap footer-${props.footer}`}>
             <div className="footer-top">
                 <div className="footer-top-item">
                     <ul className="footer-top-ul">
@@ -67,6 +68,11 @@ function Footer(){
 
 }
 
-
-export default Footer
-
+function stateprops(state) {
+    return {
+      footer: state.reducer11,
+    };
+  }
+  
+  export default connect(stateprops)(Footer);
+  

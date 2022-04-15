@@ -12,9 +12,6 @@ import { Col, Card, Row, Button } from "antd";
 import Meta from "antd/lib/card/Meta";
 
 function ExpandNav(props) {
-  useEffect(() => {
-    console.log(props.Products);
-  });
   const linkStyle = {
     color: "inherit",
     textDecoration: "none",
@@ -33,24 +30,28 @@ function ExpandNav(props) {
   };
 
   const searchClickHandler = (e) => {
-    setSearchTerm(e.target.innerText);
-    props.refreshFunction(e.target.innerText);
+    if (e === null) {
+      setSearchTerm("");
+      props.refreshFunction("");
+    } else {
+      setSearchTerm(e.target.innerText);
+      props.refreshFunction(e.target.innerText);
+    }
   };
 
   const products = props.Products.slice(0);
   const newProducts = props.Products.slice(-8);
 
-
   return (
     <div className="expand-wrap">
-      {props.bg ? <BG /> : ""}
+      {props.bg ? <BG searchClickHandler={searchClickHandler} /> : ""}
 
       <Transition in={props.expand} appear={props.expand} timeout={50}>
         {(status) => (
           <div className={`expand-nav-wrap expand-${status}`}>
             <div className="expand-top">
               <form className="expand-form">
-                <AiOutlineSearch />
+                <div style={{marginRight:"10px"}}><AiOutlineSearch /></div>
                 <input
                   type="text"
                   value={searchTerm}
@@ -79,6 +80,7 @@ function ExpandNav(props) {
                   value="립스틱"
                   onClick={(e) => {
                     searchClickHandler(e);
+                    setSlideTG(false);
                   }}
                 >
                   립스틱
@@ -89,6 +91,7 @@ function ExpandNav(props) {
                   value="리퀴드"
                   onClick={(e) => {
                     searchClickHandler(e);
+                    setSlideTG(false);
                   }}
                 >
                   리퀴드
@@ -98,6 +101,7 @@ function ExpandNav(props) {
                   value="립 글로스"
                   onClick={(e) => {
                     searchClickHandler(e);
+                    setSlideTG(false);
                   }}
                 >
                   립 글로스
@@ -107,6 +111,7 @@ function ExpandNav(props) {
                   value="립 케어"
                   onClick={(e) => {
                     searchClickHandler(e);
+                    setSlideTG(false);
                   }}
                 >
                   립 케어
@@ -157,12 +162,18 @@ function ExpandNav(props) {
                             return (
                               <div className="expand-img-box-wrap">
                                 <div className="expand-img-box">
-                                <Row >
-                                    <Col >
-                                      <Card 
-                                        bodyStyle={{padding: "0"}}
-                                        cover={<img src={`http://localhost:5000/${product.images[0]}`} />}>
-                                      {/* <Meta 
+                                  <Row>
+                                    <Col>
+                                      <Card
+                                        bodyStyle={{ padding: "0" }}
+                                        cover={
+                                          <img
+                                            src={`http://localhost:5000/${product.images[0]}`}
+                                            alt=""
+                                          />
+                                        }
+                                      >
+                                        {/* <Meta 
                                           title= {product.title}
                                       /> */}
                                       </Card>
@@ -184,12 +195,17 @@ function ExpandNav(props) {
                             return (
                               <div className="expand-img-box-wrap">
                                 <div className="expand-img-box">
-                                  <Row >
-                                    <Col >
-                                      <Card 
-                                        bodyStyle={{padding: "0"}}
-                                        cover={<img src={`http://localhost:5000/${product.images[0]}`} />}>
-                                      {/* <Meta 
+                                  <Row>
+                                    <Col>
+                                      <Card
+                                        bodyStyle={{ padding: "0" }}
+                                        cover={
+                                          <img
+                                            src={`http://localhost:5000/${product.images[0]}`}
+                                          />
+                                        }
+                                      >
+                                        {/* <Meta 
                                           title= {product.title}
                                       /> */}
                                       </Card>
@@ -198,7 +214,6 @@ function ExpandNav(props) {
                                 </div>
                                 <span>{product.title}</span>
                               </div>
-                              
                             );
                           })}
                         </li>
@@ -208,7 +223,7 @@ function ExpandNav(props) {
                 </div>
 
                 {products.length > 4 && (
-                  <span>
+                  <span className="slide-btn-wrap">
                     {slideTG ? (
                       <BsArrowLeftShort
                         className="slide-btn"

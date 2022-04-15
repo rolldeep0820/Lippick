@@ -8,6 +8,8 @@ import { process_params } from "express/lib/router";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { BsArrowRightShort, BsArrowLeftShort } from "react-icons/bs";
+import { Col, Card, Row, Button } from "antd";
+import Meta from "antd/lib/card/Meta";
 
 function ExpandNav(props) {
   useEffect(() => {
@@ -37,6 +39,7 @@ function ExpandNav(props) {
 
   const products = props.Products.slice(0);
   const newProducts = props.Products.slice(-8);
+
 
   return (
     <div className="expand-wrap">
@@ -154,12 +157,18 @@ function ExpandNav(props) {
                             return (
                               <div className="expand-img-box-wrap">
                                 <div className="expand-img-box">
-                                  <img
-                                    src={`http://localhost:5000/${product.images[0]}`}
-                                    alt=""
-                                  />
+                                <Row >
+                                    <Col >
+                                      <Card 
+                                        bodyStyle={{padding: "0"}}
+                                        cover={<img src={`http://localhost:5000/${product.images[0]}`} />}>
+                                      {/* <Meta 
+                                          title= {product.title}
+                                      /> */}
+                                      </Card>
+                                    </Col>
+                                  </Row>
                                 </div>
-
                                 <span>{product.title}</span>
                               </div>
                             );
@@ -175,14 +184,21 @@ function ExpandNav(props) {
                             return (
                               <div className="expand-img-box-wrap">
                                 <div className="expand-img-box">
-                                  <img
-                                    src={`http://localhost:5000/${product.images[0]}`}
-                                    alt=""
-                                  />
+                                  <Row >
+                                    <Col >
+                                      <Card 
+                                        bodyStyle={{padding: "0"}}
+                                        cover={<img src={`http://localhost:5000/${product.images[0]}`} />}>
+                                      {/* <Meta 
+                                          title= {product.title}
+                                      /> */}
+                                      </Card>
+                                    </Col>
+                                  </Row>
                                 </div>
-
                                 <span>{product.title}</span>
                               </div>
+                              
                             );
                           })}
                         </li>

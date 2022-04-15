@@ -11,6 +11,7 @@ import LandingLipstick from "./components/LandingLipstick";
 import LandingLiquid from "./components/LandingLiquid";
 import LandingGloss from "./components/LandingGloss";
 import LandingCare from "./components/LandingCare";
+import DetailProductPage from "./components/DetailProductPage";
 
 import { Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
@@ -19,7 +20,7 @@ import Auth from "./hoc/auth";
 import UploadProduct from "./components/UploadProduct";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 
 function App(props) {
     const [Products, setProducts] = useState([]);
@@ -110,6 +111,9 @@ function App(props) {
                 </Route>
                 <Route path="/care">
                     <LandingCare />
+                </Route>
+                <Route path="/product/:productId" component={Auth(DetailProductPage, null)}>
+                   {/* <DetailProductPage /> */}
                 </Route>
             </Switch>
             <Route path="/:id">

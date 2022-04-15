@@ -98,23 +98,23 @@ function ExpandNav(props) {
                 </span>
                 <span
                   style={linkStyle}
-                  value="립 글로스"
+                  value="립글로스"
                   onClick={(e) => {
                     searchClickHandler(e);
                     setSlideTG(false);
                   }}
                 >
-                  립 글로스
+                  립글로스
                 </span>
                 <span
                   style={linkStyle}
-                  value="립 케어"
+                  value="립케어"
                   onClick={(e) => {
                     searchClickHandler(e);
                     setSlideTG(false);
                   }}
                 >
-                  립 케어
+                  립케어
                 </span>
               </div>
               <div className="expand-bottom-right">

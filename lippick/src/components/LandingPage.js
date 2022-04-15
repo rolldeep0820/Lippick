@@ -2,13 +2,18 @@ import React, { useEffect , useState} from "react";
 import axios from "axios";
 import { Col, Card, Row, Button } from "antd";
 import Meta from "antd/lib/card/Meta";
+import { connect } from "react-redux";
 
-function LandingPage() {
+function LandingPage(props) {
 
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(8)
     const [PostSize, setPostSize] = useState(0)
+
+    useEffect(() => {
+        props.dispatch({ type: "nav-on" });
+    }, [props.navTG]);
 
      
     useEffect(() =>{
@@ -94,4 +99,10 @@ function LandingPage() {
     )
 }
 
-export default LandingPage
+function stateprops(state) {
+    return {
+        navTG: state.reducer1,
+    };
+}
+
+export default connect(stateprops)(LandingPage);

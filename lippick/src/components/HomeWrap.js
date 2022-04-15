@@ -9,16 +9,13 @@ import "./HomeWrap.scss";
 
 function HomeWrap(props) {
   useEffect(() => {
-    console.log("111" + props.footer);
-
     props.dispatch({ type: "footer-down" });
-
-    console.log("222" + props.footer);
 
     return () => {
       props.dispatch({ type: "footer-up" });
     };
   }, []);
+
 
   return (
     <Container className="home-wrap">
@@ -31,6 +28,7 @@ function HomeWrap(props) {
 
 function stateprops(state) {
   return {
+    navTG: state.reducer1,
     bg: state.reducer6,
     login: state.reducer8,
     footer: state.reducer11,

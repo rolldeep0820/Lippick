@@ -164,19 +164,21 @@ function ExpandNav(props) {
                                 <div className="expand-img-box">
                                   <Row>
                                     <Col>
-                                      <Card
-                                        bodyStyle={{ padding: "0" }}
-                                        cover={
-                                          <img
-                                            src={`http://localhost:5000/${product.images[0]}`}
-                                            alt=""
-                                          />
-                                        }
-                                      >
-                                        {/* <Meta 
-                                          title= {product.title}
-                                      /> */}
-                                      </Card>
+                                      <a href={`/product/${product._id}`}>
+                                        <Card
+                                          bodyStyle={{ padding: "0" }}
+                                          cover={
+                                            <img
+                                              src={`http://localhost:5000/${product.images[0]}`}
+                                              alt=""
+                                            />
+                                          }
+                                        >
+                                          {/* <Meta 
+                                            title= {product.title}
+                                        /> */}
+                                        </Card>
+                                      </a>
                                     </Col>
                                   </Row>
                                 </div>
@@ -197,18 +199,20 @@ function ExpandNav(props) {
                                 <div className="expand-img-box">
                                   <Row>
                                     <Col>
-                                      <Card
-                                        bodyStyle={{ padding: "0" }}
-                                        cover={
-                                          <img
-                                            src={`http://localhost:5000/${product.images[0]}`}
-                                          />
-                                        }
-                                      >
-                                        {/* <Meta 
-                                          title= {product.title}
-                                      /> */}
-                                      </Card>
+                                      <a href={`/product/${product._id}`}>
+                                        <Card
+                                          bodyStyle={{ padding: "0" }}
+                                          cover={
+                                            <img
+                                              src={`http://localhost:5000/${product.images[0]}`}
+                                            />
+                                          }
+                                        >
+                                          {/* <Meta 
+                                            title= {product.title}
+                                        /> */}
+                                        </Card>
+                                      </a>
                                     </Col>
                                   </Row>
                                 </div>

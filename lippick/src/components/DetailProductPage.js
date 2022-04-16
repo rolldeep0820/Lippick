@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DetailProductImage from "./DetailProductImage";
-import { Row, Col, Form, Button, Select } from "antd";
+import { Row, Col, Form, Button, Select, Image } from "antd";
 
 function DetailProductPage(props) {
  
@@ -26,7 +26,7 @@ function DetailProductPage(props) {
         }, [])
 
     const bagHandler = () => {
-        
+
     }
 
 
@@ -75,7 +75,10 @@ function DetailProductPage(props) {
             <br />
             <hr />
             <p>상세 설명 이미지 | 근데 리뷰 기능 만들어 말어........</p>
-            <img src={`http://localhost:5000/${Product.description}`}/>
+            <Image
+                    src={`http://localhost:5000/${Product.description}`}
+                    preview={false}
+                />
         </div> 
     )
 }

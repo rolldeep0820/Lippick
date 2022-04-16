@@ -113,8 +113,10 @@ function App(props) {
                     <LandingCare />
                 </Route>
                 <Route path="/product/:productId" component={Auth(DetailProductPage, null)}>
-                   {/* <DetailProductPage /> */}
                 </Route>
+                {/* <Route path="/product/:productId">
+                   <DetailProductPage />
+                </Route> */}
             </Switch>
             <Route path="/:id">
                 <Footer />

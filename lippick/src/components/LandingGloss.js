@@ -60,14 +60,14 @@ function LandingGloss(props) {
         
         console.log('product', product)
         return <Col lg={6} md={8} xs={24} key={index}>
-        
+            <a href={`/product/${product._id}`}>
             <Card
             cover={<img src={`http://localhost:5000/${product.images[0]}`} />}>
             <Meta 
                 title= {product.title}
             />
             </Card>
-
+            </a>
             </Col>
     })
 

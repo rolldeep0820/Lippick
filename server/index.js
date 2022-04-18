@@ -304,6 +304,15 @@ app.get("/api/product/products_by_id", (req, res) => {
 
 })
 
+app.post("/api/users/addToCart", auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).send({
+      success: true,
+    });
+  });
+});
+
 
 
 

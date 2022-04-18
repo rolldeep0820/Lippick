@@ -7,19 +7,78 @@ import ExpandNav from "./components/ExpandNav";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import LandingPage from "./components/LandingPage";
+import LandingLipstick from "./components/LandingLipstick";
+import LandingLiquid from "./components/LandingLiquid";
+import LandingGloss from "./components/LandingGloss";
+import LandingCare from "./components/LandingCare";
+import DetailProductPage from "./components/DetailProductPage";
 
 import { Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
 import Footer from "./components/Footer.js";
 import Auth from "./hoc/auth";
 import UploadProduct from "./components/UploadProduct";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 function App(props) {
+    const [Products, setProducts] = useState([]);
+    const [Skip, setSkip] = useState(0);
+    const [Limit, setLimit] = useState(8);
+    const [PostSize, setPostSize] = useState(0);
+  
+    const [searchTerm, setSearchTerm] = useState("");
+  
+    useEffect(() => {
+      let body = {
+        skip: Skip,
+        limit: Limit,
+      };
+  
+      getProducts(body);
+    }, []);
+  
+  
+  
+    const getProducts = (body) => {
+      axios.post("/api/search", body).then((response) => {
+        if (response.data.success) {
+          if (body) {
+            setProducts([...response.data.productInfo])
+            console.log(Products);
+          } 
+          setPostSize(response.data.postSize);
+        }else {
+          alert(" 상품 가져오기 실패 ");
+        }
+      });
+  
+  
+      
+    };
+  
+    const updateSearchTerm = (newSearchTerm) => {
+      
+  
+      let body ={
+          skip:0,
+          limit:Limit,
+          searchTerm:newSearchTerm
+      }
+  
+      setSkip(0)
+      setSearchTerm(newSearchTerm);
+      getProducts(body);
+  };
+
+  
+
     return (
         <div className="App">
             {props.login && <LoginPage />}
             <Route path="/:id">
-                {props.expand ? <ExpandNav /> : <BootNav />}
+                {props.expand ? <ExpandNav Products={Products} refreshFunction={updateSearchTerm}  /> : <BootNav />}
             </Route>
             <Route path="/home">
                 <HomeWrap />
@@ -38,9 +97,26 @@ function App(props) {
                 <Route path="/product/upload">
                     <UploadProduct />
                 </Route>
-                <Route path="/lipstick">
+                <Route path="/all">
                     <LandingPage />
                 </Route>
+                <Route path="/lipstick">
+                    <LandingLipstick />
+                </Route>
+                <Route path="/liquid">
+                    <LandingLiquid />
+                </Route>
+                <Route path="/gloss">
+                    <LandingGloss />
+                </Route>
+                <Route path="/care">
+                    <LandingCare />
+                </Route>
+                <Route path="/product/:productId" component={Auth(DetailProductPage, null)}>
+                </Route>
+                {/* <Route path="/product/:productId">
+                   <DetailProductPage />
+                </Route> */}
             </Switch>
             <Route path="/:id">
                 <Footer />

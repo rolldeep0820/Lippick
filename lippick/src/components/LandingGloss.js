@@ -4,7 +4,7 @@ import { Col, Card, Row, Button } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { connect } from "react-redux";
 
-function LandingPage(props) {
+function LandingGloss(props) {
 
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
@@ -14,7 +14,6 @@ function LandingPage(props) {
     useEffect(() => {
         props.dispatch({ type: "nav-on" });
     }, [props.navTG]);
-
      
     useEffect(() =>{
 
@@ -28,7 +27,7 @@ function LandingPage(props) {
     }, [])
 
     const getProducts = (body) => {
-        axios.post('/api/product/products', body)
+        axios.post('/api/product/gloss', body)
             .then(response => {
                 if (response.data.success) {
                     if(body.loadMore){
@@ -69,7 +68,6 @@ function LandingPage(props) {
             />
             </Card>
             </a>
-
             </Col>
     })
 
@@ -98,11 +96,10 @@ function LandingPage(props) {
         </div>
     )
 }
-
 function stateprops(state) {
     return {
         navTG: state.reducer1,
     };
 }
 
-export default connect(stateprops)(LandingPage);
+export default connect(stateprops)(LandingGloss);

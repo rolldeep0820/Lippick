@@ -213,8 +213,8 @@ function ImageView(props) {
                         id="input-image"
                         style={{ display: "none" }}
                     />
-                    <div>톤 판정 결과:{resultTitle}</div>
-                    <div>{resultExplain}</div>
+                    <div><span>톤 판정 결과:{resultTitle}</span></div>
+                    <div><span>{resultExplain}</span></div>
 
                     <div className="btn-wrap">
                         <div className="input-image-wrap">
@@ -225,7 +225,7 @@ function ImageView(props) {
                                 <div className="icon-wrap">
                                     <AiOutlineCloudUpload />
                                 </div>
-                                <span>사진 업로드</span>
+                                <span>업로드</span>
                             </label>
                         </div>
 

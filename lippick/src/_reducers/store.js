@@ -1,3 +1,4 @@
+import { isAllOf } from "@reduxjs/toolkit";
 import { Cookies } from "react-cookie";
 import { getCookie } from "../cookies";
 
@@ -154,7 +155,17 @@ function reducer10(state=ani,action){
 
 
 
+let footer = false;
 
+function reducer11(state=footer,action){
+
+  if(action.type === "footer-down"){
+    footer = true;
+  }else if(action.type === "footer-up"){
+    footer = false;
+  }
+  return footer
+}
 
 
 
@@ -175,5 +186,6 @@ export {
   reducer8,
   reducer9,
   reducer10,
+  reducer11,
 
 };

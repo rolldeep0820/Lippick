@@ -19,14 +19,10 @@ function BootNav(props) {
   let [isAuth, setIsAuth] = useState(false);
 
   axios.get("/api/users/auth").then((response) => {
-    console.log(response.data.isAuth);
     setIsAuth(response.data.isAuth);
-    console.log(isAuth);
   });
 
-  useEffect(() => {
-    console.log(isAuth);
-  }, [isAuth]);
+ 
 
   const linkStyle = {
     color: "inherit",
@@ -37,6 +33,7 @@ function BootNav(props) {
   const onClickHandler = () => {
     axios.get("/api/users/logout").then((response) => {
       alert("로그아웃 되었습니다.");
+      sessionStorage.clear();
       props.history.push("/home");
     });
   };

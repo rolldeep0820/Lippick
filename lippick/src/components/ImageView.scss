@@ -48,6 +48,8 @@ label {
     border-bottom: 1px solid #eaeaea;
     border-right: 1px solid #eaeaea;
 
+    padding-right: 5%;
+
     .colortest-right-wrap-title {
       flex: 0.1;
 
@@ -66,6 +68,7 @@ label {
 .input-image-wrap {
   margin-right: 3%;
   width: 20%;
+  min-width:100px;
   .input-image-btn {
     display: flex;
     align-items: center;
@@ -104,6 +107,7 @@ label {
   position: absolute;
   width: 50%;
   bottom: 10%;
+  transition: 0.5s;
 }
 
 .loading-wrap {
@@ -111,4 +115,71 @@ label {
   z-index: 930;
   top: 40%;
   left: 43.2%;
+}
+
+@media all and (min-width: 1401px) and (max-width: 1919px) {
+  .colortest-right-wrap {
+    h1 {
+      font-size: 1.5rem;
+    }
+    span {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media all and (min-width: 1023px) and (max-width: 1400px) {
+  .colortest-right-wrap {
+    h1 {
+      font-size: 1.3rem;
+    }
+    span {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+
+@media all and (max-width: 1100px) {
+  .colortest-wrap{
+    margin-top:15% !important;
+    flex-direction: column;
+    align-items: center;
+
+    width:100% !important;
+    height: 100% !important;
+
+
+  }
+ 
+  .colortest-left-wrap{
+
+    width:100% !important;
+  }
+  .colortest-right-wrap {
+
+    border:none !important;
+    width:100% !important;
+    min-height: 1000px;
+
+    h1 {
+      font-size: 1.3rem;
+    }
+    span {
+      font-size: 0.9rem;
+    }
+  }
+
+  .footer-wrap{
+    position: static !important;
+  }
+  
+}
+
+
+
+@media all and (min-width: 480px) and (max-width: 767px) {
+}
+
+@media all and (max-width: 479px) {
 }

@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 function BG(props) {
+
+
   return (
     <div
       style={{
@@ -20,6 +22,7 @@ function BG(props) {
 
         props.dispatch({type:"login-off"})
         props.dispatch({type:"play"});
+        props.searchClickHandler(null)
       }}
     ></div>
   );

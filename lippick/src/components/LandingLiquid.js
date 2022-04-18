@@ -4,18 +4,18 @@ import { Col, Card, Row, Button } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { connect } from "react-redux";
 
-function LandingPage(props) {
+function LandingLiquid(props) {
 
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(8)
     const [PostSize, setPostSize] = useState(0)
 
+     
     useEffect(() => {
         props.dispatch({ type: "nav-on" });
     }, [props.navTG]);
 
-     
     useEffect(() =>{
 
         let body = {
@@ -28,7 +28,7 @@ function LandingPage(props) {
     }, [])
 
     const getProducts = (body) => {
-        axios.post('/api/product/products', body)
+        axios.post('/api/product/liquid', body)
             .then(response => {
                 if (response.data.success) {
                     if(body.loadMore){
@@ -69,7 +69,6 @@ function LandingPage(props) {
             />
             </Card>
             </a>
-
             </Col>
     })
 
@@ -105,4 +104,4 @@ function stateprops(state) {
     };
 }
 
-export default connect(stateprops)(LandingPage);
+export default connect(stateprops)(LandingLiquid);

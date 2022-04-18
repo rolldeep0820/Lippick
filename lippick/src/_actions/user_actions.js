@@ -24,6 +24,18 @@ export function auth(){
         .then(response => response.data)
     return {
         type: "auth_user",
-        payload: request
+        payload: request  
     }
 }
+
+export function addToCart(id){
+    let body = {
+        productId : id 
+    }
+    const request = Axios.post('/api/users/addToCart', body)
+        .then(response => response.data);
+    return {
+        type: "add_to_cart",
+        payload: request
+    }
+  }

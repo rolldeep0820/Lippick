@@ -15,6 +15,7 @@
     "body-parser": "^1.20.0",
     "concurrently": "^7.1.0",
     "cookie-parser": "^1.4.6",
+    "eslint-config-react-app": "6",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15",

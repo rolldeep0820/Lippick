@@ -17,18 +17,18 @@ function HomeWrap(props) {
   }, []);
 
 
+  
   return (
     <Container className="home-wrap">
       <HomeMain />
       <HomeContent1 />
-      <HomeContent2 />
+      <HomeContent2  Products={props.Products} refreshFunction={props.refreshFunction} />
     </Container>
   );
 }
 
 function stateprops(state) {
   return {
-    navTG: state.reducer1,
     bg: state.reducer6,
     login: state.reducer8,
     footer: state.reducer11,

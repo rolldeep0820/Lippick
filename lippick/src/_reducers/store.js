@@ -170,7 +170,18 @@ function reducer11(state=footer,action){
 
 
 
+let loading = true;
 
+function reducer12(state=loading,action){
+
+  if(action.type === "loading-end"){
+    loading = false;
+  }else if(action.type ==="loading-start"){
+    loading = true;
+  }
+
+  return loading
+}
 
 
 
@@ -187,5 +198,5 @@ export {
   reducer9,
   reducer10,
   reducer11,
-
+  reducer12,
 };

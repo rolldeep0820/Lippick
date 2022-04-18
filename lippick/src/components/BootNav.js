@@ -37,55 +37,8 @@ function BootNav(props) {
       props.history.push("/home");
     });
   };
-  let nav = document.getElementById('nav-bar')
-
-  let ctarget = document.getElementsByClassName('ctarget')
-  
-  let ftarget = document.getElementById("ftarget")
-
-  const onMouseEnterHandler = () =>{
 
 
-    nav.className ="navON navbar navbar-expand navbar-light bg-light"
-  }
-
-  const onMouseLeaveHandler = () =>{
-
-    
-    nav.className ="nav-wrap navbar navbar-expand navbar-light bg-light"
-  }
-
-
-  const cb = () =>{
-
-    for(var i = 0; i<ctarget.length; i++){
-      ctarget[i].classList.remove('cw')
-      ctarget[i].classList.add("cb")
-    }
-    
-
-  }
-
-
-  const cw = () =>{
-    for(var i = 0; i<ctarget.length; i++){
-      ctarget[i].classList.remove('cb')
-      ctarget[i].classList.add("cw")
-    }
-  
-  }
-  
-  const fb = () => {
-    ftarget.classList.remove("fw");
-    ftarget.classList.add("fb");
-
-  }
-
-  const fw = () => {
-    ftarget.classList.remove("fb");
-    ftarget.classList.add("fw")
-
-  }
   return (
     <>
       <Navbar
@@ -93,12 +46,10 @@ function BootNav(props) {
         variant="light"
         className="nav-wrap"
         id="nav-bar"
-        onMouseEnter={() => {onMouseEnterHandler(); cb(); fb();}}
-        onMouseLeave={() => {onMouseLeaveHandler(); cw(); fw();}}
       >
         <Container className="nav-container">
           <button
-            className={`search-btn ctarget`}
+            className={`search-btn ${props.navTG ? "cb" : "cw"}`}
             onClick={() => {
               props.dispatch({ type: "expand-on" });
               props.dispatch({ type: "bg-on" });
@@ -116,13 +67,13 @@ function BootNav(props) {
               }}
             >
               <Navbar.Brand>
-                <div className="logo-box" id="ftarget">
-                  <Lippick  />
+                <div className="logo-box">
+                  <Lippick className={`${props.navTG ? "fb" : "fw"}`} />
                 </div>
               </Navbar.Brand>
             </Link>
 
-            <div className={`logo-menu ctarget`}>
+            <div className={`logo-menu ${props.navTG ? "cb" : "cw"}`}>
               <Link to="/lipstick" style={linkStyle}>
                 <span>립스틱</span>
               </Link>
@@ -161,12 +112,12 @@ function BootNav(props) {
                 </ul>
               </div>
             )}
-            <Nav.Link className={`nav-item ctarget`}>
+            <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
               <Link to="/wishlist" style={linkStyle}>
                 <AiOutlineHeart />
               </Link>
             </Nav.Link>
-            <Nav.Link className={`nav-item ctarget`}>
+            <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
               {isAuth ? (
                 <Link
                   to="#"
@@ -193,7 +144,7 @@ function BootNav(props) {
                 </Link>
               )}
             </Nav.Link>
-            <Nav.Link className={`nav-item ctarget`}>
+            <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
               <Link to="/bag" style={linkStyle}>
                 <BsHandbag />
               </Link>
@@ -207,6 +158,7 @@ function BootNav(props) {
 
 function stateprops(state) {
   return {
+    navTG: state.reducer1,
     playing: state.reducer3,
     expand: state.reducer5,
     bg: state.reducer6,

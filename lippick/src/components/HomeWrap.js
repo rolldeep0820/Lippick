@@ -17,6 +17,7 @@ function HomeWrap(props) {
   }, []);
 
 
+  
   return (
     <Container className="home-wrap">
       <HomeMain />

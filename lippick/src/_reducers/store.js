@@ -2,17 +2,7 @@ import { isAllOf } from "@reduxjs/toolkit";
 import { Cookies } from "react-cookie";
 import { getCookie } from "../cookies";
 
-let navTG = false;
 
-function reducer1(state = navTG, action) {
-  if (action.type === "nav-on") {
-    navTG = true;
-  } else if (action.type === "nav-off") {
-    navTG = false;
-  }
-
-  return navTG;
-}
 
 let test = true;
 
@@ -176,7 +166,6 @@ function reducer11(state=footer,action){
 
 
 export {
-  reducer1,
   reducer2,
   reducer3,
   reducer4,

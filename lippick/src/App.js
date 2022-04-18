@@ -78,10 +78,10 @@ function App(props) {
         <div className="App">
             {props.login && <LoginPage />}
             <Route path="/:id">
-                {props.expand ? <ExpandNav Products={Products} refreshFunction={updateSearchTerm}  /> : <BootNav />}
+                {props.expand ? <ExpandNav Products={Products} refreshFunction={updateSearchTerm}  /> : <BootNav refreshFunction={updateSearchTerm} />}
             </Route>
             <Route path="/home">
-                <HomeWrap />
+                <HomeWrap Products={Products} refreshFunction={updateSearchTerm}  />
             </Route>
 
             <Switch>

@@ -3,20 +3,21 @@ import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
 
-function MakeUp() {
+function MakeUp(props) {
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
 
+    const color = props.color;
     const runFacemesh = async () => {
         const net = await facemesh.load(
             facemesh.SupportedPackages.mediapipeFacemesh
         );
         setInterval(() => {
-            detect(net);
+            detect(net, color);
         }, 1000);
     };
 
-    const detect = async (net) => {
+    const detect = async (net, color) => {
         if (
             typeof webcamRef.current !== "undefined" &&
             webcamRef.current !== null &&
@@ -37,11 +38,11 @@ function MakeUp() {
             const ctx = canvasRef.current.getContext("2d");
 
             requestAnimationFrame(() => {
-                drawMesh(face, ctx);
+                drawMesh(face, ctx, color);
             });
         }
     };
-    const drawMesh = (predictions, ctx) => {
+    const drawMesh = (predictions, ctx, color) => {
         if (predictions.length > 0) {
             predictions.forEach((prediction) => {
                 const keypoints1 = prediction.annotations.lipsLowerOuter;
@@ -67,7 +68,7 @@ function MakeUp() {
                 for (i = keypoints4.length - 1; i >= 0; i--) {
                     ctx.lineTo(keypoints4[i][0], keypoints4[i][1]);
                 }
-                ctx.fillStyle = "red";
+                ctx.fillStyle = color;
                 ctx.globalAlpha = 0.7;
                 ctx.fill();
             });
@@ -81,7 +82,7 @@ function MakeUp() {
             <Webcam
                 ref={webcamRef}
                 style={{
-                    position: "absolute",
+                    position: "relative",
                     marginLeft: "auto",
                     marginRight: "auto",
                     left: 0,
@@ -95,7 +96,7 @@ function MakeUp() {
             <canvas
                 ref={canvasRef}
                 style={{
-                    position: "absolute",
+                    position: "relative",
                     marginLeft: "auto",
                     marginRight: "auto",
                     left: 0,

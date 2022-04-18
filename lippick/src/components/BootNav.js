@@ -38,13 +38,16 @@ function BootNav(props) {
     });
   };
 
+  const mouseLeave = () =>{
 
+    props.dispatch({ type: "nav-off" });
+  }
   return (
     <>
       <Navbar
         bg="light"
         variant="light"
-        className="nav-wrap"
+        className={`${props.navTG ? "navON" : "nav-wrap"}`}
         id="nav-bar"
       >
         <Container className="nav-container">

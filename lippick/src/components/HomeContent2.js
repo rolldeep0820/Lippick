@@ -6,14 +6,13 @@ import { ReactComponent as Lippick } from "../img/lippick4.svg";
 import { reverse } from "@tensorflow/tfjs";
 
 function HomeContent2(props) {
-
-
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(()=>{
+  
+  useEffect(() => {
     setSearchTerm("립스틱");
     props.refreshFunction("립스틱");
-  },[])
+  }, []);
   const searchClickHandler = (e) => {
     if (e === null) {
       setSearchTerm("");
@@ -26,7 +25,13 @@ function HomeContent2(props) {
     }
   };
 
-  const products2 = props.Products.slice(0,3);
+  const linkStyle = {
+    color: "inherit",
+    textDecoration: "none",
+    maxHeight: "75px",
+  };
+
+  const products2 = props.Products.slice(0, 4);
 
   return (
     <div className="content2-wrap">
@@ -76,19 +81,35 @@ function HomeContent2(props) {
         </div>
 
         <div className="content2-contents">
-          <div className="content2-contents-left-wrap">
-            <div className="content2-contents-left-top"></div>
-            <div className="content2-contents-left-bottom"></div>
-          </div>
+          
 
           <div className="content2-contents-right-wrap">
             {products2.map((product) => {
               return (
                 <div className="content2-contents-right-img">
-                  <img
-                    src={`http://localhost:5000/${product.images[0]}`}
-                    alt=""
-                  />
+                  <Link to={`./product/${product._id}`}>
+                    <img
+                      src={`http://localhost:5000/${product.images[0]}`}
+                      alt=""
+                    />
+                  </Link>
+                  <div className="product-content-wrap">
+                    <Link to={`./product/${product._id}`} style={linkStyle}>
+                      <span className="product-title">{product.title}</span>
+                    </Link>
+                    <div
+                      className="color-box"
+                      style={{
+                        backgroundColor: `${product.color}`,
+                        width: "20px",
+                        height: "20px",
+                        borderRadius: "10px",
+                        marginTop: "3%",
+                      }}
+                    ></div>
+                    <span className="product-tone">{product.tone}</span>
+                    <span className="product-price">{product.price} 원</span>
+                  </div>
                 </div>
               );
             })}

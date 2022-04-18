@@ -10,7 +10,10 @@ function DetailProductPage(props) {
 
     useEffect(() => {
         props.dispatch({ type: "nav-on" });
-    }, [props.navTG]);
+            
+    }, []);
+
+
     const dispatch = useDispatch();
  
     const productId = props.match.params.productId;

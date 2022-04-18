@@ -9,6 +9,8 @@ export default function user(state = {}, action){
           return { ...state, register: action.payload }
         case "auth_user":
           return { ...state, userData: action.payload }
+        case "add_to_cart":
+          return { ...state }
 
         default:
         return state;

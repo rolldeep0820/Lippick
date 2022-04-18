@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DetailProductImage from "./DetailProductImage";
 import { Row, Col, Form, Button, Select, Image } from "antd";
+import { useDispatch } from "react-redux"
+import { addToCart } from "../_actions/user_actions";
 
 function DetailProductPage(props) {
+
+    const dispatch = useDispatch();
  
     const productId = props.match.params.productId;
 
@@ -26,6 +30,9 @@ function DetailProductPage(props) {
         }, [])
 
     const bagHandler = () => {
+        // 필요한 정보를 cart field에 넣어준다.
+        dispatch(addToCart(productId))
+        
 
     }
 

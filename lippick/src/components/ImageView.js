@@ -29,7 +29,7 @@ function ImageView(props) {
     const picRef = useRef(null);
     const canvasRef = useRef(null);
 
-    const URL2 = "https://teachablemachine.withgoogle.com/models/UoYzLe7MY/";
+    const URL2 = "https://teachablemachine.withgoogle.com/models/LstXi4uuR/";
 
     let model, webcam, labelContainer, maxPredictions;
     let [loading, setLoading] = useState(false);
@@ -65,20 +65,20 @@ function ImageView(props) {
         );
         console.log(prediction[0].className);
         switch (prediction[0].className) {
-            case "봄 웜톤":
-                setTitle("봄 웜톤");
+            case "봄":
+                setTitle("봄 웜");
                 setExplain("추천색 : 카멜색, 복숭아색, 골드색");
                 break;
-            case "여름 쿨톤":
-                setTitle("여름 쿨톤");
+            case "여름":
+                setTitle("여름 쿨");
                 setExplain("추천색 : 라벤더색, 연분홍색, 연하늘색");
                 break;
-            case "가을 웜톤":
-                setTitle("가을 웜톤");
+            case "가을":
+                setTitle("가을 웜");
                 setExplain("추천색 : 연회색, 검정색");
                 break;
-            case "겨울 쿨톤":
-                setTitle("겨울 쿨톤");
+            case "겨울":
+                setTitle("겨울 쿨");
                 setExplain("추천색 : 골드베이지, 누드톤");
                 break;
             default:

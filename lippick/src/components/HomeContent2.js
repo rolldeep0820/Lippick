@@ -8,7 +8,6 @@ import { reverse } from "@tensorflow/tfjs";
 function HomeContent2(props) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  
   useEffect(() => {
     setSearchTerm("립스틱");
     props.refreshFunction("립스틱");
@@ -81,8 +80,6 @@ function HomeContent2(props) {
         </div>
 
         <div className="content2-contents">
-          
-
           <div className="content2-contents-right-wrap">
             {products2.map((product) => {
               return (

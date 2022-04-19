@@ -1,0 +1,143 @@
+.image-gallery {
+
+  margin-right: 0 !important;
+}
+.detail-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+
+  * {
+    padding: 0 !important;
+  }
+  svg:hover {
+    color: #d40d50 !important;
+  }
+
+  .detail-top-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+
+    .detail-top-wrap-2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      align-content: space-around;
+
+      .detail-info-wrap{
+
+        width:35%;
+      }
+      .detail-top-left {
+        width: 100%;
+      }
+
+      .detail-top-right {
+        width: 100%;
+      }
+      .heart {
+        cursor: pointer;
+        font-size: 1.5rem;
+        fill: #d40d50;
+      }
+
+      .detail-title-wrap {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .detail-btn {
+        outline: none;
+        border: none;
+        background-color: black;
+        color: white;
+        height: 60px;
+        margin-top: 10%;
+        transition: 0.5s;
+        width: 100%;
+      }
+
+      .detail-btn:hover {
+        background-color: white;
+        color: #333;
+        border: 1px solid #333;
+      }
+    }
+  }
+
+  .detail-bottom-wrap {
+  }
+}
+
+.ant-btn:focus,
+.ant-btn:hover {
+  color: #d40d50 !important;
+  border-color: #d40d50 !important;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #d40d50 !important;
+  border-right-width: 1px !important;
+}
+
+.ant-select:not(.ant-select-custmoize-input) .ant-select-selector {
+  border-color: #d40d50 !important;
+}
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #ff397b44 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .image-gallery-icon:hover {
+    color: #d40d50 !important;
+  }
+}
+
+.image-gallery-thumbnail.active,
+.image-gallery-thumbnail:focus {
+  outline: none;
+  border: 4px solid #d40d50 !important;
+}
+
+.image-gallery-thumbnail:hover {
+  border: 4px solid #d40d4f86 !important;
+}
+
+@media all and (min-width: 1023px) and (max-width: 1400px) {
+  .detail-wrap {
+    margin-top: 15% !important;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .detail-wrap {
+    margin-top: 15% !important;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+
+@media all and (min-width: 480px) and (max-width: 991px) {
+  .detail-wrap .detail-top-wrap {
+    flex-direction: column !important;
+  }
+  .detail-top-wrap{
+      align-items: center !important;
+  }
+  .detail-info-wrap{
+      width: 100% !important;
+      margin-top:5%;
+  }
+}

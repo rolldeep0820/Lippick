@@ -14,7 +14,8 @@ export default function user(state = {}, action){
               ...state.userData,
               cart: action.payload
           } }
-
+        case "get_cart_items":
+          return { ... state , cartDetail: action.payload }
         default:
         return state;
       }

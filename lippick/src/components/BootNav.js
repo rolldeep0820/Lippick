@@ -12,6 +12,7 @@ import axios from "axios";
 import { getCookie } from "../cookies";
 import { withRouter } from "react-router-dom";
 import UploadProduct from "./UploadProduct";
+import { Badge } from 'antd';
 
 function BootNav(props) {
   let [loginCheck, setLoginCheck] = useState(false);
@@ -147,11 +148,13 @@ function BootNav(props) {
                 </Link>
               )}
             </Nav.Link>
+            <Badge size="small" count={5} style={{marginRight: 8, marginTop: 12}}>
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
               <Link to="/bag" style={linkStyle}>
                 <BsHandbag />
               </Link>
             </Nav.Link>
+            </Badge>
           </Nav>
         </Container>
       </Navbar>

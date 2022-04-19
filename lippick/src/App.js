@@ -13,6 +13,8 @@ import LandingGloss from "./components/LandingGloss";
 import LandingCare from "./components/LandingCare";
 import DetailProductPage from "./components/DetailProductPage";
 
+import BagPage from "./components/BagPage";
+
 import { Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
 import Footer from "./components/Footer.js";
@@ -114,9 +116,8 @@ function App(props) {
                 </Route>
                 <Route path="/product/:productId" component={Auth(DetailProductPage, null)}>
                 </Route>
-                {/* <Route path="/product/:productId">
-                   <DetailProductPage />
-                </Route> */}
+                <Route path="/bag" component={Auth(BagPage, true)}>
+                </Route>
             </Switch>
             <Route path="/:id">
                 <Footer />

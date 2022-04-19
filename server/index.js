@@ -16,6 +16,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
 
 const mongoose = require("mongoose");
+const { off } = require("process");
 mongoose
   .connect(
     "mongodb+srv://itwillteam3:teamteam333@boilerplate.ddtin.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -288,20 +289,26 @@ app.post("/api/search", (req, res) => {
   }
 });
 
-// axios.get(`/api/product/products_by_id?id=${productId}`)
 
 app.get("/api/product/products_by_id", (req, res) => {
 
-  let productId = req.query.id
-  console.log(productId)
+  let type = req.query.type
+  let productIds = req.query.id
+  
+  if(type === "array") {
+    let ids = req.query.id.split(',')
+    productIds = ids.map(item => {
+      return item
+    })
+  }
 
   // productId를 이용해서 DB에서 productId와 같은 상품의 정보를 가져온다.
 
-  Product.find({_id:productId})
+  Product.find({_id:productIds})
     .exec((err, product) => {
       console.log(product)
     if (err) return res.status(400).send(err)
-    return res.status(200).send({ success: true, product})
+    return res.status(200).json(product)
   }) 
   
 

@@ -78,35 +78,45 @@ function MakeUp(props) {
         runFacemesh();
     }, []);
     return (
-        <div>
-            <Webcam
-                ref={webcamRef}
+        <div
+            style={{
+                textAlign: "center",
+                padding: "5%",
+                paddingTop: "10%",
+            }}
+        >
+            <div
                 style={{
-                    position: "relative",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    left: 0,
-                    right: 0,
-                    textAlign: "center",
-                    zIndex: 9,
-                    width: 640,
-                    height: 480,
+                    position: "absolute",
                 }}
-            />
-            <canvas
-                ref={canvasRef}
-                style={{
-                    position: "relative",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    left: 0,
-                    right: 0,
-                    textAlign: "center",
-                    zIndex: 9,
-                    width: 640,
-                    height: 480,
-                }}
-            />
+            >
+                <Webcam
+                    ref={webcamRef}
+                    style={{
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        left: 0,
+                        textAlign: "center",
+                        zIndex: 10,
+                        width: "100%",
+                        height: "100%",
+                    }}
+                />
+            </div>
+            <div style={{ position: "absolute" }}>
+                <canvas
+                    ref={canvasRef}
+                    style={{
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        left: 0,
+                        textAlign: "center",
+                        zIndex: 10,
+                        width: "100%",
+                        height: "100%",
+                    }}
+                />
+            </div>
         </div>
     );
 }

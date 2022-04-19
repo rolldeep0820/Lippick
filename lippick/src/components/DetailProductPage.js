@@ -47,6 +47,20 @@ function DetailProductPage(props) {
             <Row gutter={[30, 30]}>
                 <Col lg={12} sm={24}>
                     {tryOn && <MakeUp color={Product.color} />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
+                    {tryOn && <br />}
                     {!tryOn && <DetailProductImage detail={Product} />}
                 </Col>
                 <Col lg={12} sm={24}>

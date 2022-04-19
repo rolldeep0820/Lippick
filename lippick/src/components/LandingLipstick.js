@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Col, Card, Row, Button } from "antd";
-import Meta from "antd/lib/card/Meta";
 import { connect } from "react-redux";
 import Loading from "./Loading";
-import lipstick_banner from "../img/lipstick_banner.webp";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import "./Landing.scss";
 
 function LandingLipstick(props) {
@@ -119,14 +116,15 @@ function LandingLipstick(props) {
   });
 
   return (
-    <div>
+    <div style={{width:"100%"}}>
+      
       {props.loading ? (
         <Loading />
       ) : (
         <div>
           <div className="bg-wrap">
             <div className="bg bg-lipstick">
-              <span
+              <span className="bg-title-1"
                 style={{
                   position: "absolute",
                   color: "white",
@@ -140,6 +138,7 @@ function LandingLipstick(props) {
               </span>
             </div>
             <div className="content-text">
+              <span className="bg-title-2">립스틱</span>
               <span style={{ fontSize: "0.8rem" }}>
                 입술에 새로운 매력을 더하는 샤넬 립 컬러.루쥬 알뤼르 립스틱은 단
                 한 번의 클릭으로 강렬한 색상을 선사합니다. 은은한 컬러에서
@@ -164,7 +163,7 @@ function LandingLipstick(props) {
             <div
               style={{
                 display: "flex",
-                justifyContent: "flex-start",
+                justifyContent: "flex-end",
                 width: "100%",
               }}
             >

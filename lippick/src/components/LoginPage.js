@@ -80,12 +80,13 @@ function LoginPage(props) {
               >
                 <span className="login-box-mid-form-title mb-3">Members</span>
                 <span className="mt-5">이메일*</span>
-                <input type="email" value={Email} onChange={onEmailHandler} />
+                <input type="email" value={Email} onChange={onEmailHandler} required/>
                 <span className="mt-3">비밀번호*</span>
                 <input
                   type="password"
                   value={Password}
                   onChange={onPasswordHandler}
+                  required
                 />
                 <span className="search-pw">비밀번호찾기</span>
                 <button className="login-box-btn">로그인</button>

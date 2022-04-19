@@ -25,116 +25,116 @@ import { useEffect } from "react";
 import axios from "axios";
 
 function App(props) {
-    const [Products, setProducts] = useState([]);
-    const [Skip, setSkip] = useState(0);
-    const [Limit, setLimit] = useState(8);
-    const [PostSize, setPostSize] = useState(0);
+  const [Products, setProducts] = useState([]);
+  const [Skip, setSkip] = useState(0);
+  const [Limit, setLimit] = useState(8);
+  const [PostSize, setPostSize] = useState(0);
 
-    const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-    useEffect(() => {
-        let body = {
-            skip: Skip,
-            limit: Limit,
-        };
-
-        getProducts(body);
-    }, []);
-
-    const getProducts = (body) => {
-        axios.post("/api/search", body).then((response) => {
-            if (response.data.success) {
-                if (body) {
-                    setProducts([...response.data.productInfo]);
-                    console.log(Products);
-                }
-                setPostSize(response.data.postSize);
-            } else {
-                alert(" 상품 가져오기 실패 ");
-            }
-        });
+  useEffect(() => {
+    let body = {
+      skip: Skip,
+      limit: Limit,
     };
 
-    const updateSearchTerm = (newSearchTerm) => {
-        let body = {
-            skip: 0,
-            limit: Limit,
-            searchTerm: newSearchTerm,
-        };
+    getProducts(body);
+  }, []);
 
-        setSkip(0);
-        setSearchTerm(newSearchTerm);
-        getProducts(body);
+  const getProducts = (body) => {
+    axios.post("/api/search", body).then((response) => {
+      if (response.data.success) {
+        if (body) {
+          setProducts([...response.data.productInfo]);
+          console.log(Products);
+        }
+        setPostSize(response.data.postSize);
+      } else {
+        alert(" 상품 가져오기 실패 ");
+      }
+    });
+  };
+
+  const updateSearchTerm = (newSearchTerm) => {
+    let body = {
+      skip: 0,
+      limit: Limit,
+      searchTerm: newSearchTerm,
     };
 
-    return (
-        <div className="App">
-            {props.login && <LoginPage />}
-            <Route path="/:id">
-                {props.expand ? (
-                    <ExpandNav
-                        Products={Products}
-                        refreshFunction={updateSearchTerm}
-                    />
-                ) : (
-                    <BootNav refreshFunction={updateSearchTerm} />
-                )}
-            </Route>
-            <Route path="/home">
-                <HomeWrap
-                    Products={Products}
-                    refreshFunction={updateSearchTerm}
-                />
-            </Route>
+    setSkip(0);
+    setSearchTerm(newSearchTerm);
+    getProducts(body);
+  };
 
-            <Switch>
-                <Route path="/personal">
-                    <ImageView />
-                </Route>
-                <Route path="/personal1">
-                    <ImageView />
-                </Route>
-                <Route path="/register">
-                    <RegisterPage />
-                </Route>
-                <Route path="/product/upload">
-                    <UploadProduct />
-                </Route>
-                <Route path="/all">
-                    <LandingPage />
-                </Route>
-                <Route path="/lipstick">
-                    <LandingLipstick />
-                </Route>
-                <Route path="/liquid">
-                    <LandingLiquid />
-                </Route>
-                <Route path="/gloss">
-                    <LandingGloss />
-                </Route>
-                <Route path="/care">
-                    <LandingCare />
-                </Route>
+  return (
+    <div className="App">
+      {props.login && <LoginPage />}
+      <Route path="/:id">
+        {props.expand ? (
+          <ExpandNav Products={Products} refreshFunction={updateSearchTerm} />
+        ) : (
+          <BootNav refreshFunction={updateSearchTerm} />
+        )}
+      </Route>
+      <Route path="/home">
+        <HomeWrap Products={Products} refreshFunction={updateSearchTerm} />
+      </Route>
 
-                <Route path="/product/:productId" component={Auth(DetailProductPage, null)}>
-                </Route>
-                <Route path="/bag" component={Auth(BagPage, true)}>
-                </Route>
+      <Switch>
+        <Route path="/personal">
+          <ImageView />
+        </Route>
+        <Route path="/personal1">
+          <ImageView />
+        </Route>
+        <Route path="/register">
+          <RegisterPage />
+        </Route>
+        <Route path="/product/upload">
+          <UploadProduct />
+        </Route>
+        <Route path="/all">
+          <LandingPage />
+        </Route>
+        <Route path="/lipstick">
+          <LandingLipstick />
+        </Route>
+        <Route path="/liquid">
+          <LandingLiquid />
+        </Route>
+        <Route path="/gloss">
+          <LandingGloss />
+        </Route>
+        <Route path="/care">
+          <LandingCare />
+        </Route>
 
-            </Switch>
-            <Route path="/:id">
-                <Footer />
-            </Route>
-        </div>
-    );
+        <Route path="/test">
+          <DetailProductPage
+            Products={Products}
+            refreshFunction={updateSearchTerm}
+          />
+        </Route>
+        <Route
+          path="/product/:productId"
+          component={Auth(DetailProductPage, null)}
+        ></Route>
+        <Route path="/bag" component={Auth(BagPage, true)}></Route>
+      </Switch>
+      <Route path="/:id">
+        <Footer />
+      </Route>
+    </div>
+  );
 }
 
 function stateprops(state) {
-    return {
-        navTG: state.reducer1,
-        expand: state.reducer5,
-        login: state.reducer8,
-    };
+  return {
+    navTG: state.reducer1,
+    expand: state.reducer5,
+    login: state.reducer8,
+  };
 }
 
 export default connect(stateprops)(App);

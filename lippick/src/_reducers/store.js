@@ -52,7 +52,7 @@ function reducer5(state = expand, action) {
   }
 
   return expand;
-} 
+}
 
 let bg = false;
 
@@ -93,20 +93,14 @@ function reducer7(state = selectImg, action) {
   return selectImg;
 }
 
-
-
 let login = false;
 
-
 function reducer8(state = login, action) {
-
-
   if (action.type === "login-on") {
     login = true;
   } else if (action.type === "login-off") {
     login = false;
   }
-
 
   return login;
 }
@@ -141,50 +135,50 @@ function reducer9(state = tap, action) {
 
 let ani = false;
 
-function reducer10(state=ani,action){
-
-  if(action.type === "ani-on"){
-    ani= true
-  }else if(action.type ==="ani-off"){
-    ani= false;
+function reducer10(state = ani, action) {
+  if (action.type === "ani-on") {
+    ani = true;
+  } else if (action.type === "ani-off") {
+    ani = false;
   }
 
-  return ani
+  return ani;
 }
-
-
-
 
 let footer = false;
 
-function reducer11(state=footer,action){
-
-  if(action.type === "footer-down"){
+function reducer11(state = footer, action) {
+  if (action.type === "footer-down") {
     footer = true;
-  }else if(action.type === "footer-up"){
+  } else if (action.type === "footer-up") {
     footer = false;
   }
-  return footer
+  return footer;
 }
-
-
-
 
 let loading = true;
 
-function reducer12(state=loading,action){
-
-  if(action.type === "loading-end"){
+function reducer12(state = loading, action) {
+  if (action.type === "loading-end") {
     loading = false;
-  }else if(action.type ==="loading-start"){
+  } else if (action.type === "loading-start") {
     loading = true;
   }
 
-  return loading
+  return loading;
 }
 
+let heart = false;
 
+function reducer13(state = heart, action) {
+  if (action.type === "heart-fill") {
+    heart = true;
+  } else if (action.type === "heart-drain") {
+    heart = false;
+  }
 
+  return heart;
+}
 
 export {
   reducer1,
@@ -199,4 +193,5 @@ export {
   reducer10,
   reducer11,
   reducer12,
+  reducer13,
 };

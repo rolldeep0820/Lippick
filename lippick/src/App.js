@@ -112,7 +112,7 @@ function App(props) {
 
         <Route
           path="/product/:productId"
-          render={() => Auth(DetailProductPage, null)}
+          component={Auth(DetailProductPage, null)}
         ></Route>
         <Route path="/bag" component={Auth(BagPage, true)}></Route>
       </Switch>

@@ -39,7 +39,7 @@ function LoginPage(props) {
         console.log("res 성공했을까?");
         window.location.replace("/home")
       } else {
-        alert("Error");
+        alert("아이디와 비밀번호를 확인해주세요.");
       }
     });
   };

@@ -59,6 +59,7 @@ function LandingCare(props) {
 
   const renderCards = Products.map((product, index) => {
     console.log("product", product);
+    props.dispatch({ type: "loading-end" });
     return (
       <Col
         lg={6}

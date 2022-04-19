@@ -16,13 +16,14 @@ function HomeWrap(props) {
     };
   }, []);
 
-
-  
   return (
     <Container className="home-wrap">
       <HomeMain />
       <HomeContent1 />
-      <HomeContent2  Products={props.Products} refreshFunction={props.refreshFunction} />
+      <HomeContent2
+        Products={props.Products}
+        refreshFunction={props.refreshFunction}
+      />
     </Container>
   );
 }

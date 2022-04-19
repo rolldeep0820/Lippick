@@ -19,6 +19,7 @@ function DetailProductPage(props) {
     props.dispatch({ type: "nav-on" });
   }, []);
 
+
   const dispatch = useDispatch();
 
   const productId = props.match.params.productId;
@@ -174,7 +175,7 @@ function DetailProductPage(props) {
               <p>{Product.price} 원</p>
               <Select
                 style={{ width: "200px", marginTop: "10px" }}
-                placeholder="선택 가능한 컬러"
+                placeholder="&nbsp;선택 가능한 컬러"
                 onClick={() => {
                   searchOther();
                 }}

@@ -10,8 +10,12 @@ export default function user(state = {}, action){
         case "auth_user":
           return { ...state, userData: action.payload }
         case "add_to_cart":
-          return { ...state }
-
+          return { ...state, userData: {
+              ...state.userData,
+              cart: action.payload
+          } }
+        case "get_cart_items":
+          return { ... state , cartDetail: action.payload }
         default:
         return state;
       }

@@ -25,14 +25,9 @@ function DetailProductPage(props) {
         axios
             .get(`/api/product/products_by_id?id=${productId}`)
             .then((response) => {
-                console.log(response.data.success);
-                if (response.data.success) {
-                    console.log("response.data", response.data);
-                    setProduct(response.data.product[0]);
-                } else {
-                    console.log("가져오기 실패");
-                }
-            });
+                setProduct(response.data[0]);
+            })
+            .catch(err => alert(err))
     }, []);
     console.log(Product.color);
 

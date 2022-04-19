@@ -29,12 +29,20 @@
     position: relative;
     background-size: cover;
     display: inline-block;
-    transition: 0.5s;
   }
 }
 
 .bg-lipstick {
   background-image: url(../img/lipstick_banner.webp);
+}
+.bg-liquid{
+  background-image: url(../img/liquid_banner.webp);
+}
+.bg-gloss{
+  background-image: url(../img/gloss_banner.webp);
+}
+.bg-care{
+  background-image: url(../img/care_banner.webp);
 }
 .content-text {
   width: 40%;
@@ -45,6 +53,14 @@
   justify-content: center;
   align-items: center;
   margin-top: 1%;
+  flex-direction: column;
+
+  .bg-title-2{
+    font-size:2rem;
+    font-weight: 500;
+    margin-bottom:10%;
+    display: none;
+  }
 }
 
 @media all and (min-width: 1401px) and (max-width: 1650px) {
@@ -82,11 +98,32 @@
   .bg {
     margin-top: 15% !important;
     margin: 0 auto;
+    height:50vh !important;
     
     background-size: contain !important;
+  }
+  .bg-title-1{
+    display:none;
+  }
+  .bg-title-2{
+    display: block !important;
   }
   .bg-lipstick {
     background-image: url(../img/lipstick_banner_s.webp);
     background-position: 100%;
   }
+  .bg-liquid {
+    background-image: url(../img/liquid_banner_s.webp);
+    background-position: 100%;
+  }
+
+  .bg-gloss{
+    background-image: url(../img/gloss_banner_s.webp);
+    background-position: 100%;
+  }
+  .bg-care{
+    background-image: url(../img/care_banner_s.webp);
+    background-position: 100%;
+  }
+
 }

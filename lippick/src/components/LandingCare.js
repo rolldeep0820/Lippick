@@ -160,7 +160,7 @@ function LandingCare(props) {
             <div
               style={{
                 display: "flex",
-                justifyContent: "flex-start",
+                justifyContent: "flex-end",
                 width: "100%",
               }}
             >

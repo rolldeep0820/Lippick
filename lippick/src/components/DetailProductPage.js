@@ -54,7 +54,7 @@ function DetailProductPage(props) {
       } else {
         alert(" 상품 가져오기 실패 ");
       }
-      props.dispatch({type:"loading-end"})
+      
 
       
     });

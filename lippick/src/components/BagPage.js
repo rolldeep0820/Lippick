@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch} from "react-redux";
 import { getCartItems } from "../_actions/user_actions"
 import UserCardBlock from './UserCardBlock';
@@ -6,6 +6,9 @@ import UserCardBlock from './UserCardBlock';
 
 function BagPage(props) {
     const dispatch = useDispatch();
+    const [Total, setTotal] = useState(0)
+    const [CartNumber, setCartNumber] = useState(0)
+
     useEffect(() => {
 
         let cartItems = []
@@ -19,17 +22,43 @@ function BagPage(props) {
                 })
 
                 dispatch(getCartItems(cartItems, props.user.userData.cart ))
-                    .then(response => { console.log(response)})
+                    .then(response => { 
+                        calculateTotal(response.payload)
+                    })
             }
         }
         
     }, [props.user.userData])
+
+    let calculateTotal = (cartDetail) => {
+        let total = 0;
+
+        cartDetail.map(item => {
+            total += parseInt(item.price,10) * item.quantity
+        })
+        setTotal(total)
+    }
+
+    let cartNum = (cartDetail) => {
+        let total = 0;
+
+        cartDetail.map(item => {
+            total += parseInt(item.quantity,10)
+        })
+        setCartNumber(total)
+    } 
+
+
 
     return (
         <div style={{ width: '85%', margin: '3rem auto'}}>
             <h1>BagPage</h1>
             <div>
             <UserCardBlock products={props.user.cartDetail}/>
+            </div>
+
+            <div style={{ marginTop: '3rem' }}>
+                <p>총 금액: {Total} 원</p>
             </div>
         </div>
     )

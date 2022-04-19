@@ -11,6 +11,7 @@ import { MdTty } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
 import Loading from "./Loading";
+import "./DetailProduct.scss"
 
 const { Option } = Select;
 function DetailProductPage(props) {
@@ -54,7 +55,7 @@ function DetailProductPage(props) {
       } else {
         alert(" 상품 가져오기 실패 ");
       }
-      
+      props.dispatch({type:"loading-end"})
 
       
     });

@@ -89,8 +89,10 @@
 }
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background-color: #ff397b44 !important;
+  background-color: white !important;
 }
+
+
 
 @media (hover: hover) and (pointer: fine) {
   .image-gallery-icon:hover {

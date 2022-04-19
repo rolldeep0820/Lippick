@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import DetailProductImage from "./DetailProductImage";
-import { Row, Col, Form, Button, Select, Image } from "antd";
+import { Row, Col, Form, Button, Select, Image} from "antd";
 import { connect, useDispatch } from "react-redux";
 import { addToCart } from "../_actions/user_actions";
 import MakeUp from "./MakeUp";
@@ -9,7 +9,9 @@ import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
 import { MdTty } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { Link, useHistory } from "react-router-dom";
 
+const {Option} = Select;
 function DetailProductPage(props) {
   useEffect(() => {
     props.dispatch({ type: "nav-on" });
@@ -23,8 +25,61 @@ function DetailProductPage(props) {
 
   const [tryOn, setTryOn] = useState(false);
 
+  const [Products, setProducts] = useState([]);
+  const [Skip, setSkip] = useState(0);
+  const [Limit, setLimit] = useState(8);
+  const [PostSize, setPostSize] = useState(0);
+
   const [searchTerm, setSearchTerm] = useState("");
 
+  useEffect(() => {
+    let body = {
+      skip: Skip,
+      limit: Limit,
+    };
+
+    getProducts(body);
+  }, []);
+
+  const getProducts = (body) => {
+    axios.post("/api/search", body).then((response) => {
+      if (response.data.success) {
+        if (body) {
+          setProducts([...response.data.productInfo]);
+          console.log(Products);
+        }
+        setPostSize(response.data.postSize);
+      } else {
+        alert(" 상품 가져오기 실패 ");
+      }
+    });
+  };
+
+  const getProductsForSearch = (body) => {
+    axios.post("/api/search", body).then((response) => {
+      if (response.data.success) {
+        if (body) {
+          setProducts([...response.data.productInfo]);
+          console.log(Products);
+        }
+        setPostSize(response.data.postSize);
+      } else {
+        alert(" 상품 가져오기 실패 ");
+      }
+    });
+  };
+
+  const updateSearchTerm = (newSearchTerm) => {
+    let body = {
+      skip: 0,
+      limit: Limit,
+      searchTerm: newSearchTerm,
+    };
+
+    setSkip(0);
+    setSearchTerm(newSearchTerm);
+    getProductsForSearch(body);
+  };
 
   useEffect(() => {
     axios
@@ -34,7 +89,6 @@ function DetailProductPage(props) {
       })
       .catch((err) => alert(err));
   }, []);
-  console.log(Product.color);
 
   const bagHandler = () => {
     // 필요한 정보를 cart field에 넣어준다.
@@ -44,7 +98,24 @@ function DetailProductPage(props) {
     setTryOn(!tryOn);
   };
 
-  
+  const searchTitle = (text) => {
+    if (text === undefined) {
+      return "";
+    } else {
+      let searchText = text.split(" ");
+      return searchText[0];
+    }
+  };
+
+  const searchOther = () => {
+    setSearchTerm(searchTitle(Product.title));
+    updateSearchTerm(searchTitle(Product.title));
+  };
+
+
+  const linkOther = (value) => {
+    window.location.replace(`/product/${value}`)
+  };
 
   return (
     <div className="detail-wrap">
@@ -90,9 +161,19 @@ function DetailProductPage(props) {
             </div>
 
             <p>{Product.price} 원</p>
-            <p style={{ fontWeight: "bold" }}>선택 가능한 컬러</p>
-            <Select style={{ width: "200px" }}>
-              <option>제품이름 같은 다른 놈</option>
+            <Select
+              style={{ width: "200px", marginTop: "10px" }}
+              placeholder="선택 가능한 컬러"
+              onClick={() => {
+                searchOther();
+              }}
+              onChange={(e) => {
+                linkOther(e);
+              }}
+            >
+              {Products.map((pro) => {
+                return <Option value={pro._id}>{pro.title}</Option>;
+              })}
             </Select>
 
             <button className="detail-btn" onClick={bagHandler}>

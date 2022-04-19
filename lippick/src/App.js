@@ -110,6 +110,12 @@ function App(props) {
           <LandingCare />
         </Route>
 
+        <Route path="/test">
+          <DetailProductPage
+            Products={Products}
+            refreshFunction={updateSearchTerm}
+          />
+        </Route>
         <Route
           path="/product/:productId"
           component={Auth(DetailProductPage, null)}

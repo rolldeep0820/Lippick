@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from "react";
-import ImageGallery from 'react-image-gallery';
-import "./DetailProduct.scss"
+import ImageGallery from "react-image-gallery";
+import { connect } from "react-redux";
+import "./DetailProduct.scss";
 
-function DetailProductImage(props){
+function DetailProductImage(props) {
+  const [Images, setImages] = useState([]);
 
-    const [Images, setImages] = useState([])
+  useEffect(() => {
+    if (props.detail.images && props.detail.images.length > 0) {
+      let images = [];
 
-    useEffect(() => {
+      props.detail.images.map((item) => {
+        images.push({
+          original: `http://localhost:5000/${item}`,
+          thumbnail: `http://localhost:5000/${item}`,
+        });
+      });
+      setImages(images);
+    }
 
-        if(props.detail.images && props.detail.images.length > 0){
-            let images = []
+    props.dispatch({ type: "loading-end" });
+  }, [props.detail]);
 
-            props.detail.images.map(item => {
-                images.push({
-                    original: `http://localhost:5000/${item}`,
-                    thumbnail: `http://localhost:5000/${item}`
-                })
-            })
-            setImages(images)
-        } 
-         
-    }, [props.detail])
-    
-    return (
-        <div>
-            <ImageGallery items={Images} />
-        </div>
-    )
+  return (
+    <div>
+      <ImageGallery items={Images} />
+    </div>
+  );
 }
 
-export default DetailProductImage
+function stateprops(state) {
+    return {
+      navTG: state.reducer1,
+      loading: state.reducer12,
+      heart: state.reducer13,
+    };
+  }
+  
+  export default connect(stateprops)(DetailProductImage);
+  

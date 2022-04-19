@@ -4,20 +4,21 @@ import "./index.css";
 import App from "./App";
 import "antd/dist/antd.min.css";
 
-
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import {  createStore } from "@reduxjs/toolkit";
+import { createStore } from "@reduxjs/toolkit";
 
 import { BrowserRouter } from "react-router-dom";
 import promiseMiddleware from "redux-promise";
 import ReduxThunk from "redux-thunk";
-import { applyMiddleware} from "redux";
+import { applyMiddleware } from "redux";
 import Reducer from "./_reducers";
+import ScrollToTop from "./components/ScrollToTop";
 
-
-
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
+const createStoreWithMiddleware = applyMiddleware(
+  promiseMiddleware,
+  ReduxThunk
+)(createStore);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,13 +27,18 @@ ReactDOM.render(
         <App />
       </BrowserRouter>
     </Provider> */}
-    <Provider store={createStoreWithMiddleware(Reducer,
-                window.__REDUX_DEVTOOLS_EXTENSION__ &&
-                window.__REDUX_DEVTOOLS_EXTENSION__())}>
-       <BrowserRouter>
+    <Provider
+      store={createStoreWithMiddleware(
+        Reducer,
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          window.__REDUX_DEVTOOLS_EXTENSION__()
+      )}
+    >
+      <BrowserRouter>
+        <ScrollToTop />
         <App />
       </BrowserRouter>
-    </Provider> 
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

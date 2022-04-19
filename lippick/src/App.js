@@ -27,66 +27,67 @@ function App(props) {
     const [Skip, setSkip] = useState(0);
     const [Limit, setLimit] = useState(8);
     const [PostSize, setPostSize] = useState(0);
-  
-    const [searchTerm, setSearchTerm] = useState("");
-  
-    useEffect(() => {
-      let body = {
-        skip: Skip,
-        limit: Limit,
-      };
-  
-      getProducts(body);
-    }, []);
-  
-  
-  
-    const getProducts = (body) => {
-      axios.post("/api/search", body).then((response) => {
-        if (response.data.success) {
-          if (body) {
-            setProducts([...response.data.productInfo])
-            console.log(Products);
-          } 
-          setPostSize(response.data.postSize);
-        }else {
-          alert(" 상품 가져오기 실패 ");
-        }
-      });
-  
-  
-      
-    };
-  
-    const updateSearchTerm = (newSearchTerm) => {
-      
-  
-      let body ={
-          skip:0,
-          limit:Limit,
-          searchTerm:newSearchTerm
-      }
-  
-      setSkip(0)
-      setSearchTerm(newSearchTerm);
-      getProducts(body);
-  };
 
-  
+    const [searchTerm, setSearchTerm] = useState("");
+
+    useEffect(() => {
+        let body = {
+            skip: Skip,
+            limit: Limit,
+        };
+
+        getProducts(body);
+    }, []);
+
+    const getProducts = (body) => {
+        axios.post("/api/search", body).then((response) => {
+            if (response.data.success) {
+                if (body) {
+                    setProducts([...response.data.productInfo]);
+                    console.log(Products);
+                }
+                setPostSize(response.data.postSize);
+            } else {
+                alert(" 상품 가져오기 실패 ");
+            }
+        });
+    };
+
+    const updateSearchTerm = (newSearchTerm) => {
+        let body = {
+            skip: 0,
+            limit: Limit,
+            searchTerm: newSearchTerm,
+        };
+
+        setSkip(0);
+        setSearchTerm(newSearchTerm);
+        getProducts(body);
+    };
 
     return (
         <div className="App">
             {props.login && <LoginPage />}
             <Route path="/:id">
-                {props.expand ? <ExpandNav Products={Products} refreshFunction={updateSearchTerm}  /> : <BootNav refreshFunction={updateSearchTerm} />}
+                {props.expand ? (
+                    <ExpandNav
+                        Products={Products}
+                        refreshFunction={updateSearchTerm}
+                    />
+                ) : (
+                    <BootNav refreshFunction={updateSearchTerm} />
+                )}
             </Route>
             <Route path="/home">
-                <HomeWrap Products={Products} refreshFunction={updateSearchTerm}  />
+                <HomeWrap
+                    Products={Products}
+                    refreshFunction={updateSearchTerm}
+                />
             </Route>
 
             <Switch>
-                <Route path="/personal" component={Auth(ImageView, true)}>
-                    {/* <ImageView /> */}
+                <Route path="/personal">
+                    <ImageView />
                 </Route>
                 <Route path="/personal1">
                     <ImageView />
@@ -112,8 +113,10 @@ function App(props) {
                 <Route path="/care">
                     <LandingCare />
                 </Route>
-                <Route path="/product/:productId" component={Auth(DetailProductPage, null)}>
-                </Route>
+                <Route
+                    path="/product/:productId"
+                    component={Auth(DetailProductPage, null)}
+                ></Route>
                 {/* <Route path="/product/:productId">
                    <DetailProductPage />
                 </Route> */}

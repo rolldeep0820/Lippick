@@ -21,7 +21,7 @@ function UserCardBlock (props) {
                     {product.quantity} EA
                 </td>
                 <td>
-                    {product.price} 원
+                    {product.price*product.quantity} 원
                 </td>
                 <td>
                     <button>삭제</button>

@@ -28,4 +28,4 @@ function DetailProductImage(props){
     )
 }
 
-export default DetailProductImage
+export default React.memo(DetailProductImage)

@@ -11,212 +11,203 @@ import { MdTty } from "react-icons/md";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
 import Loading from "./Loading";
-import "./DetailProduct.scss"
+import "./DetailProduct.scss";
 
 const { Option } = Select;
 function DetailProductPage(props) {
-  useEffect(() => {
-    props.dispatch({ type: "nav-on" });
-  }, []);
+    useEffect(() => {
+        props.dispatch({ type: "nav-on" });
+    }, []);
 
+    const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+    const productId = props.match.params.productId;
 
-  const productId = props.match.params.productId;
+    const [Product, setProduct] = useState({});
 
-  const [Product, setProduct] = useState({});
+    const [tryOn, setTryOn] = useState(false);
 
-  const [tryOn, setTryOn] = useState(false);
+    const [Products, setProducts] = useState([]);
+    const [Skip, setSkip] = useState(0);
+    const [Limit, setLimit] = useState(8);
+    const [PostSize, setPostSize] = useState(0);
 
-  const [Products, setProducts] = useState([]);
-  const [Skip, setSkip] = useState(0);
-  const [Limit, setLimit] = useState(8);
-  const [PostSize, setPostSize] = useState(0);
+    const [searchTerm, setSearchTerm] = useState("");
 
-  const [searchTerm, setSearchTerm] = useState("");
+    useEffect(() => {
+        let body = {
+            skip: Skip,
+            limit: Limit,
+        };
 
-  useEffect(() => {
-    let body = {
-      skip: Skip,
-      limit: Limit,
+        getProducts(body);
+        props.dispatch({ type: "loading-start" });
+    }, []);
+
+    const getProducts = (body) => {
+        axios.post("/api/search", body).then((response) => {
+            if (response.data.success) {
+                if (body) {
+                    setProducts([...response.data.productInfo]);
+                    console.log(Products);
+                }
+                setPostSize(response.data.postSize);
+            } else {
+                alert(" 상품 가져오기 실패 ");
+            }
+            props.dispatch({ type: "loading-end" });
+        });
     };
 
-    getProducts(body);
-    props.dispatch({type:"loading-start"})
-  }, []);
-
-  const getProducts = (body) => {
-    axios.post("/api/search", body).then((response) => {
-      if (response.data.success) {
-        if (body) {
-          setProducts([...response.data.productInfo]);
-          console.log(Products);
-        }
-        setPostSize(response.data.postSize);
-      } else {
-        alert(" 상품 가져오기 실패 ");
-      }
-      props.dispatch({type:"loading-end"})
-
-      
-    });
-  };
-
-  const getProductsForSearch = (body) => {
-    axios.post("/api/search", body).then((response) => {
-      if (response.data.success) {
-        if (body) {
-          setProducts([...response.data.productInfo]);
-          console.log(Products);
-        }
-        setPostSize(response.data.postSize);
-      } else {
-        alert(" 상품 가져오기 실패 ");
-      }
-
-      
-    });
-  };
-
-  const updateSearchTerm = (newSearchTerm) => {
-    let body = {
-      skip: 0,
-      limit: Limit,
-      searchTerm: newSearchTerm,
+    const getProductsForSearch = (body) => {
+        axios.post("/api/search", body).then((response) => {
+            if (response.data.success) {
+                if (body) {
+                    setProducts([...response.data.productInfo]);
+                    console.log(Products);
+                }
+                setPostSize(response.data.postSize);
+            } else {
+                alert(" 상품 가져오기 실패 ");
+            }
+        });
     };
 
-    setSkip(0);
-    setSearchTerm(newSearchTerm);
-    getProductsForSearch(body);
-  };
+    const updateSearchTerm = (newSearchTerm) => {
+        let body = {
+            skip: 0,
+            limit: Limit,
+            searchTerm: newSearchTerm,
+        };
 
-  useEffect(() => {
-    axios
-      .get(`/api/product/products_by_id?id=${productId}`)
-      .then((response) => {
-        setProduct(response.data[0]);
-      })
-      .catch((err) => alert(err));
-  }, []);
+        setSkip(0);
+        setSearchTerm(newSearchTerm);
+        getProductsForSearch(body);
+    };
 
-  const bagHandler = () => {
-    // 필요한 정보를 cart field에 넣어준다.
-    dispatch(addToCart(productId));
-  };
-  const changeTry = () => {
-    setTryOn(!tryOn);
-  };
+    useEffect(() => {
+        axios
+            .get(`/api/product/products_by_id?id=${productId}`)
+            .then((response) => {
+                setProduct(response.data[0]);
+            })
+            .catch((err) => alert(err));
+    }, []);
 
-  const searchTitle = (text) => {
-    if (text === undefined) {
-      return "";
-    } else {
-      let searchText = text.split(" ");
-      return searchText[0];
-    }
-  };
+    const bagHandler = () => {
+        // 필요한 정보를 cart field에 넣어준다.
+        dispatch(addToCart(productId));
+    };
+    const changeTry = () => {
+        setTryOn(!tryOn);
+    };
 
-  const searchOther = () => {
-    setSearchTerm(searchTitle(Product.title));
-    updateSearchTerm(searchTitle(Product.title));
-  };
+    const searchTitle = (text) => {
+        if (text === undefined) {
+            return "";
+        } else {
+            let searchText = text.split(" ");
+            return searchText[0];
+        }
+    };
 
-  const linkOther = (value) => {
-    window.location.replace(`/product/${value}`);
-  };
- 
+    const searchOther = () => {
+        setSearchTerm(searchTitle(Product.title));
+        updateSearchTerm(searchTitle(Product.title));
+    };
 
-  return (
-    <div className="detail-wrap">
-      {props.loading ? (
-        <Loading />
-      ) : (
-        <div className="detail-top-wrap">
-          <Row gutter={[30, 30]} className="detail-top-wrap-2">
-            <Col lg={12} sm={24}>
-              {tryOn && <MakeUp color={Product.color} />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {tryOn && <br />}
-              {!tryOn && <DetailProductImage detail={Product} />}
-            </Col>
+    const linkOther = (value) => {
+        window.location.replace(`/product/${value}`);
+    };
 
-            <Col lg={12} sm={24} className="detail-info-wrap">
-              <div className="detail-title-wrap">
-                <h3>{Product.title}</h3>
-                {props.heart ? (
-                  <AiFillHeart
-                    className="heart"
-                    onClick={() => {
-                      props.dispatch({ type: "heart-drain" });
-                    }}
-                  />
-                ) : (
-                  <AiOutlineHeart
-                    className="heart"
-                    onClick={() => {
-                      props.dispatch({ type: "heart-fill" });
-                    }}
-                  />
-                )}
-              </div>
+    return (
+        <div className="detail-wrap">
+            {props.loading ? (
+                <Loading />
+            ) : (
+                <div className="detail-top-wrap">
+                    <Row gutter={[30, 30]} className="detail-top-wrap-2">
+                        <Col lg={12} sm={24}>
+                            <div>
+                                {!tryOn && (
+                                    <DetailProductImage detail={Product} />
+                                )}
+                                {tryOn && <MakeUp color={Product.color} />}
+                            </div>
+                        </Col>
 
-              <p>{Product.price} 원</p>
-              <Select
-                style={{ width: "200px", marginTop: "10px" }}
-                placeholder="&nbsp;선택 가능한 컬러"
-                onClick={() => {
-                  searchOther();
-                }}
-                onChange={(e) => {
-                  linkOther(e);
-                }}
-              >
-                {Products.map((pro) => {
-                  return <Option value={pro._id}>{pro.title}</Option>;
-                })}
-              </Select>
+                        <Col lg={12} sm={24} className="detail-info-wrap">
+                            <div className="detail-title-wrap">
+                                <h3>{Product.title}</h3>
+                                {props.heart ? (
+                                    <AiFillHeart
+                                        className="heart"
+                                        onClick={() => {
+                                            props.dispatch({
+                                                type: "heart-drain",
+                                            });
+                                        }}
+                                    />
+                                ) : (
+                                    <AiOutlineHeart
+                                        className="heart"
+                                        onClick={() => {
+                                            props.dispatch({
+                                                type: "heart-fill",
+                                            });
+                                        }}
+                                    />
+                                )}
+                            </div>
 
-              <button className="detail-btn" onClick={bagHandler}>
-                장바구니에 추가하기
-              </button>
+                            <p>{Product.price} 원</p>
+                            <Select
+                                style={{ width: "200px", marginTop: "10px" }}
+                                placeholder="&nbsp;선택 가능한 컬러"
+                                onClick={() => {
+                                    searchOther();
+                                }}
+                                onChange={(e) => {
+                                    linkOther(e);
+                                }}
+                            >
+                                {Products.map((pro) => {
+                                    return (
+                                        <Option value={pro._id}>
+                                            {pro.title}
+                                        </Option>
+                                    );
+                                })}
+                            </Select>
 
-              <button className="detail-btn" onClick={changeTry}>
-                트라이온
-              </button>
-            </Col>
-          </Row>
+                            <button className="detail-btn" onClick={bagHandler}>
+                                장바구니에 추가하기
+                            </button>
+
+                            <button className="detail-btn" onClick={changeTry}>
+                                트라이온
+                            </button>
+                        </Col>
+                    </Row>
+                </div>
+            )}
+
+            <div className="detail-bottom-wrap"></div>
+            <p>상세 설명 이미지 | 근데 리뷰 기능 만들어 말어........</p>
+            <Image
+                src={`http://localhost:5000/${Product.description}`}
+                preview={false}
+            />
         </div>
-      )}
-
-      <div className="detail-bottom-wrap"></div>
-      <p>상세 설명 이미지 | 근데 리뷰 기능 만들어 말어........</p>
-      <Image
-        src={`http://localhost:5000/${Product.description}`}
-        preview={false}
-      />
-    </div>
-
-  );
+    );
 }
 
 function stateprops(state) {
-  return {
-    navTG: state.reducer1,
-    loading: state.reducer12,
-    heart: state.reducer13,
-  };
+    return {
+        navTG: state.reducer1,
+        loading: state.reducer12,
+        heart: state.reducer13,
+    };
 }
 
 export default connect(stateprops)(DetailProductPage);

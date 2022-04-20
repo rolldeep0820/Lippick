@@ -105,32 +105,29 @@ function reducer8(state = login, action) {
   return login;
 }
 
-let tap = [true, false, false, false];
-// let tap1 = true;
-// let tap2 = false;
-// let tap3 = false;
-// let tap4 = false;
+let tab = [true, false, false, false];
 
-function reducer9(state = tap, action) {
+
+function reducer9(state = tab, action) {
   switch (action.type) {
     case "on-1":
-      tap = [true, false, false, false];
+      tab = [true, false, false, false];
       break;
     case "on-2":
-      tap = [false, true, false, false];
+      tab = [false, true, false, false];
       break;
     case "on-3":
-      tap = [false, false, true, false];
+      tab = [false, false, true, false];
       break;
     case "on-4":
-      tap = [false, false, false, true];
+      tab = [false, false, false, true];
       break;
 
     default:
-      return tap;
+      return tab;
   }
 
-  return tap;
+  return tab;
 }
 
 let ani = false;
@@ -179,6 +176,7 @@ function reducer13(state = heart, action) {
 
   return heart;
 }
+
 
 export {
   reducer1,

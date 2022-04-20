@@ -8,6 +8,7 @@ import { promise } from "bcrypt/promises";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import MakeUp from "./MakeUp";
 import "./ImageView.scss";
+
 import colortest from "../img/colortest_full.png";
 import loadingGIF from "../img/loading.gif";
 import {
@@ -15,6 +16,7 @@ import {
     AiOutlineSmile,
     AiOutlineSync,
 } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function ImageView(props) {
     useEffect(() => {
@@ -66,19 +68,23 @@ function ImageView(props) {
         console.log(prediction[0].className);
         switch (prediction[0].className) {
             case "봄":
-                setTitle("봄 웜");
+                setTitle("봄웜");
                 setExplain("추천색 : 카멜색, 복숭아색, 골드색");
+                getProductsByTone("봄웜");
                 break;
             case "여름":
-                setTitle("여름 쿨");
+                setTitle("여름쿨");
+                getProductsByTone("여름쿨");
                 setExplain("추천색 : 라벤더색, 연분홍색, 연하늘색");
                 break;
             case "가을":
-                setTitle("가을 웜");
+                setTitle("가을웜");
+                getProductsByTone("가을웜");
                 setExplain("추천색 : 연회색, 검정색");
                 break;
             case "겨울":
-                setTitle("겨울 쿨");
+                setTitle("겨울쿨");
+                getProductsByTone("겨울쿨");
                 setExplain("추천색 : 골드베이지, 누드톤");
                 break;
             default:
@@ -106,6 +112,7 @@ function ImageView(props) {
     };
 
     //얼굴 감지, make-up
+
     const runFacemesh = async () => {
         const net = await facemesh.load(
             facemesh.SupportedPackages.mediapipeFacemesh
@@ -154,12 +161,26 @@ function ImageView(props) {
                 for (i = keypoints4.length - 1; i >= 0; i--) {
                     ctx.lineTo(keypoints4[i][0], keypoints4[i][1]);
                 }
-                ctx.fillStyle = "red";
-                ctx.globalAlpha = 0.7;
+                ctx.fillStyle = props.Products[0].color;
+                console.log(props.Products[0].color);
+                ctx.globalAlpha = 0.8;
                 ctx.fill();
             });
         }
     };
+
+    //톤 별 상품 불러오기
+    const getProductsByTone = (tone) => {
+        props.refreshFunction(tone);
+    };
+    const linkStyle = {
+        color: "inherit",
+        textDecoration: "none",
+        maxHeight: "75px",
+    };
+
+    //
+
     return (
         <div className="colortest-wrap">
             {loading && (
@@ -182,6 +203,7 @@ function ImageView(props) {
                             ref={picRef}
                             alt="sample"
                             src={fileImage}
+                            onLoad={() => predict()}
                         />
                     ) : (
                         <img src={colortest} alt="" />
@@ -213,9 +235,59 @@ function ImageView(props) {
                         id="input-image"
                         style={{ display: "none" }}
                     />
-                    <div><span>톤 판정 결과:{resultTitle}</span></div>
-                    <div><span>{resultExplain}</span></div>
-
+                    <div>
+                        <span
+                            onClick={() => getProductsByTone({ resultTitle })}
+                        >
+                            톤 판정 결과:{resultTitle}
+                        </span>
+                    </div>
+                    <div>
+                        <span>{resultExplain}</span>
+                    </div>
+                    {resultTitle && (
+                        <div className="content2-contents-right-wrap">
+                            {props.Products.slice(0, 1).map((product) => {
+                                return (
+                                    <div className="content2-contents-right-img">
+                                        <Link to={`./product/${product._id}`}>
+                                            <img
+                                                src={`http://localhost:5000/${product.images[0]}`}
+                                                alt=""
+                                                className="img-molu"
+                                            />
+                                        </Link>
+                                        <div className="product-content-wrap">
+                                            <Link
+                                                to={`./product/${product._id}`}
+                                                style={linkStyle}
+                                            >
+                                                <span className="product-title">
+                                                    {product.title}
+                                                </span>
+                                            </Link>
+                                            <div
+                                                className="color-box"
+                                                style={{
+                                                    backgroundColor: `${product.color}`,
+                                                    width: "20px",
+                                                    height: "20px",
+                                                    borderRadius: "10px",
+                                                    marginTop: "3%",
+                                                }}
+                                            ></div>
+                                            <span className="product-tone">
+                                                {product.tone}
+                                            </span>
+                                            <span className="product-price">
+                                                {product.price} 원
+                                            </span>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                     <div className="btn-wrap">
                         <div className="input-image-wrap">
                             <label
@@ -232,11 +304,7 @@ function ImageView(props) {
                         <div className="input-image-wrap">
                             <label
                                 className="input-image-btn"
-                                onClick={() => {
-                                    init()
-                                        .then(() => predict())
-                                        .then(runFacemesh());
-                                }}
+                                onClick={() => runFacemesh()}
                             >
                                 <div className="icon-wrap">
                                     <AiOutlineSmile />
@@ -244,6 +312,7 @@ function ImageView(props) {
                                 <span>테스트</span>
                             </label>
                         </div>
+
                         <div className="input-image-wrap">
                             <label
                                 className="input-image-btn"

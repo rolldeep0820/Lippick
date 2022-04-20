@@ -5,14 +5,24 @@ import { BsFillVolumeUpFill, BsFillVolumeMuteFill } from "react-icons/bs";
 import { AiFillPauseCircle, AiFillPlayCircle } from "react-icons/ai";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { withRouter } from "react-router-dom";
+ 
 function MainBottom(props) {
 
+  let userid = sessionStorage.getItem("userId")
+
+  const personalAuth = () => {
+    if(userid === null){
+      alert("로그인 후 이용해주세요.")
+      return props.history.push("/home");
+    }
+    props.history.push("/personal");
+  }
 
   return (
     <div className="high-wrap">
       <Container className="main-bottom-wrap">
-        <Link to="/personal">
+        <Link onClick={personalAuth}>
           <div className="link-box">
             <span>퍼스널 컬러 테스트</span>
           </div>
@@ -58,4 +68,4 @@ function stateprops(state) {
   };
 }
 
-export default connect(stateprops)(MainBottom);
+export default withRouter(connect(stateprops)(MainBottom));

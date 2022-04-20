@@ -23,6 +23,8 @@ function BootNav(props) {
     setIsAuth(response.data.isAuth);
   });
 
+  let userid = sessionStorage.getItem("userId")
+  console.log(userid)
  
 
   const linkStyle = {
@@ -38,6 +40,14 @@ function BootNav(props) {
       props.history.push("/home");
     });
   };
+
+  const bagPageAuth = () => {
+    if(userid === null){
+      alert("로그인 후 이용해주세요.")
+      return props.history.push("/home");
+    }
+    props.history.push("/bag");
+  }
 
   const mouseLeave = () =>{
 
@@ -150,7 +160,7 @@ function BootNav(props) {
             </Nav.Link>
             <Badge size="small" count={5} style={{marginRight: 8, marginTop: 12}}>
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
-              <Link to="/bag" style={linkStyle}>
+              <Link style={linkStyle} onClick={bagPageAuth}>
                 <BsHandbag />
               </Link>
             </Nav.Link>

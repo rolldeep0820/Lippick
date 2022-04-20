@@ -38,13 +38,16 @@ function HomeContent1(props) {
           >
             <div className={`content-img-box ${props.selectedImg}`}></div>
           </Link>
+        </div>
+
+        <div className="btn-box">
           <div className="content-text-wrap">
             {props.selectedImg === "content1-img-1" && <span>Lipstick</span>}
             {props.selectedImg === "content1-img-2" && <span>Liquid</span>}
             {props.selectedImg === "content1-img-3" && <span>Lip Gloss</span>}
             {props.selectedImg === "content1-img-4" && <span>Lip Care</span>}
           </div>
-          <div className="btn-box">
+          <div className="btn-wrap-home">
             <button
               className="slide-btn"
               onClick={() => {
@@ -54,6 +57,7 @@ function HomeContent1(props) {
               <BsFillArrowLeftCircleFill />
             </button>
             <button
+            style={{marginLeft:"10%"}}
               className="slide-btn"
               onClick={() => {
                 props.dispatch({ type: "plus" });

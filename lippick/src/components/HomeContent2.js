@@ -38,10 +38,10 @@ function HomeContent2(props) {
         <div className="content2-title">
           <h2>립픽 추천 제품</h2>
         </div>
-        <div className="content2-tap-wrap">
-          <ul className="content2-tap">
+        <div className="content2-tab-wrap">
+          <ul className="content2-tab">
             <li
-              className={`${props.tap[0] && "tap-on"}`}
+              className={`${props.tab[0] && "tab-on"}`}
               onClick={() => {
                 props.dispatch({ type: "on-1" });
                 searchClickHandler(null);
@@ -50,7 +50,7 @@ function HomeContent2(props) {
               립스틱
             </li>
             <li
-              className={`${props.tap[1] && "tap-on"}`}
+              className={`${props.tab[1] && "tab-on"}`}
               onClick={(e) => {
                 props.dispatch({ type: "on-2" });
                 searchClickHandler(e);
@@ -59,7 +59,7 @@ function HomeContent2(props) {
               리퀴드
             </li>
             <li
-              className={`${props.tap[2] && "tap-on"}`}
+              className={`${props.tab[2] && "tab-on"}`}
               onClick={(e) => {
                 props.dispatch({ type: "on-3" });
                 searchClickHandler(e);
@@ -68,7 +68,7 @@ function HomeContent2(props) {
               립글로스
             </li>
             <li
-              className={`${props.tap[3] && "tap-on"}`}
+              className={`${props.tab[3] && "tab-on"}`}
               onClick={(e) => {
                 props.dispatch({ type: "on-4" });
                 searchClickHandler(e);
@@ -120,7 +120,7 @@ function HomeContent2(props) {
 function stateprops(state) {
   return {
     bg: state.reducer6,
-    tap: state.reducer9,
+    tab: state.reducer9,
   };
 }
 

@@ -41,12 +41,12 @@
       }
     }
 
-    .content2-tap-wrap {
+    .content2-tab-wrap {
       width: 100%;
       border-bottom: 1px solid #eaeaea;
       display: flex;
       justify-content: center;
-      .content2-tap {
+      .content2-tab {
         display: flex;
         width: 25%;
         align-items: center;
@@ -68,7 +68,7 @@
           color: gray;
         }
 
-        .tap-on {
+        .tab-on {
           font-weight: 500 !important;
           color: black;
           display: inline;
@@ -76,7 +76,7 @@
           margin-bottom: -2px;
         }
 
-        .tap-on::after {
+        .tab-on::after {
           display: block;
           content: "";
           border-left: 8px solid transparent;
@@ -182,7 +182,7 @@
 
 
 @media all and (min-width: 1401px) and (max-width: 1919px) {
-  .content2-tap-wrap {
+  .content2-tab-wrap {
     li {
       font-size: 0.9rem;
     }
@@ -190,13 +190,13 @@
 }
 
 @media all and (min-width: 1023px) and (max-width: 1400px) {
-  .content2-tap-wrap {
+  .content2-tab-wrap {
     li {
       font-size: 0.9rem;
     }
   }
 
-  .content2-tap {
+  .content2-tab {
     width: 40% !important;
   }
 
@@ -226,11 +226,11 @@
     flex: 0.33 !important;
   }
 
-  .content2-tap {
+  .content2-tab {
     width: 40% !important;
   }
 
-  .content2-tap-wrap {
+  .content2-tab-wrap {
     li {
       font-size: 0.8rem;
     }
@@ -272,7 +272,7 @@
     }
   }
 
-  .content2-tap {
+  .content2-tab {
     width: 100% !important;
   }
 

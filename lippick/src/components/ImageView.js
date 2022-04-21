@@ -8,6 +8,7 @@ import { promise } from "bcrypt/promises";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import MakeUp from "./MakeUp";
 import "./ImageView.scss";
+import Slider from "react-slick";
 
 import colortest from "../img/colortest_full.png";
 import loadingGIF from "../img/loading.gif";
@@ -19,6 +20,14 @@ import {
 import { Link } from "react-router-dom";
 
 function ImageView(props) {
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
+
     useEffect(() => {
         props.dispatch({ type: "nav-on" });
     }, [props.navTG]);
@@ -49,7 +58,6 @@ function ImageView(props) {
             alert("이미지를 업로드해주세요.");
             return Promise.reject(new Error(204));
         } else {
-            setLoading(true);
             model = await tmImage.load(modelURL, metadataURL);
             let maxPredictions = model.getTotalClasses();
             console.log(maxPredictions);
@@ -58,6 +66,7 @@ function ImageView(props) {
 
     // run the webcam image through the image model
     async function predict() {
+        setLoading(true);
         model = await tmImage.load(modelURL, metadataURL);
         // predict can take in an image, video or canvas html element
         const pic = document.getElementById("pic");
@@ -69,23 +78,23 @@ function ImageView(props) {
         switch (prediction[0].className) {
             case "봄":
                 setTitle("봄 웜");
-                setExplain("추천색 : 카멜색, 복숭아색, 골드색");
+                setExplain("추천 컬러 : 카멜색, 복숭아색, 골드색");
                 getProductsByTone("봄웜");
                 break;
             case "여름":
                 setTitle("여름 쿨");
                 getProductsByTone("여름쿨");
-                setExplain("추천색 : 라벤더색, 연분홍색, 연하늘색");
+                setExplain("추천 컬러 : 라벤더색, 연분홍색, 연하늘색");
                 break;
             case "가을":
                 setTitle("가을 웜");
                 getProductsByTone("가을웜");
-                setExplain("추천색 : 연회색, 검정색");
+                setExplain("추천 컬러 : 연회색, 검정색");
                 break;
             case "겨울":
                 setTitle("겨울 쿨");
                 getProductsByTone("겨울쿨");
-                setExplain("추천색 : 골드베이지, 누드톤");
+                setExplain("추천 컬러 : 골드베이지, 누드톤");
                 break;
             default:
                 setTitle("알수없음");
@@ -110,9 +119,6 @@ function ImageView(props) {
         setTitle("");
         setExplain("");
     };
-
-    //얼굴 감지, make-up
-
     const runFacemesh = async () => {
         const net = await facemesh.load(
             facemesh.SupportedPackages.mediapipeFacemesh
@@ -221,13 +227,11 @@ function ImageView(props) {
                 <div className="colortest-right-wrap-title">
                     <h1>퍼스널 컬러테스트 </h1>
                 </div>
-
                 <div className="colortest-right-wrap-span">
                     <span>
                         립픽 머신러닝 학습 모델을 통해 퍼스널 컬러를 진단합니다.
                     </span>
                 </div>
-
                 <div
                     style={{
                         alignItems: "center",
@@ -246,91 +250,86 @@ function ImageView(props) {
                         <span>톤 판정 결과:{resultTitle}</span>
                     </div>
                     <div>
-                        <span>{resultExplain}</span>
+                        <span className="resultExplain">{resultExplain}</span>
                     </div>
                     {resultTitle && (
-                        <div className="content2-contents-right-wrap">
-                            {props.Products.slice(0, 2).map((product) => {
-                                return (
-                                    <div
-                                        className="content2-contents-right-img"
-                                        onClick={() =>
-                                            drawMesh(face, ctx, product.color)
-                                        }
-                                    >
-                                        <img
-                                            src={`http://localhost:5000/${product.images[0]}`}
-                                            alt=""
-                                            className="img-molu"
-                                        />
+                        <div className="test-slide-wrap">
+                            <Slider {...settings}>
+                                {props.Products.slice(0, 10).map((product) => {
+                                    return (
+                                        <div
+                                            className="test-slide-img"
+                                            onClick={() =>
+                                                drawMesh(
+                                                    face,
+                                                    ctx,
+                                                    product.color
+                                                )
+                                            }
+                                        >
+                                            <img
+                                                src={`http://localhost:5000/${product.images[0]}`}
+                                                alt=""
+                                            />
 
-                                        <div className="product-content-wrap">
-                                            <Link
-                                                to={`./product/${product._id}`}
-                                                style={linkStyle}
-                                            >
-                                                <span className="product-title">
-                                                    {resultTitle} 추천 제품:
-                                                    {product.title}
+                                            <div className="product-content-wrap">
+                                                <Link
+                                                    to={`./product/${product._id}`}
+                                                    style={linkStyle}
+                                                >
+                                                    <span className="product-title">
+                                                        {resultTitle} 추천 제품:
+                                                        {product.title}
+                                                    </span>
+                                                </Link>
+                                                <div
+                                                    className="color-box"
+                                                    style={{
+                                                        backgroundColor: `${product.color}`,
+                                                        width: "20px",
+                                                        height: "20px",
+                                                        borderRadius: "10px",
+                                                        marginTop: "3%",
+                                                    }}
+                                                ></div>
+
+                                                <span className="product-price">
+                                                    {product.price} 원
                                                 </span>
-                                            </Link>
-                                            <div
-                                                className="color-box"
-                                                style={{
-                                                    backgroundColor: `${product.color}`,
-                                                    width: "20px",
-                                                    height: "20px",
-                                                    borderRadius: "10px",
-                                                    marginTop: "3%",
-                                                }}
-                                            ></div>
-
-                                            <span className="product-price">
-                                                {product.price} 원
-                                            </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
+                            </Slider>
                         </div>
                     )}
-                    <div className="btn-wrap">
-                        <div className="input-image-wrap">
-                            <label
-                                className="input-image-btn"
-                                for="input-image"
-                            >
-                                <div className="icon-wrap">
-                                    <AiOutlineCloudUpload />
-                                </div>
-                                <span>업로드</span>
-                            </label>
-                        </div>
-
-                        <div className="input-image-wrap">
-                            <label
-                                className="input-image-btn"
-                                onClick={() => predict()}
-                            >
-                                <div className="icon-wrap">
-                                    <AiOutlineSmile />
-                                </div>
-                                <span>테스트</span>
-                            </label>
-                        </div>
-
-                        <div className="input-image-wrap">
-                            <label
-                                className="input-image-btn"
-                                onClick={() => deleteFileImage()}
-                            >
-                                <div className="icon-wrap">
-                                    <AiOutlineSync />
-                                </div>
-                                <span>초기화</span>
-                            </label>
-                        </div>
+                </div>
+                <div className="btn-wrap">
+                    <div className="input-image-wrap">
+                        <label className="input-image-btn" for="input-image">
+                            <div className="icon-wrap">
+                                <AiOutlineCloudUpload />
+                            </div>
+                            <span>업로드</span>
+                        </label>
                     </div>
+
+                    <div className="input-image-wrap">
+                        <label
+                            className="input-image-btn"
+                            onClick={() => predict()}
+                        >
+                            <div className="icon-wrap">
+                                <AiOutlineSmile />
+                            </div>
+                            <span>테스트</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <span className="test-span">
+                        *립스틱 사진을 클릭하면 테스트해볼 수 있습니다.
+                    </span>
                 </div>
             </div>
         </div>

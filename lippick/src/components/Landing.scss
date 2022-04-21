@@ -63,6 +63,11 @@
   }
 }
 
+.ant-card-bordered:hover{
+  background-color: #eaeaea;
+  transition: 0.5s;
+
+}
 @media all and (min-width: 1401px) and (max-width: 1650px) {
   .bg {
     height: 60vh !important;

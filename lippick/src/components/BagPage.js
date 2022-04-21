@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch} from "react-redux";
-import { getCartItems } from "../_actions/user_actions"
+import { getCartItems, removeCartItem } from "../_actions/user_actions"
 import UserCardBlock from './UserCardBlock';
-
+import Paypal from "./Paypal"
 
 function BagPage(props) {
     const dispatch = useDispatch();
@@ -48,19 +48,30 @@ function BagPage(props) {
         setCartNumber(total)
     } 
 
+    let removeFromCart = (productId) => {
+        dispatch(removeCartItem(productId))
+        .then(response => {
+
+        })
+    }
+
 
 
     return (
         <div style={{ width: '85%', margin: '3rem auto'}}>
             <h1>BagPage</h1>
             <div>
-            <UserCardBlock products={props.user.cartDetail}/>
+            <UserCardBlock products={props.user.cartDetail} removeItem={removeFromCart}/>
             </div>
 
             <div style={{ marginTop: '3rem' }}>
                 <p>총 금액: {Total} 원</p>
             </div>
-        </div>
+
+            <Paypal />
+
+
+        </div> 
     )
 }
 

@@ -120,22 +120,28 @@ function ImageView(props) {
 
         detect(net);
     };
+    const [face, setFace] = useState();
+    const [ctx, setCtx] = useState();
 
     const detect = async (net) => {
         if (typeof picRef.current !== "undefined" && picRef.current !== null) {
             canvasRef.current.width = picRef.current.width;
             canvasRef.current.height = picRef.current.height;
             const pic = document.getElementById("pic");
-            const face = await net.estimateFaces({ input: pic });
+            const face1 = await net.estimateFaces({ input: pic });
 
-            const ctx = canvasRef.current.getContext("2d");
+            const ctx1 = canvasRef.current.getContext("2d");
 
-            requestAnimationFrame(() => {
-                drawMesh(face, ctx);
-            });
+            setFace(face1);
+            setCtx(ctx1);
+
+            // requestAnimationFrame(() => {
+
+            // });
         }
     };
-    const drawMesh = (predictions, ctx) => {
+    const drawMesh = (predictions, ctx, color) => {
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
         if (predictions.length > 0) {
             predictions.forEach((prediction) => {
                 const keypoints1 = prediction.annotations.lipsLowerOuter;
@@ -161,8 +167,8 @@ function ImageView(props) {
                 for (i = keypoints4.length - 1; i >= 0; i--) {
                     ctx.lineTo(keypoints4[i][0], keypoints4[i][1]);
                 }
-                ctx.fillStyle = props.Products[0].color;
-                console.log(props.Products[0].color);
+                ctx.fillStyle = color;
+
                 ctx.globalAlpha = 0.8;
                 ctx.fill();
             });
@@ -203,7 +209,7 @@ function ImageView(props) {
                             ref={picRef}
                             alt="sample"
                             src={fileImage}
-                            onLoad={() => predict()}
+                            onLoad={() => runFacemesh()}
                         />
                     ) : (
                         <img src={colortest} alt="" />
@@ -236,27 +242,27 @@ function ImageView(props) {
                         style={{ display: "none" }}
                     />
                     <div>
-                        <span
-                            onClick={() => getProductsByTone({ resultTitle })}
-                        >
-                            톤 판정 결과:{resultTitle}
-                        </span>
+                        <span>톤 판정 결과:{resultTitle}</span>
                     </div>
                     <div>
                         <span>{resultExplain}</span>
                     </div>
                     {resultTitle && (
                         <div className="content2-contents-right-wrap">
-                            {props.Products.slice(0, 1).map((product) => {
+                            {props.Products.slice(0, 2).map((product) => {
                                 return (
-                                    <div className="content2-contents-right-img">
-                                        <Link to={`./product/${product._id}`}>
-                                            <img
-                                                src={`http://localhost:5000/${product.images[0]}`}
-                                                alt=""
-                                                className="img-molu"
-                                            />
-                                        </Link>
+                                    <div
+                                        className="content2-contents-right-img"
+                                        onClick={() =>
+                                            drawMesh(face, ctx, product.color)
+                                        }
+                                    >
+                                        <img
+                                            src={`http://localhost:5000/${product.images[0]}`}
+                                            alt=""
+                                            className="img-molu"
+                                        />
+
                                         <div className="product-content-wrap">
                                             <Link
                                                 to={`./product/${product._id}`}
@@ -303,7 +309,7 @@ function ImageView(props) {
                         <div className="input-image-wrap">
                             <label
                                 className="input-image-btn"
-                                onClick={() => runFacemesh()}
+                                onClick={() => predict()}
                             >
                                 <div className="icon-wrap">
                                     <AiOutlineSmile />

@@ -117,7 +117,8 @@ function ImageView(props) {
         const net = await facemesh.load(
             facemesh.SupportedPackages.mediapipeFacemesh
         );
-
+        setTitle("");
+        setExplain("");
         detect(net);
     };
     const [face, setFace] = useState();

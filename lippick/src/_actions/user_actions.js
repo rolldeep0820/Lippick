@@ -67,3 +67,25 @@ export function addToCart(id){
         payload: request
     }
   }
+
+  export function removeCartItem(productId){
+    
+    const request = Axios.get(`/api/users/removeFromCart?id=${productId}`)
+        .then(response => {
+            
+            // productInfo, cart 정보를 조합해서 CartDetail을 만든다. 
+            response.data.cart.forEach(item => {
+                response.data.productInfo.forEach((product, index) => {
+                    if(item.id === product._id){
+                        response.data.productInfo[index].quantity = item.quantity
+                    }
+                })
+            })
+            return response.data;
+        });
+    
+    return {
+        type: "remove_cart_item",
+        payload: request
+    }
+  }

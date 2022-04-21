@@ -121,12 +121,6 @@ function ImageView(props) {
     setExplain("");
   };
 
-  //얼굴 감지, make-up
-
-  const runFacemesh = async () => {
-    const net = await facemesh.load(
-      facemesh.SupportedPackages.mediapipeFacemesh
-    );
 
     detect(net);
   };

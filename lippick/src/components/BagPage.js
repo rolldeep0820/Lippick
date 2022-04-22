@@ -3,11 +3,13 @@ import { useDispatch} from "react-redux";
 import { getCartItems, removeCartItem } from "../_actions/user_actions"
 import UserCardBlock from './UserCardBlock';
 import Paypal from "./Paypal"
+import { Empty } from 'antd';
 
 function BagPage(props) {
     const dispatch = useDispatch();
     const [Total, setTotal] = useState(0)
     const [CartNumber, setCartNumber] = useState(0)
+    const [ShowTotal, setShowTotal] = useState(false)
 
     useEffect(() => {
 
@@ -37,6 +39,7 @@ function BagPage(props) {
             total += parseInt(item.price,10) * item.quantity
         })
         setTotal(total)
+        setShowTotal(true)
     }
 
     let cartNum = (cartDetail) => {
@@ -51,7 +54,9 @@ function BagPage(props) {
     let removeFromCart = (productId) => {
         dispatch(removeCartItem(productId))
         .then(response => {
-
+            if(response.payload.productInfo.length <= 0){
+                setShowTotal(false)
+            }
         })
     }
 
@@ -64,11 +69,22 @@ function BagPage(props) {
             <UserCardBlock products={props.user.cartDetail} removeItem={removeFromCart}/>
             </div>
 
-            <div style={{ marginTop: '3rem' }}>
-                <p>총 금액: {Total} 원</p>
-            </div>
+            {ShowTotal ?
+                <div style={{ marginTop: '3rem' }}>
+                    <p>총 금액: {Total} 원</p>
+                </div>
+                :
+                <>
+                <br />
+                <br />
+                <Empty description={false} image={Empty.PRESENTED_IMAGE_SIMPLE}/>
+                </>
+            }
 
-            <Paypal />
+            {ShowTotal && 
+                <Paypal />
+
+            }
 
 
         </div> 

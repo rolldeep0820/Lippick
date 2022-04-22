@@ -348,12 +348,12 @@ app.post("/api/users/addToCart", auth, (req, res) => {
                 },
                 { new: true },
                 (err,
-                (userInfo) => {
+                userInfo) => {
                     if (err)
                         return res.status(400).json({ success: false, err });
                     res.status(200).send(userInfo.cart);
-                })
-            );
+                }
+            )
         }
     });
 });

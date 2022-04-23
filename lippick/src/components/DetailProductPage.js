@@ -27,7 +27,18 @@ function DetailProductPage(props) {
     useEffect(() => {
         props.dispatch({ type: "nav-on" });
     }, []);
-
+    useEffect(() => {
+        props.dispatch({ type: "bag-get" });
+        setTimeout(() => {
+            props.dispatch({ type: "bag-get" });
+        }, 500);
+        setTimeout(() => {
+            props.dispatch({ type: "bag-get" });
+        }, 750);
+        setTimeout(() => {
+            props.dispatch({ type: "bag-get" });
+        }, 1000);
+    }, [props]);
     const dispatch = useDispatch();
 
     const productId = props.match.params.productId;
@@ -115,8 +126,11 @@ function DetailProductPage(props) {
     }, []);
 
     const bagHandler = () => {
+        // dispatch({ type: "bag-get" });
         // 필요한 정보를 cart field에 넣어준다.
         dispatch(addToCart(productId));
+        // .then(dispatch({ type: "bag-add" }));
+        // .then(dispatch({ type: "bag-get" }));
     };
     const changeTry = () => {
         setTryOn(!tryOn);
@@ -481,6 +495,7 @@ function stateprops(state) {
         loading: state.reducer12,
         heart: state.reducer13,
         slide: state.reducer14,
+        bagCount: state.setBagCount,
     };
 }
 

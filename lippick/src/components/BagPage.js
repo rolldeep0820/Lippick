@@ -50,12 +50,28 @@ function BagPage(props) {
     };
 
     let removeFromCart = (productId) => {
+        // dispatch({ type: "bag-get" });
         dispatch(removeCartItem(productId)).then((response) => {
             if (response.payload.productInfo.length <= 0) {
                 setShowTotal(false);
             }
         });
-        dispatch({ type: "bag-remove" });
+        dispatch({ type: "bag-get" });
+        setTimeout(() => {
+            dispatch({ type: "bag-get" });
+        }, 500);
+        setTimeout(() => {
+            dispatch({ type: "bag-get" });
+        }, 750);
+        setTimeout(() => {
+            dispatch({ type: "bag-get" });
+        }, 1000);
+        setTimeout(() => {
+            dispatch({ type: "bag-get" });
+        }, 1500);
+        setTimeout(() => {
+            dispatch({ type: "bag-get" });
+        }, 2000);
     };
 
     return (
@@ -65,6 +81,7 @@ function BagPage(props) {
                 <UserCardBlock
                     products={props.user.cartDetail}
                     removeItem={removeFromCart}
+                    onClick={() => {}}
                 />
             </div>
 

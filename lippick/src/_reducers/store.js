@@ -9,6 +9,7 @@ function setBagCount(state = bagCount, action) {
     if (action.type == "bag-get") {
         axios.get("/api/users/auth").then((response) => {
             let total = 0;
+
             response.data.cart.map((item) => {
                 total += parseInt(item.quantity, 10);
             });

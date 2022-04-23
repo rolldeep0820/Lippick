@@ -15,18 +15,27 @@ import UploadProduct from "./UploadProduct";
 import { Badge } from "antd";
 
 function BootNav(props) {
-    let [loginCheck, setLoginCheck] = useState(false);
     let [dropTG, setDropTG] = useState(false);
     let [isAuth, setIsAuth] = useState(false);
 
     useEffect(() => {
         axios.get("/api/users/auth").then((response) => {
             setIsAuth(response.data.isAuth);
-            props.dispatch({ type: "bag-get" });
         });
     }, []);
 
-    props.dispatch({ type: "bag-get" });
+    useEffect(() => {
+        props.dispatch({ type: "bag-get" });
+        setTimeout(() => {
+            props.dispatch({ type: "bag-get" });
+        }, 500);
+        setTimeout(() => {
+            props.dispatch({ type: "bag-get" });
+        }, 750);
+        setTimeout(() => {
+            props.dispatch({ type: "bag-get" });
+        }, 1000);
+    }, [props]);
 
     let userid = sessionStorage.getItem("userId");
     console.log(userid);
@@ -178,21 +187,26 @@ function BootNav(props) {
                                 </Link>
                             )}
                         </Nav.Link>
-                        <Badge
-                            size="small"
-                            count={props.bagCount}
-                            style={{ marginRight: 8, marginTop: 12 }}
-                        >
-                            <Nav.Link
-                                className={`nav-item ${
-                                    props.navTG ? "cb" : "cw"
-                                }`}
+                        {
+                            <Badge
+                                size="small"
+                                count={props.bagCount}
+                                style={{ marginRight: 8, marginTop: 12 }}
                             >
-                                <Link style={linkStyle} onClick={bagPageAuth}>
-                                    <BsHandbag />
-                                </Link>
-                            </Nav.Link>
-                        </Badge>
+                                <Nav.Link
+                                    className={`nav-item ${
+                                        props.navTG ? "cb" : "cw"
+                                    }`}
+                                >
+                                    <Link
+                                        style={linkStyle}
+                                        onClick={bagPageAuth}
+                                    >
+                                        <BsHandbag />
+                                    </Link>
+                                </Nav.Link>
+                            </Badge>
+                        }
                     </Nav>
                 </Container>
             </Navbar>

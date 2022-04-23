@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import user from "./user_reducers";
 import {
+    setBagCount,
     reducer1,
     reducer2,
     reducer3,
@@ -14,10 +15,11 @@ import {
     reducer11,
     reducer12,
     reducer13,
-  } from "./store";
+} from "./store";
 
 const rootReducer = combineReducers({
     user,
+    setBagCount,
     reducer1,
     reducer2,
     reducer3,
@@ -31,6 +33,6 @@ const rootReducer = combineReducers({
     reducer11,
     reducer12,
     reducer13,
-})
+});
 
 export default rootReducer;

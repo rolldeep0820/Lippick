@@ -3,7 +3,7 @@ import axios from "axios";
 import DetailProductImage from "./DetailProductImage";
 import { Row, Col, Form, Button, Select, Image } from "antd";
 import { connect, useDispatch } from "react-redux";
-import { addToCart } from "../_actions/user_actions";
+import { addToCart, addToWish } from "../_actions/user_actions";
 import MakeUp from "./MakeUp";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
@@ -125,16 +125,20 @@ function DetailProductPage(props) {
             .catch((err) => alert(err));
     }, []);
 
-    const bagHandler = () => {
-        // dispatch({ type: "bag-get" });
-        // 필요한 정보를 cart field에 넣어준다.
-        dispatch(addToCart(productId));
-        // .then(dispatch({ type: "bag-add" }));
-        // .then(dispatch({ type: "bag-get" }));
-    };
-    const changeTry = () => {
-        setTryOn(!tryOn);
-    };
+  const bagHandler = () => {
+    // 필요한 정보를 cart field에 넣어준다.
+    dispatch(addToCart(productId));
+    alert("상품을 장바구니에 추가했습니다.");
+  }; 
+
+  const wishHandler = () => {
+    dispatch(addToWish(productId));
+  }
+
+  const changeTry = () => {
+    setTryOn(!tryOn);
+  };
+
 
     const searchTitle = (text) => {
         if (text === undefined) {
@@ -188,29 +192,28 @@ function DetailProductPage(props) {
                             {!tryOn && <DetailProductImage detail={Product} />}
                         </Col>
 
-                        <Col lg={12} sm={24} className="detail-info-wrap">
-                            <div className="detail-title-wrap">
-                                <h3>{Product.title}</h3>
-                                {props.heart ? (
-                                    <AiFillHeart
-                                        className="heart"
-                                        onClick={() => {
-                                            props.dispatch({
-                                                type: "heart-drain",
-                                            });
-                                        }}
-                                    />
-                                ) : (
-                                    <AiOutlineHeart
-                                        className="heart"
-                                        onClick={() => {
-                                            props.dispatch({
-                                                type: "heart-fill",
-                                            });
-                                        }}
-                                    />
-                                )}
-                            </div>
+
+            <Col lg={12} sm={24} className="detail-info-wrap">
+              <div className="detail-title-wrap">
+                <h3>{Product.title}</h3>
+                {props.heart ? (
+                  <AiFillHeart
+                    className="heart"
+                    onClick={() => {
+                      props.dispatch({ type: "heart-drain" })
+                      dispatch(addToWish(productId))
+                    }}
+                  />
+                ) : (
+                  <AiOutlineHeart
+                    className="heart"
+                    onClick={() => {
+                      props.dispatch({ type: "heart-fill" });
+                    }}
+                  />
+                )}
+              </div>
+
 
                             <p>{Product.price} 원</p>
                             <Select

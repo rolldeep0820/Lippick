@@ -7,6 +7,7 @@ const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 const multer = require("multer");
 const { Product } = require("./models/Product");
+const { Payment } = require("./models/Payment");
 
 // application/x-www-from-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -384,6 +385,96 @@ app.get('/api/users/removeFromCart', auth, (req,res) => {
         }
     )
 })
+
+app.post('/api/users/successBuy', auth, (req,res) => {
+    
+    // 1. User Collection 안에 History 필드 안에 간단한 결제 정보 넣어주기
+    let history = [];
+    let transactionData = {};
+
+    req.body.cartDetail.forEach((item) => {
+        history.push({
+            dataOfPurchase: Date.now(),
+            name: item.title,
+            id: item._id,
+            price: item.price,
+            quantity: item.quantity,
+            paymentId: req.body.paymentData.paymentID
+
+        })
+    })
+
+    // 2. Payment Collection 안에 자세한 결제 정보를 넣어주기.
+    transactionData.user = {
+        id: req.user._id,
+        name: req.user.name,
+        email: req.user.email
+    }
+
+    transactionData.data = req.body.paymentData
+    transactionData.product = history
+
+    // history 정보 저장
+    User.findOneAndUpdate(
+        {_id: req.user._id},
+        { $push: { history: history }, $set: { cart: [] }},
+        { new: true },
+        (err, user) => {
+            if(err) return res.json({ success: false, err})
+
+            // payment에다가 transactionData 정보 저장
+            const payment = new Payment(transactionData)
+            payment.save((err, doc) => {
+                if(err) return res.json({ success: false, err})
+                res.status(200).json({
+                    success: true,
+                    cart: user.cart,
+                    cartDetail: []
+                })
+
+                // 상품 당 몇개의 quantity를 샀는지
+
+                let products = [];
+                doc.product.forEach(item => {
+                    products.push({ id: item.id, quantity: item.quantity })
+                })
+
+
+            })
+
+
+        }
+    )
+})
+
+
+app.post("/api/users/addToWish", auth, (req, res) => {
+    // 먼저 User Collection에 해당 유저의 정보를 가져오기
+    // let userid = props.sessionStorage.getItem("userId")
+    // console.log("session userid", userid)
+    User.findOne({ _id: req.user._id }, (err, userInfo) => {
+
+            User.findOneAndUpdate(
+                { _id: req.user._id },
+                {
+                    $push: {
+                        wish: {
+                            id: req.body.productId
+                        },
+                    },
+                },
+                { new: true },
+                (err,
+                userInfo) => { 
+                    if (err)
+                        return res.status(400).json({ success: false, err });
+                    res.status(200).send(userInfo.wish);
+                }
+            )
+    });
+});
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

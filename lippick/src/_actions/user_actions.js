@@ -86,7 +86,34 @@ export function removeCartItem(productId) {
     );
 
     return {
-        type: "remove_cart_item",
-        payload: request,
-    };
-}
+
+        type: "remove_cart_item", 
+        payload: request
+    }
+  }
+
+  export function onSuccessBuy(data){
+    
+    const request = Axios.post(`/api/users/successBuy`, data)
+        .then(response => response.data);
+
+    return {
+        type: "on_success_buy",
+        payload: request
+    }
+  }
+
+
+  export function addToWish(id){
+    let body = {
+        productId : id 
+    }
+    const request = Axios.post('/api/users/addToWish', body)
+        .then(response => response.data);
+    return {
+        type: "add_to_wish",
+        payload: request
+    }
+  }
+  
+

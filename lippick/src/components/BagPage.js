@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch} from "react-redux";
-import { getCartItems, removeCartItem } from "../_actions/user_actions"
+import { getCartItems, removeCartItem, onSuccessBuy } from "../_actions/user_actions"
 import UserCardBlock from './UserCardBlock';
 import Paypal from "./Paypal"
-import { Empty } from 'antd';
+import { Empty, Result } from 'antd';
 
 function BagPage(props) {
     const dispatch = useDispatch();
     const [Total, setTotal] = useState(0)
     const [CartNumber, setCartNumber] = useState(0)
     const [ShowTotal, setShowTotal] = useState(false)
+    const [ShowSuccess, setShowSuccess] = useState(false)
 
     useEffect(() => {
 
@@ -60,7 +61,21 @@ function BagPage(props) {
         })
     }
 
+    const transactionSuccess = (data) => {
 
+        dispatch(onSuccessBuy({
+            paymentData: data,
+            cartDetail: props.user.cartDetail
+        }))
+            .then(response => {
+                if(response.payload.success){
+                    setShowTotal(false)
+                    setShowSuccess(true)
+                }
+            })
+
+    }
+    
 
     return (
         <div style={{ width: '85%', margin: '3rem auto'}}>
@@ -69,20 +84,27 @@ function BagPage(props) {
             <UserCardBlock products={props.user.cartDetail} removeItem={removeFromCart}/>
             </div>
 
+           
             {ShowTotal ?
                 <div style={{ marginTop: '3rem' }}>
                     <p>총 금액: {Total} 원</p>
                 </div>
-                :
-                <>
-                <br />
-                <br />
-                <Empty description={false} image={Empty.PRESENTED_IMAGE_SIMPLE}/>
-                </>
+                : ShowSuccess ?
+                    <Result
+                    status="success"
+                    title="결제가 완료되었습니다."
+                    />
+                    :
+                    <> 
+                    <Empty description={false} image={Empty.PRESENTED_IMAGE_SIMPLE}/>
+                    </>
             }
 
             {ShowTotal && 
-                <Paypal />
+                <Paypal  
+                    total={(Total/1243.5).toFixed(2)}
+                    onSuccess={transactionSuccess}
+                />
 
             }
 

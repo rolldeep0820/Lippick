@@ -18,10 +18,20 @@ export default function user(state = {}, action){
           return { ... state , cartDetail: action.payload }
         case "remove_cart_item":
           return { ... state , cartDetail: action.payload.productInfo,
-                  userData: {
+                  userData: { 
                     ...state.userData,
                     cart: action.payload.cart
                   } }
+        case "on_success_buy":
+          return { ... state, cartDetail: action.payload.cartDetail,
+                  userData:{
+                    ...state.userData, cart:action.payload.cart
+                  }}
+        case "add_to_wish":
+          return { ...state, userData: {
+            ...state.userData,
+            wish: action.payload
+          } }
         default:
         return state;
       }

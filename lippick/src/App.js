@@ -14,6 +14,8 @@ import LandingCare from "./components/LandingCare";
 import DetailProductPage from "./components/DetailProductPage";
 
 import BagPage from "./components/BagPage";
+import WishPage from "./components/WishPage";
+import HistoryPage from "./components/HistoryPage";
 
 import { Route, Switch } from "react-router-dom";
 import HomeWrap from "./components/HomeWrap";
@@ -121,6 +123,8 @@ function App(props) {
           component={Auth(DetailProductPage, null)}
         ></Route>
         <Route path="/bag" component={Auth(BagPage, true)}></Route>
+        <Route path="/wish" component={Auth(WishPage, true)}></Route>
+        <Route path="/history" component={Auth(HistoryPage, true)}></Route>
       </Switch>
       <Route path="/:id">
         <Footer />

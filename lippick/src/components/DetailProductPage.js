@@ -3,7 +3,7 @@ import axios from "axios";
 import DetailProductImage from "./DetailProductImage";
 import { Row, Col, Form, Button, Select, Image } from "antd";
 import { connect, useDispatch } from "react-redux";
-import { addToCart } from "../_actions/user_actions";
+import { addToCart, addToWish } from "../_actions/user_actions";
 import MakeUp from "./MakeUp";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
@@ -116,7 +116,13 @@ function DetailProductPage(props) {
   const bagHandler = () => {
     // 필요한 정보를 cart field에 넣어준다.
     dispatch(addToCart(productId));
-  };
+    alert("상품을 장바구니에 추가했습니다.");
+  }; 
+
+  const wishHandler = () => {
+    dispatch(addToWish(productId));
+  }
+
   const changeTry = () => {
     setTryOn(!tryOn);
   };
@@ -180,7 +186,8 @@ function DetailProductPage(props) {
                   <AiFillHeart
                     className="heart"
                     onClick={() => {
-                      props.dispatch({ type: "heart-drain" });
+                      props.dispatch({ type: "heart-drain" })
+                      dispatch(addToWish(productId))
                     }}
                   />
                 ) : (

@@ -117,3 +117,49 @@ export function removeCartItem(productId) {
   }
   
 
+
+  export function getWishItems (wishItems, userWish) {
+    const request = Axios.get(
+        `/api/product/products_by_id?id=${wishItems}&type=array`
+    ).then((response) => {
+
+        userWish.forEach((wishItem) => {
+            // response.data.forEach((productDetail, index) => {
+            //     if(wishItem.id === productDetail._id){
+            //         response.data.product[index] = wishItem
+            //     }
+            // })
+        });
+
+        return response.data;
+    });
+
+    return {
+        type: "get_wish_items",
+        payload: request,
+    };
+}
+
+
+export function removeWishItem(productId) {
+    const request = Axios.get(`/api/users/removeFromWish?id=${productId}`).then(
+        (response) => {
+           //  productInfo, cart 정보를 조합해서 CartDetail을 만든다.
+            response.data.wish.forEach((item) => {
+                // response.data.productInfo.forEach((product, index) => {
+                //     if (item._id === product._id) {
+                //         response.data.productInfo[index].quantity =
+                //             item.quantity;
+                //     }
+                // });
+            });
+            return response.data;
+        }
+    );
+
+    return {
+
+        type: "remove_wish_item", 
+        payload: request
+    }
+  }

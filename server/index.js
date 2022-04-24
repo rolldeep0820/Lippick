@@ -302,7 +302,7 @@ app.get("/api/product/products_by_id", (req, res) => {
 
     // productId를 이용해서 DB에서 productId와 같은 상품의 정보를 가져온다.
 
-    Product.find({ _id: productIds }).exec((err, product) => {
+    Product.find({ _id: { $in: productIds } }).exec((err, product) => {
         console.log(product);
         if (err) return res.status(400).send(err);
         return res.status(200).json(product);
@@ -474,6 +474,33 @@ app.post("/api/users/addToWish", auth, (req, res) => {
     });
 });
 
+
+app.get('/api/users/removeFromWish', auth, (req,res) => {
+    
+    // 먼저 cart안에 내가 지우려고 한 제품을 지워주기
+    User.findOneAndUpdate(
+        {_id: req.user._id},
+        {
+            $pull:
+            {"wish" :{ "id" : req.query.id}}
+        },
+        { new: true },
+        (err, userInfo) => {
+            let wish = userInfo.wish;
+            let array = wish.map(item => {
+                return item.id
+            })
+
+            Product.find({ _id : {$in : array } })
+            .exec((err, productInfo) => {
+                return res.status(200).json({
+                    productInfo,
+                    wish
+                })
+            })
+        }
+    )
+})
 
 
 app.listen(port, () => {

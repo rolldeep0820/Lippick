@@ -32,6 +32,14 @@ export default function user(state = {}, action){
             ...state.userData,
             wish: action.payload
           } }
+        case "get_wish_items":
+          return  { ... state , wishDetail: action.payload }
+        case "remove_wish_item":
+          return { ... state , wishDetail: action.payload.productInfo,
+                  userData: { 
+                    ...state.userData,
+                    wish: action.payload.wish
+                  } }
         default:
         return state;
       }

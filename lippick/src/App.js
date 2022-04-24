@@ -123,7 +123,7 @@ function App(props) {
           component={Auth(DetailProductPage, null)}
         ></Route>
         <Route path="/bag" component={Auth(BagPage, true)}></Route>
-        <Route path="/wish" component={Auth(WishPage, true)}></Route>
+        <Route path="/wishlist" component={Auth(WishPage, true)}></Route>
         <Route path="/history" component={Auth(HistoryPage, true)}></Route>
       </Switch>
       <Route path="/:id">

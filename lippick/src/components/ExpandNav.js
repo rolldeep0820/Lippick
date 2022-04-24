@@ -51,7 +51,9 @@ function ExpandNav(props) {
           <div className={`expand-nav-wrap expand-${status}`}>
             <div className="expand-top">
               <form className="expand-form">
-                <div style={{marginRight:"10px"}}><AiOutlineSearch /></div>
+                <div style={{ marginRight: "10px" }}>
+                  <AiOutlineSearch />
+                </div>
                 <input
                   type="text"
                   value={searchTerm}
@@ -205,6 +207,7 @@ function ExpandNav(props) {
                                           cover={
                                             <img
                                               src={`http://localhost:5000/${product.images[0]}`}
+                                              alt=""
                                             />
                                           }
                                         >

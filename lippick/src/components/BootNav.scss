@@ -1,3 +1,8 @@
+.ant-badge {
+  margin-top: 5% !important;
+  font-size: 1rem !important;
+}
+
 .nav-wrap {
   position: absolute;
   background-color: transparent !important;
@@ -8,8 +13,7 @@
   transition: 0.5s;
 }
 
-.nav-wrap:hover{
-
+.nav-wrap:hover {
   color: black !important;
   background-color: white !important;
   position: absolute;
@@ -19,11 +23,11 @@
   min-height: 10vh;
   transition: 0.5s;
 
-  .search-btn{
+  .search-btn {
     color: black !important;
   }
 
-  .logo-menu{
+  .logo-menu {
     color: black !important;
   }
 
@@ -31,16 +35,13 @@
     color: black !important;
   }
 
-  .logo-box{
-    fill:black !important;
+  .logo-box {
+    fill: black !important;
 
-    svg{
-      fill:black !important;
+    svg {
+      fill: black !important;
     }
   }
-
-  
-
 }
 .cw {
   color: white !important;
@@ -169,20 +170,29 @@
   margin-left: 16px;
   top: 100%;
   width: 100px;
-  height: 100px;
+  height: 150px;
   background: white;
   border-radius: 10px;
   box-shadow: 3px 5px 10px 1px #333;
 
   ul {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    a {
+      li {
+        margin-top: 10px;
+        .balloon-item {
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+      }
+    }
     li {
-      margin-top:6%;
+      margin-top: 10px;
       .balloon-item {
         font-size: 0.9rem;
         cursor: pointer;
@@ -243,14 +253,12 @@
 /* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
 
 @media all and (min-width: 480px) and (max-width: 767px) {
-
   .logo-wrap {
     margin-left: 10%;
   }
   .logo-box {
     top: 20px !important;
     position: relative !important;
-    
   }
   .logo-menu {
     display: none !important;

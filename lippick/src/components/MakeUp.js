@@ -79,17 +79,7 @@ function MakeUp(props) {
     runFacemesh();
   }, []);
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "600px",
-        backgroundColor: "rgb(163,204,163)",
-        textAlign: "center",
-        padding: "5%",
-        paddingTop: "10%",
-      }}
-      className="makeup-wrap"
-    >
+    <div className="makeup-wrap">
       <div className="cam-wrap">
         <Webcam ref={webcamRef} className="cam" />
       </div>

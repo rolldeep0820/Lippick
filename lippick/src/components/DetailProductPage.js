@@ -21,6 +21,7 @@ import {
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BootNav from "./BootNav";
+import Halert from "./Halert.js";
 
 const { Option } = Select;
 function DetailProductPage(props) {
@@ -166,6 +167,21 @@ function DetailProductPage(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  let duplicate = false;
+  if (props.user.userData.isAuth) {
+    props.user.userData.wish.forEach((item) => {
+      if (item.id === productId) {
+        duplicate = true;
+      }
+    });
+    if (duplicate) {
+      dispatch({ type: "heart-fill" });
+    } else {
+      dispatch({ type: "heart-drain" });
+    }
+  } else {
+    dispatch({ type: "heart-drain" });
+  }
 
   return (
     <div className="detail-wrap">
@@ -173,6 +189,7 @@ function DetailProductPage(props) {
         <Loading />
       ) : (
         <div className="detail-top-wrap">
+          {props.hAlert && <Halert />}
           <div className="detail-top-wrap-2">
             <div className="detail-top-wrap-left">
               {tryOn ? (
@@ -206,6 +223,8 @@ function DetailProductPage(props) {
                           return props.history.back(1);
                         }
                         props.dispatch({ type: "heart-fill" });
+                        props.dispatch({ type: "hAlert-on" });
+
                         dispatch(addToWish(productId));
                       }}
                     />
@@ -455,8 +474,8 @@ function stateprops(state) {
     tab: state.reducer9,
     loading: state.reducer12,
     heart: state.reducer13,
-    slide: state.reducer14,
     bagCount: state.setBagCount,
+    hAlert: state.reducer14,
   };
 }
 

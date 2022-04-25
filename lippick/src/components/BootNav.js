@@ -38,7 +38,6 @@ function BootNav(props) {
   }, [props]);
 
   let userid = sessionStorage.getItem("userId");
-  console.log(userid);
 
   const linkStyle = {
     color: "inherit",
@@ -57,10 +56,18 @@ function BootNav(props) {
   const bagPageAuth = () => {
     if (userid === null) {
       alert("로그인 후 이용해주세요.");
-      return props.history.push("/home");
+      return props.history.back(1);
     }
     props.history.push("/bag");
   };
+
+  const WishAuth = () => {
+    if (userid === null) {
+      alert("로그인 후 이용해주세요.");
+      return props.history.back(1);
+    }
+    props.history.push("/wishlist");
+  }
 
   const mouseLeave = () => {
     props.dispatch({ type: "nav-off" });
@@ -148,7 +155,7 @@ function BootNav(props) {
               </div>
             )}
             <Nav.Link className={`nav-item ${props.navTG ? "cb" : "cw"}`}>
-              <Link to="/wishlist" style={linkStyle}>
+              <Link onClick={WishAuth} style={linkStyle}>
                 <AiOutlineHeart />
               </Link>
             </Nav.Link>

@@ -54,6 +54,8 @@ function DetailProductPage(props) {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  let userid = sessionStorage.getItem("userId");
+
   useEffect(() => {
     let body = {
       skip: Skip,
@@ -127,6 +129,10 @@ function DetailProductPage(props) {
 
   const bagHandler = () => {
     // 필요한 정보를 cart field에 넣어준다.
+    if (userid === null) {
+      alert("로그인 후 이용해주세요.");
+      return props.history.back(1);
+    }
     dispatch(addToCart(productId));
     alert("상품을 장바구니에 추가했습니다.");
   };
@@ -183,6 +189,10 @@ function DetailProductPage(props) {
                     <AiFillHeart
                       className="heart"
                       onClick={() => {
+                        if (userid === null) {
+                          alert("로그인 후 이용해주세요.");
+                          return props.history.back(1);
+                        }
                         props.dispatch({ type: "heart-drain" });
                         dispatch(removeWishItem(productId));
                       }}
@@ -191,6 +201,10 @@ function DetailProductPage(props) {
                     <AiOutlineHeart
                       className="heart"
                       onClick={() => {
+                        if (userid === null) {
+                          alert("로그인 후 이용해주세요.");
+                          return props.history.back(1);
+                        }
                         props.dispatch({ type: "heart-fill" });
                         dispatch(addToWish(productId));
                       }}

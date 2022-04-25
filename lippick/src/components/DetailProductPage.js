@@ -167,62 +167,63 @@ function DetailProductPage(props) {
         <Loading />
       ) : (
         <div className="detail-top-wrap">
-          <Row gutter={[30, 30]} className="detail-top-wrap-2">
-            <Col lg={12} sm={24}>
+          <div className="detail-top-wrap-2">
+            <div className="detail-top-wrap-left">
               {tryOn ? (
                 <MakeUp color={Product.color} />
               ) : (
                 <DetailProductImage detail={Product} />
               )}
-            </Col>
+            </div>
+            <div className="detail-top-wrap-right">
+              <div className="detail-info-wrap">
+                <div className="detail-title-wrap">
+                  <h3>{Product.title}</h3>
+                  {props.heart ? (
+                    <AiFillHeart
+                      className="heart"
+                      onClick={() => {
+                        props.dispatch({ type: "heart-drain" });
+                        dispatch(removeWishItem(productId));
+                      }}
+                    />
+                  ) : (
+                    <AiOutlineHeart
+                      className="heart"
+                      onClick={() => {
+                        props.dispatch({ type: "heart-fill" });
+                        dispatch(addToWish(productId));
+                      }}
+                    />
+                  )}
+                </div>
 
-            <Col lg={12} sm={24} className="detail-info-wrap">
-              <div className="detail-title-wrap">
-                <h3>{Product.title}</h3>
-                {props.heart ? (
-                  <AiFillHeart
-                    className="heart"
-                    onClick={() => {
-                      props.dispatch({ type: "heart-drain" });
-                      dispatch(removeWishItem(productId));
-                    }}
-                  />
-                ) : (
-                  <AiOutlineHeart
-                    className="heart"
-                    onClick={() => {
-                      props.dispatch({ type: "heart-fill" });
-                      dispatch(addToWish(productId));
-                    }}
-                  />
-                )}
+                <p>{Product.price} 원</p>
+                <Select
+                  style={{ width: "200px", marginTop: "10px" }}
+                  placeholder="&nbsp;선택 가능한 컬러"
+                  onClick={() => {
+                    searchOther();
+                  }}
+                  onChange={(e) => {
+                    linkOther(e);
+                  }}
+                >
+                  {Products.map((pro) => {
+                    return <Option value={pro._id}>{pro.title}</Option>;
+                  })}
+                </Select>
+
+                <button className="detail-btn" onClick={bagHandler}>
+                  장바구니에 추가하기
+                </button>
+
+                <button className="detail-btn" onClick={changeTry}>
+                  트라이온
+                </button>
               </div>
-
-              <p>{Product.price} 원</p>
-              <Select
-                style={{ width: "200px", marginTop: "10px" }}
-                placeholder="&nbsp;선택 가능한 컬러"
-                onClick={() => {
-                  searchOther();
-                }}
-                onChange={(e) => {
-                  linkOther(e);
-                }}
-              >
-                {Products.map((pro) => {
-                  return <Option value={pro._id}>{pro.title}</Option>;
-                })}
-              </Select>
-
-              <button className="detail-btn" onClick={bagHandler}>
-                장바구니에 추가하기
-              </button>
-
-              <button className="detail-btn" onClick={changeTry}>
-                트라이온
-              </button>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </div>
       )}
 

@@ -57,6 +57,7 @@ function App(props) {
     });
   };
 
+  
   const updateSearchTerm = (newSearchTerm) => {
     let body = {
       skip: 0,

@@ -9,16 +9,13 @@
     align-items: center;
     flex-wrap: wrap;
 
-    
-
     .wish-item-wrap {
       display: flex;
       flex-direction: column;
       width: 20%;
       align-items: center;
-      margin-right:5%;
-      margin-top:5%;
-      
+      margin-right: 5%;
+      margin-top: 5%;
 
       .wish-item-top {
         width: 100%;
@@ -105,6 +102,51 @@
           border: 1px solid black;
           color: black !important;
         }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1023px) and (max-width: 1400px) {
+  .wish-item-title {
+    span {
+      font-size: 1rem !important;
+    }
+  }
+  .wish-item-info {
+    span {
+      font-size: 0.9rem !important;
+    }
+  }
+
+  .wish-top-wrap .wish-wrap .wish-item-wrap {
+    width: 30% !important;
+    margin-right: 3% !important;
+  }
+}
+/* 테블릿 세로 (해상도 768px ~ 1023px)*/
+
+@media all and (min-width: 768px) and (max-width: 1023px) {
+    .wish-top-wrap {
+        margin-top:15% !important;
+      .wish-wrap {
+        .wish-item-wrap {
+          width: 45% !important;
+          margin-right: 5% !important;
+        }
+      }
+    }
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+
+@media all and (min-width: 480px) and (max-width: 767px) {
+  .wish-top-wrap {
+      margin-top:20% !important;
+    .wish-wrap {
+      .wish-item-wrap {
+        width: 100% !important;
+        margin-right: 0 !important;
       }
     }
   }

@@ -28,7 +28,7 @@ function HistoryPage(props) {
             props.user.userData.history.map((item) => {
               return (
                 <div className="history-card-wrap">
-                  <Link to={`/product/${item.id}`} style={linkStyle}>
+                  <Link to={`/product/${item.id}`} style={linkStyle} className="link-1">
                     <div className="history-card-left">
                       <img
                         src={`http://localhost:5000/${item.image}`}
@@ -59,7 +59,7 @@ function HistoryPage(props) {
                       </div>
                     </div>
                     <div className="history-card-right-bottom">
-                      <Link to={`/product/${item.id}`} style={linkStyle}>
+                      <Link to={`/product/${item.id}`} style={linkStyle} className="link-2">
                         <div>
                           <span>
                             <AiOutlineEye /> 주문 제품 상세보기

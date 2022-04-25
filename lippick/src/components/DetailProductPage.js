@@ -167,6 +167,23 @@ function DetailProductPage(props) {
     slidesToScroll: 1,
   };
 
+
+  let duplicate = false;
+  if(props.user.userData.isAuth){
+    props.user.userData.wish.forEach((item) => {
+      if (item.id === productId) {
+        duplicate = true;
+      }
+    });
+    if (duplicate) {
+    dispatch({ type: "heart-fill" })
+    } else {
+    dispatch({ type: "heart-drain" })
+    }
+  } else {
+    dispatch({ type: "heart-drain" })
+  }
+  
   return (
     <div className="detail-wrap">
       {props.loading ? (

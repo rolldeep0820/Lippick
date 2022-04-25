@@ -199,6 +199,18 @@ function reducer13(state = heart, action) {
     return heart;
 }
 
+let hAlert = false;
+
+function reducer14(state = hAlert, action) {
+
+    if(action.type === "hAlert-on"){
+        hAlert = true;
+    }else if(action.type === "hAlert-off"){
+        hAlert = false;
+    }
+
+    return hAlert;
+}
 
 export {
     reducer1,
@@ -215,4 +227,5 @@ export {
     reducer12,
     reducer13,
     setBagCount,
+    reducer14,
 };

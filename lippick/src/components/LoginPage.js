@@ -88,7 +88,7 @@ function LoginPage(props) {
                   onChange={onPasswordHandler}
                   required
                 />
-                <span className="search-pw">비밀번호찾기</span>
+                {/* <span className="search-pw">비밀번호찾기</span> */}
                 <button className="login-box-btn">로그인</button>
               </form>
             </div>

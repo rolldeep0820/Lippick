@@ -86,7 +86,7 @@
       border-bottom: 1px solid #eaeaea;
       display: flex;
       justify-content: center;
-      margin-top:5%;
+      margin-top: 5%;
       .detail-tab {
         display: flex;
         width: 45%;
@@ -293,6 +293,7 @@
   }
   .detail-top-wrap {
     align-items: center !important;
+    margin-top: 5% !important;
 
     .detail-top-wrap-2 {
       flex-direction: column !important;

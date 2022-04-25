@@ -1,72 +1,100 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from "react-redux";
-import { getWishItems, removeWishItem, addToCart } from "../_actions/user_actions";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import {
+  getWishItems,
+  removeWishItem,
+  addToCart,
+} from "../_actions/user_actions";
+import "./WishPage.scss";
 
-function WishPage (props) {
-    const dispatch = useDispatch();
+function WishPage(props) {
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        let wishItems=[]
+  useEffect(() => {
+    props.dispatch({ type: "nav-on" });
+  }, [props.navTG]);
+  useEffect(() => {
+    let wishItems = [];
 
-        if(props.user.userData && props.user.userData.wish) {
-            if(props.user.userData.wish.length > 0 ) {
-                props.user.userData.wish.forEach(item => {
-                    wishItems.push(item.id)
-            })
+    if (props.user.userData && props.user.userData.wish) {
+      if (props.user.userData.wish.length > 0) {
+        props.user.userData.wish.forEach((item) => {
+          wishItems.push(item.id);
+        });
 
-                dispatch(getWishItems(wishItems, props.user.userData.wish))
-            }
-        } 
-        
-    }, [props.user.userData])
-
-    let removeFromWish = (productId) => {
-        dispatch(removeWishItem(productId))
-        .then(response => {
-
-        })
+        dispatch(getWishItems(wishItems, props.user.userData.wish));
+      }
     }
+  }, [props.user.userData]);
 
-    let removeAndCart = (productId) => {
-        dispatch(removeWishItem(productId))
-        .then(dispatch(addToCart(productId)))
-    }
+  let removeFromWish = (productId) => {
+    dispatch(removeWishItem(productId)).then((response) => {});
+  };
 
-    return (
-        <div style={{ width: '80%', margin: '3rem auto'}}>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <table>
-                <thead>
-                    <tr>
-                        <th>제품</th>
-                        <th>제품 이름</th>
-                        <th>장바구니로</th>
-                        <th>삭제하기</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.user
-                    && props.user.wishDetail 
-                    && props.user.wishDetail.map(item => (
-                            <tr key={item._id}>
-                                <td>
-                                    <img style={{ width: '70px'}} alt="product"
-                                        src={`http://localhost:5000/${item.images[0]}`}/>
-                                </td>
-                                <td>{item.title}</td>
-                                <td><button onClick={() => removeAndCart(item._id)}>장바구니로</button></td>
-                                <td><button onClick={() => removeFromWish(item._id)}>삭제</button></td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
-        </div>
-    )
+  let removeAndCart = (productId) => {
+    dispatch(removeWishItem(productId)).then(dispatch(addToCart(productId)));
+    return alert("장바구니에 추가되었습니다.")
+  };
+
+  return (
+    <div className="wish-top-wrap">
+      <h3>나의 위시리스트</h3>
+      <div className="wish-wrap">
+        {props.user &&
+          props.user.wishDetail &&
+          props.user.wishDetail.map((item) => {
+            return (
+              <div key={item._id} className="wish-item-wrap">
+                <div className="wish-item-top">
+                  <button
+                    className="wish-btn-removeFromWish"
+                    onClick={() => removeFromWish(item._id)}
+                  >
+                    &times;
+                  </button>
+                  <img
+                    src={`http://localhost:5000/${item.images[0]}`}
+                    alt="product"
+                  />
+                </div>
+                <div className="wish-item-bottom">
+                  <div className="wish-item-title">
+                    <span>{item.title}</span>
+                  </div>
+                  <div className="wish-item-info">
+                    <div className="wish-item-info-top">
+                      <span>{item.price} 원</span>
+                    </div>
+
+                    <div className="wish-item-info-bottom">
+                      <span>
+                        {item.tone}&nbsp;{item.category}
+                      </span>
+                      <div
+                        className="wish-item-circle"
+                        style={{ backgroundColor: item.color }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <button
+                    className="wish-btn-removeAndCart"
+                    onClick={() => removeAndCart(item._id)}
+                  >
+                    장바구니에 추가하기
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
+}
+function stateprops(state) {
+  return {
+    navTG: state.reducer1,
+  };
 }
 
-export default WishPage;
+export default connect(stateprops)(WishPage);

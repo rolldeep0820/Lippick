@@ -28,12 +28,18 @@ function WishPage (props) {
     }
 
     let removeAndCart = (productId) => {
-        dispatch(addToCart(productId));
         dispatch(removeWishItem(productId))
+        .then(dispatch(addToCart(productId)))
     }
 
     return (
         <div style={{ width: '80%', margin: '3rem auto'}}>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <table>
                 <thead>
                     <tr>
@@ -44,7 +50,9 @@ function WishPage (props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.user && props.user.wishDetail.map(item => (
+                    {props.user
+                    && props.user.wishDetail 
+                    && props.user.wishDetail.map(item => (
                             <tr key={item._id}>
                                 <td>
                                     <img style={{ width: '70px'}} alt="product"

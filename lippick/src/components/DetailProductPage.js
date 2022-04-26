@@ -167,14 +167,14 @@ function DetailProductPage(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  let duplicate = false;
+  let check = false;
   if (props.user.userData.isAuth) {
     props.user.userData.wish.forEach((item) => {
       if (item.id === productId) {
-        duplicate = true;
+        check = true;
       }
     });
-    if (duplicate) {
+    if (check) {
       dispatch({ type: "heart-fill" });
     } else {
       dispatch({ type: "heart-drain" });

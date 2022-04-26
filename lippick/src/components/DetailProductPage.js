@@ -167,35 +167,21 @@ function DetailProductPage(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  let check = false;
-  if (props.user.userData.isAuth) {
-    props.user.userData.wish.forEach((item) => {
-      if (item.id === productId) {
-        check = true;
-      }
-    });
-    if (check) {
-      dispatch({ type: "heart-fill" });
-    } else {
-      dispatch({ type: "heart-drain" });
-    }
-  } else {
-    dispatch({ type: "heart-drain" });
-  }
 
 
+  
+  
+  
   let duplicate = false;
-  if(props.user.userData.isAuth){
-    props.user.userData.wish.forEach((item) => {
-      if (item.id === productId) {
-        duplicate = true;
-      }
-    });
-    if (duplicate) {
-    dispatch({ type: "heart-fill" })
-    } else {
-    dispatch({ type: "heart-drain" })
+ 
+  props && props.user && props.userData && props.user.userData.wish &&
+  props.user.userData.wish.forEach((item) => {
+    if (item.id === productId) {
+      duplicate = true;
     }
+  });
+  if (duplicate) {
+    dispatch({ type: "heart-fill" })
   } else {
     dispatch({ type: "heart-drain" })
   }

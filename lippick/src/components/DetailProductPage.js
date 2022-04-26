@@ -173,20 +173,31 @@ function DetailProductPage(props) {
   
   console.log("이때는", props.user)
   let duplicate = false;
-  if(props && props.user && props.userData && props.user.userData.isAuth){
-    props.user.userData.wish.forEach((item) => {
-      if (item.id === productId) {
-        duplicate = true;
+  if(props.user){
+    if(props.user.userData){
+      if(props.user.userData.isAuth){
+        props.user.userData.wish.forEach((item) => {
+          if (item.id === productId) {
+            duplicate = true;
+          }
+        });
+        if (duplicate) {
+          dispatch({ type: "heart-fill" })
+        } else {
+          dispatch({ type: "heart-drain" })
+        }
+      } else {
+        dispatch({ type: "heart-drain" })
       }
-    });
-    if (duplicate) {
-      dispatch({ type: "heart-fill" })
+      
     } else {
       dispatch({ type: "heart-drain" })
     }
   } else {
     dispatch({ type: "heart-drain" })
   }
+
+
   
   return (
     <div className="detail-wrap">

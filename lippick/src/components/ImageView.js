@@ -176,7 +176,7 @@ function ImageView(props) {
                 }
                 ctx.fillStyle = color;
 
-                ctx.globalAlpha = 0.8;
+                ctx.globalAlpha = 0.6;
                 ctx.fill();
             });
         }

@@ -13,37 +13,49 @@ function MakeUp(props) {
         const net = await facemesh.load(
             facemesh.SupportedPackages.mediapipeFacemesh
         );
+        setTimeout(() => {
+            if (
+                !(
+                    typeof webcamRef.current !== "undefined" &&
+                    webcamRef.current !== null &&
+                    webcamRef.current.video.readyState === 4
+                )
+            ) {
+                alert("사용 가능한 캠이 없습니다.");
+                props.setTryOn(!props.tryOn);
+
+                return;
+            }
+        }, 3000);
         setInterval(() => {
             detect(net, color);
         }, 750);
-    };
 
-    const detect = async (net, color) => {
-        if (
-            typeof webcamRef.current !== "undefined" &&
-            webcamRef.current !== null &&
-            webcamRef.current.video.readyState === 4
-        ) {
-            const video = webcamRef.current.video;
-            const videoWidth = webcamRef.current.video.videoWidth;
-            const videoHeight = webcamRef.current.video.videoHeight;
+        const detect = async (net, color) => {
+            if (
+                typeof webcamRef.current !== "undefined" &&
+                webcamRef.current !== null &&
+                webcamRef.current.video.readyState === 4
+            ) {
+                const video = webcamRef.current.video;
+                const videoWidth = webcamRef.current.video.videoWidth;
+                const videoHeight = webcamRef.current.video.videoHeight;
 
-            webcamRef.current.video.width = videoWidth;
-            webcamRef.current.video.height = videoHeight;
+                webcamRef.current.video.width = videoWidth;
+                webcamRef.current.video.height = videoHeight;
 
-            canvasRef.current.width = videoWidth;
-            canvasRef.current.height = videoHeight;
+                canvasRef.current.width = videoWidth;
+                canvasRef.current.height = videoHeight;
 
-            const face = await net.estimateFaces({ input: video });
+                const face = await net.estimateFaces({ input: video });
 
-            const ctx = canvasRef.current.getContext("2d");
+                const ctx = canvasRef.current.getContext("2d");
 
-            requestAnimationFrame(() => {
-                drawMesh(face, ctx, color);
-            });
-        } else {
-            alert("노캠");
-        }
+                requestAnimationFrame(() => {
+                    drawMesh(face, ctx, color);
+                });
+            }
+        };
     };
     const drawMesh = (predictions, ctx, color) => {
         if (predictions.length > 0) {

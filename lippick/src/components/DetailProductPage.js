@@ -189,7 +189,11 @@ function DetailProductPage(props) {
                     <div className="detail-top-wrap-2">
                         <div className="detail-top-wrap-left">
                             {tryOn ? (
-                                <MakeUp color={Product.color} />
+                                <MakeUp
+                                    color={Product.color}
+                                    tryOn={tryOn}
+                                    setTryOn={setTryOn}
+                                />
                             ) : (
                                 <DetailProductImage detail={Product} />
                             )}

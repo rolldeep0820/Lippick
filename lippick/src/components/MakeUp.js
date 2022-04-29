@@ -41,6 +41,8 @@ function MakeUp(props) {
             requestAnimationFrame(() => {
                 drawMesh(face, ctx, color);
             });
+        } else {
+            alert("노캠");
         }
     };
     const drawMesh = (predictions, ctx, color) => {

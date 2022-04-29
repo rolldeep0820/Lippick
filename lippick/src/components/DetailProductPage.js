@@ -82,7 +82,6 @@ function DetailProductPage(props) {
             if (response.data.success) {
                 if (body) {
                     setProducts([...response.data.productInfo]);
-                    console.log(Products);
                 }
                 setPostSize(response.data.postSize);
             } else {
@@ -98,7 +97,6 @@ function DetailProductPage(props) {
             if (response.data.success) {
                 if (body) {
                     setProducts([...response.data.productInfo]);
-                    console.log(Products);
                 }
                 setPostSize(response.data.postSize);
             } else {
@@ -130,7 +128,7 @@ function DetailProductPage(props) {
 
     const bagHandler = () => {
         // 필요한 정보를 cart field에 넣어준다.
-        if (userid === null) {
+        if (userid === "false") {
             alert("로그인 후 이용해주세요.");
             return props.history.back(1);
         }
@@ -168,7 +166,6 @@ function DetailProductPage(props) {
         slidesToScroll: 1,
     };
 
-    console.log("이때는", props.user);
     let duplicate = false;
 
     setDuplicate();
@@ -206,7 +203,7 @@ function DetailProductPage(props) {
                                         <AiFillHeart
                                             className="heart"
                                             onClick={() => {
-                                                if (userid === null) {
+                                                if (userid === "false") {
                                                     alert(
                                                         "로그인 후 이용해주세요."
                                                     );
@@ -226,7 +223,7 @@ function DetailProductPage(props) {
                                         <AiOutlineHeart
                                             className="heart"
                                             onClick={() => {
-                                                if (userid === null) {
+                                                if (userid === "false") {
                                                     alert(
                                                         "로그인 후 이용해주세요."
                                                     );

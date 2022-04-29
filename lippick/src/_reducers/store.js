@@ -9,11 +9,12 @@ function setBagCount(state = bagCount, action) {
     if (action.type == "bag-get") {
         axios.get("/api/users/auth").then((response) => {
             let total = 0;
-
-            response.data.cart.map((item) => {
-                total += parseInt(item.quantity, 10);
-            });
-            bagCount = total;
+            if (response.data.cart) {
+                response.data.cart.map((item) => {
+                    total += parseInt(item.quantity, 10);
+                });
+                bagCount = total;
+            }
         });
     }
     if (action.type == "bag-add") {
@@ -202,10 +203,9 @@ function reducer13(state = heart, action) {
 let hAlert = false;
 
 function reducer14(state = hAlert, action) {
-
-    if(action.type === "hAlert-on"){
+    if (action.type === "hAlert-on") {
         hAlert = true;
-    }else if(action.type === "hAlert-off"){
+    } else if (action.type === "hAlert-off") {
         hAlert = false;
     }
 

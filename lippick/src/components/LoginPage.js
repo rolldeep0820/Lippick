@@ -23,20 +23,15 @@ function LoginPage(props) {
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
-        console.log("Email:", Email);
-
         let body = {
             email: Email,
             password: Password,
         };
 
         dispatch(loginUser(body)).then((response) => {
-            console.log("res는 받았을까?");
             if (response.payload.loginSuccess) {
                 let userId = response.payload.userId;
-                console.log(userId);
                 sessionStorage.setItem("userId", true);
-                console.log("res 성공했을까?");
                 window.location.replace("/home");
             } else {
                 alert("아이디와 비밀번호를 확인해주세요.");

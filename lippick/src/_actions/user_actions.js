@@ -4,7 +4,6 @@ export function loginUser(dataToSubmit) {
     const request = Axios.post("/api/users/login", dataToSubmit).then(
         (response) => response.data
     );
-    console.log("loginUser 액션 ");
     return {
         type: "login_user",
         payload: request,
@@ -86,43 +85,39 @@ export function removeCartItem(productId) {
     );
 
     return {
+        type: "remove_cart_item",
+        payload: request,
+    };
+}
 
-        type: "remove_cart_item", 
-        payload: request
-    }
-  }
-
-  export function onSuccessBuy(data){
-    
-    const request = Axios.post(`/api/users/successBuy`, data)
-        .then(response => response.data);
+export function onSuccessBuy(data) {
+    const request = Axios.post(`/api/users/successBuy`, data).then(
+        (response) => response.data
+    );
 
     return {
         type: "on_success_buy",
-        payload: request
-    }
-  }
+        payload: request,
+    };
+}
 
-
-  export function addToWish(id){
+export function addToWish(id) {
     let body = {
-        productId : id 
-    }
-    const request = Axios.post('/api/users/addToWish', body)
-        .then(response => response.data);
+        productId: id,
+    };
+    const request = Axios.post("/api/users/addToWish", body).then(
+        (response) => response.data
+    );
     return {
         type: "add_to_wish",
-        payload: request
-    }
-  }
-  
+        payload: request,
+    };
+}
 
-
-  export function getWishItems (wishItems, userWish) {
+export function getWishItems(wishItems, userWish) {
     const request = Axios.get(
         `/api/product/products_by_id?id=${wishItems}&type=array`
     ).then((response) => {
-
         userWish.forEach((wishItem) => {
             // response.data.forEach((productDetail, index) => {
             //     if(wishItem.id === productDetail._id){
@@ -140,11 +135,10 @@ export function removeCartItem(productId) {
     };
 }
 
-
 export function removeWishItem(productId) {
     const request = Axios.get(`/api/users/removeFromWish?id=${productId}`).then(
         (response) => {
-           //  productInfo, cart 정보를 조합해서 CartDetail을 만든다.
+            //  productInfo, cart 정보를 조합해서 CartDetail을 만든다.
             response.data.wish.forEach((item) => {
                 // response.data.productInfo.forEach((product, index) => {
                 //     if (item._id === product._id) {
@@ -158,8 +152,7 @@ export function removeWishItem(productId) {
     );
 
     return {
-
-        type: "remove_wish_item", 
-        payload: request
-    }
-  }
+        type: "remove_wish_item",
+        payload: request,
+    };
+}

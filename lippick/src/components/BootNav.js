@@ -24,21 +24,11 @@ function BootNav(props) {
         });
     }, []);
     useEffect(() => {
-        console.log(isAuth);
         sessionStorage.setItem("userId", isAuth);
     }, [isAuth]);
 
     useEffect(() => {
-        props.dispatch({ type: "bag-get" });
-        setTimeout(() => {
-            props.dispatch({ type: "bag-get" });
-        }, 500);
-        setTimeout(() => {
-            props.dispatch({ type: "bag-get" });
-        }, 750);
-        setTimeout(() => {
-            props.dispatch({ type: "bag-get" });
-        }, 1000);
+        getBag(props);
     }, [props]);
 
     const linkStyle = {
@@ -64,7 +54,6 @@ function BootNav(props) {
     };
 
     const WishAuth = () => {
-        console.log(isAuth);
         if (isAuth === false) {
             alert("로그인 후 이용해주세요.");
             return props.history.back(1);
@@ -188,7 +177,6 @@ function BootNav(props) {
                                     style={linkStyle}
                                     onClick={() => {
                                         setDropTG(!dropTG);
-                                        console.log(dropTG);
                                     }}
                                 >
                                     <AiOutlineUser />
@@ -233,6 +221,14 @@ function BootNav(props) {
             </Navbar>
         </>
     );
+}
+
+function getBag(props) {
+    for (let i = 0; i++; i < 5) {
+        setTimeout(() => {
+            props.dispatch({ type: "bag-get" });
+        }, i * 250);
+    }
 }
 
 function stateprops(state) {

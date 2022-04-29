@@ -153,18 +153,18 @@ function BagPage(props) {
               </pre>
             </div>
           ) : (
-            <div>
+            <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
               <Empty description={false} image={Empty.PRESENTED_IMAGE_SIMPLE} />
               <pre
                 style={{
                   fontSize: "0.9rem",
-                  paddingLeft: "10px",
+                  paddingLeft: "15px",
                   overflow: "auto",
                   whiteSpace: "pre-wrap",
                   minWidth:"190px"
                 }}
               >
-                장바구니가 비어있습니다.
+                쇼핑백이 비어있습니다.
               </pre>
             </div>
           )}

@@ -24,7 +24,6 @@ function BootNav(props) {
         });
     }, []);
     useEffect(() => {
-        console.log(isAuth);
         sessionStorage.setItem("userId", isAuth);
     }, [isAuth]);
 
@@ -64,7 +63,6 @@ function BootNav(props) {
     };
 
     const WishAuth = () => {
-        console.log(isAuth);
         if (isAuth === false) {
             alert("로그인 후 이용해주세요.");
             return props.history.back(1);
@@ -188,7 +186,6 @@ function BootNav(props) {
                                     style={linkStyle}
                                     onClick={() => {
                                         setDropTG(!dropTG);
-                                        console.log(dropTG);
                                     }}
                                 >
                                     <AiOutlineUser />

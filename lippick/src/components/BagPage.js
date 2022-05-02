@@ -43,7 +43,9 @@ function BagPage(props) {
             }
         }
     }, [props.user.userData]);
-
+    // useEffect(() => {
+    //     bagGet();
+    // }, [ShowSuccess, ShowTotal]);
     let calculateTotal = (cartDetail) => {
         let total = 0;
 
@@ -64,7 +66,7 @@ function BagPage(props) {
     };
 
     let bagGet = () => {
-        for (let i = 0; i++; i < 8) {
+        for (let i = 0; i++; i < 30) {
             setTimeout(() => {
                 dispatch({ type: "bag-get" });
             }, i * 250);
@@ -89,11 +91,11 @@ function BagPage(props) {
             })
         ).then((response) => {
             if (response.payload.success) {
+                dispatch({ type: "bag-remove" });
                 setShowTotal(false);
                 setShowSuccess(true);
             }
         });
-        bagGet();
     };
 
     return (

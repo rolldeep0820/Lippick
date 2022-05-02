@@ -129,11 +129,11 @@ function DetailProductPage(props) {
     const bagHandler = () => {
         // 필요한 정보를 cart field에 넣어준다.
         if (userid === "false") {
-            alert("로그인 후 이용해주세요.");
+            //  alert("로그인 후 이용해주세요.");
             return props.history.back(1);
         }
         dispatch(addToCart(productId));
-        alert("상품을 장바구니에 추가했습니다.");
+        //alert("상품을 장바구니에 추가했습니다.");
     };
 
     const changeTry = () => {

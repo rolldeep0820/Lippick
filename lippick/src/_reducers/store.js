@@ -213,6 +213,19 @@ function reducer14(state = hAlert, action) {
     return hAlert;
 }
 
+
+let bAlert= false;
+
+function reducer15(state = bAlert, action){
+
+    if(action.type === "bAlert-on"){
+        bAlert = true;
+    }else if(action.type === "bAlert-off"){
+        bAlert = false;
+
+    }
+    return bAlert;
+}
 export {
     reducer1,
     reducer2,
@@ -229,4 +242,5 @@ export {
     reducer13,
     setBagCount,
     reducer14,
+    reducer15
 };

@@ -8,6 +8,7 @@ import {
 } from "../_actions/user_actions";
 import "./WishPage.scss";
 import { Empty } from "antd";
+import Balert from "./Balert.js";
 
 function WishPage(props) {
     const [wishShow, setWishShow] = useState(false);
@@ -49,7 +50,7 @@ function WishPage(props) {
             dispatch(addToCart(productId))
         );
         bagGet();
-        return alert("장바구니에 추가되었습니다.");
+        props.dispatch({type:"bAlert-on"});
     };
 
     return (
@@ -57,6 +58,7 @@ function WishPage(props) {
             {wishShow ? (
                 <div>
                     <h3>나의 위시리스트</h3>
+                    {props.bAlert && <Balert/>}
                     <div className="wish-wrap">
                         {props.user &&
                             props.user.wishDetail &&
@@ -139,6 +141,7 @@ function WishPage(props) {
 function stateprops(state) {
     return {
         navTG: state.reducer1,
+        bAlert: state.reducer15,
     };
 }
 

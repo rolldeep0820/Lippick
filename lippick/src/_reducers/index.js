@@ -15,7 +15,8 @@ import {
     reducer11,
     reducer12,
     reducer13,
-    reducer14
+    reducer14,
+    reducer15
 } from "./store";
 
 const rootReducer = combineReducers({
@@ -34,7 +35,8 @@ const rootReducer = combineReducers({
     reducer11,
     reducer12,
     reducer13,
-    reducer14
+    reducer14,
+    reducer15
 });
 
 export default rootReducer;

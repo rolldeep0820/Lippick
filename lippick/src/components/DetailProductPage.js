@@ -22,6 +22,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import BootNav from "./BootNav";
 import Halert from "./Halert.js";
+import Balert from "./Balert.js";
 
 const { Option } = Select;
 function DetailProductPage(props) {
@@ -65,6 +66,7 @@ function DetailProductPage(props) {
 
         getProducts(body);
         props.dispatch({ type: "loading-start" });
+        console.log(props.bAlert)
     }, []);
 
     const splitTitle = (text, number) => {
@@ -134,6 +136,7 @@ function DetailProductPage(props) {
         }
         dispatch(addToCart(productId));
         //alert("상품을 장바구니에 추가했습니다.");
+        dispatch({type:"bAlert-on"});
     };
 
     const changeTry = () => {
@@ -183,6 +186,7 @@ function DetailProductPage(props) {
             ) : (
                 <div className="detail-top-wrap">
                     {props.hAlert && <Halert />}
+                    {props.bAlert && <Balert />}
                     <div className="detail-top-wrap-2">
                         <div className="detail-top-wrap-left">
                             {tryOn ? (
@@ -552,6 +556,7 @@ function stateprops(state) {
         heart: state.reducer13,
         bagCount: state.setBagCount,
         hAlert: state.reducer14,
+        bAlert : state.reducer15,
     };
 }
 

@@ -28,6 +28,8 @@ const { Option } = Select;
 function DetailProductPage(props) {
     useEffect(() => {
         props.dispatch({ type: "nav-on" });
+        props.dispatch({type:"hAlert-off"});
+        props.dispatch({type:"bAlert-off"});
     }, []);
     useEffect(() => {
         props.dispatch({ type: "bag-get" });
@@ -66,7 +68,8 @@ function DetailProductPage(props) {
 
         getProducts(body);
         props.dispatch({ type: "loading-start" });
-        console.log(props.bAlert)
+        
+        
     }, []);
 
     const splitTitle = (text, number) => {

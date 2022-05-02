@@ -21,8 +21,9 @@ function setBagCount(state = bagCount, action) {
         bagCount += 1;
     }
     if (action.type == "bag-remove") {
-        bagCount -= 1;
+        bagCount = 0;
     }
+
     return bagCount;
 }
 

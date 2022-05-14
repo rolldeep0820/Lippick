@@ -7,6 +7,8 @@
     "start": "concurrently \"npm run backend\" \"npm run start --prefix lippick\"",
     "backend": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  
+     
   },
   "author": "team3",
   "license": "ISC",
@@ -25,4 +27,5 @@
   "devDependencies": {
     "nodemon": "^2.0.15"
   }
+ 
 }

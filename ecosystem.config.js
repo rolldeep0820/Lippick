@@ -1,14 +1,11 @@
 module.exports = {
     apps: [
         {
-            name: "server",
-            script: "./server/index.js",
-            ignore_watch: ["node_modules"],
-        },
-        {
-            name: "client",
-            script: "./lippick/src/index.js",
+            name: "Lippick",
+            script: "npm",
+            args: "start",
             exec_mode: "cluster",
+            ignore_watch: ["node_modules"],
         },
     ],
 };

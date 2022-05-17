@@ -2,7 +2,7 @@
   "name": "lippick02",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
+ 
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@teachablemachine/image": "^0.8.5",

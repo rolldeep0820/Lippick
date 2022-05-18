@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run backend\" \"PORT = 443 npm run start --prefix lippick\"",
+    "start": "concurrently \"npm run backend\" \"PORT = 3000 npm run start --prefix lippick\"",
     "backend": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

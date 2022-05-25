@@ -23,10 +23,9 @@ function MainBottom(props) {
         <div className="high-wrap">
             <Container className="main-bottom-wrap">
                 <Link
-                    onClick={
-                        //personalAuth
-                        props.history.push("/personal")
-                    }
+                    onClick={() => {
+                        props.history.push("/personal");
+                    }}
                 >
                     <div className="link-box">
                         <span>퍼스널 컬러 테스트</span>

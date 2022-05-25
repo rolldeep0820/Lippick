@@ -22,7 +22,12 @@ function MainBottom(props) {
     return (
         <div className="high-wrap">
             <Container className="main-bottom-wrap">
-                <Link onClick={personalAuth}>
+                <Link
+                    onClick={
+                        //personalAuth
+                        props.history.push("/personal")
+                    }
+                >
                     <div className="link-box">
                         <span>퍼스널 컬러 테스트</span>
                     </div>

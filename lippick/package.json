@@ -1,5 +1,5 @@
 {
-  "name": "lippick02",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,7 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15",
     "node-sass": "^7.0.1",
-    "react": "^18.0.0",
+    "react": "^18.1.0",
     "react-bootstrap": "^2.2.2",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.0.0",
@@ -68,7 +68,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://vjoe96.github.io/lippick/",
   "devDependencies": {
     "@svgr/webpack": "^6.2.1"
   }
